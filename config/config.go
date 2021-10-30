@@ -47,7 +47,6 @@ func GetConfig() *ConfigApp {
 		err error
 	)
 
-	//Development
 	viper.SetConfigFile("./.env")
 	err = viper.ReadInConfig()
 	if err != nil {
