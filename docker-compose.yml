@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  databases:
+    container_name: mongodb-4.2
+    image: mongo:4.2
+    hostname: ${MONGODB_HOST}
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    restart: on-failure
+    ports:
+      - 27017:27017
+    networks:
+      - local_network
+networks:
+  local_network:
+    name: local_network
