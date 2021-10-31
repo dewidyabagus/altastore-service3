@@ -9,7 +9,7 @@ import (
 
 type Checkout struct {
 	ID             string
-	ShoppingCardId string `validate:"required"`
+	ShoppingCartId string `validate:"required"`
 	Description    string `validate:"required"`
 	PaymentStatus  string
 	CreatedBy      string
@@ -75,7 +75,7 @@ func toDetailItemInCart(items *[]shoppingdetail.ShopCartDetailItemWithProductNam
 func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart) *CheckItemDetails {
 	return &CheckItemDetails{
 		ID:             cinfo.ID,
-		ShoppingCardId: cinfo.ShoppingCardId,
+		ShoppingCardId: cinfo.ShoppingCartId,
 		Description:    cinfo.Description,
 		PaymentStatus:  cinfo.PaymentStatus,
 		CreatedBy:      cinfo.CreatedBy,

@@ -9,6 +9,7 @@ type CheckoutResponse struct {
 	ID             string    `json:"id"`
 	ShoppingCardId string    `json:"shoppingcartid"`
 	Description    string    `json:"description"`
+	PaymentStatus  string    `json:"paymentstatus"`
 	CreatedBy      string    `json:"created_by"`
 	CreatedAt      time.Time `json:"created_at"`
 }
@@ -16,8 +17,9 @@ type CheckoutResponse struct {
 func toCheckoutResponse(checkout checkout.Checkout) CheckoutResponse {
 	return CheckoutResponse{
 		ID:             checkout.ID,
-		ShoppingCardId: checkout.ShoppingCardId,
+		ShoppingCardId: checkout.ShoppingCartId,
 		Description:    checkout.Description,
+		PaymentStatus:  checkout.PaymentStatus,
 		CreatedBy:      checkout.CreatedBy,
 		CreatedAt:      checkout.CreatedAt,
 	}
