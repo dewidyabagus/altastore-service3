@@ -84,7 +84,7 @@ func (r *Repository) GetAllCheckout() (*[]checkout.Checkout, error) {
 			")cp on cp.id  = CAST (c.id AS text)" +
 			"where  cp.rnum = 1").Scan(&checkoutList).Error
 	if err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	return &checkoutList, nil
