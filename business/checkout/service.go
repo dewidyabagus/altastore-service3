@@ -5,7 +5,6 @@ import (
 	"AltaStore/business/checkoutpayment"
 	"AltaStore/business/shopping"
 	"AltaStore/util/validator"
-	"fmt"
 
 	snap "github.com/midtrans/midtrans-go/snap"
 )
@@ -91,7 +90,6 @@ func (s *service) GetAllCheckout() (*[]Checkout, error) {
 func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
 	dtCheckout, err := s.repository.GetCheckoutById(id)
 
-	fmt.Printf("%v", dtCheckout)
 	if err != nil {
 		return nil, err
 	}

@@ -22,30 +22,30 @@ type Checkout struct {
 	DeletedAt      time.Time `gorm:"deleted_at;type:timestamp"`
 }
 
-func (c *Checkout) toBusinessCheckout() checkout.Checkout {
-	return checkout.Checkout{
-		ID:             c.ID,
-		ShoppingCartId: c.ShoppingCartId,
-		Description:    c.Description,
-		CreatedBy:      c.CreatedBy,
-		CreatedAt:      c.CreatedAt,
-		UpdatedAt:      c.UpdatedAt,
-	}
-}
+// func (c *Checkout) toBusinessCheckout() checkout.Checkout {
+// 	return checkout.Checkout{
+// 		ID:             c.ID,
+// 		ShoppingCartId: c.ShoppingCartId,
+// 		Description:    c.Description,
+// 		CreatedBy:      c.CreatedBy,
+// 		CreatedAt:      c.CreatedAt,
+// 		UpdatedAt:      c.UpdatedAt,
+// 	}
+// }
 
-func toListCheckout(c *[]Checkout) *[]checkout.Checkout {
-	var listCheckout []checkout.Checkout
+// func toListCheckout(c *[]Checkout) *[]checkout.Checkout {
+// 	var listCheckout []checkout.Checkout
 
-	for _, checkout := range *c {
-		listCheckout = append(listCheckout, checkout.toBusinessCheckout())
-	}
+// 	for _, checkout := range *c {
+// 		listCheckout = append(listCheckout, checkout.toBusinessCheckout())
+// 	}
 
-	if listCheckout == nil {
-		listCheckout = []checkout.Checkout{}
-	}
+// 	if listCheckout == nil {
+// 		listCheckout = []checkout.Checkout{}
+// 	}
 
-	return &listCheckout
-}
+// 	return &listCheckout
+// }
 
 func insertCheckout(data *checkout.Checkout) *Checkout {
 	return &Checkout{
