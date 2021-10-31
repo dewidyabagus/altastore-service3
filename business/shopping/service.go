@@ -67,7 +67,7 @@ func (s *service) NewItemInShopCart(cartId string, item *DetailItemInShopCart, u
 	}
 
 	if shopCartUser.ID != cartId {
-		return business.ErrNotFound
+		return business.ErrNotHavePermission
 	}
 
 	return s.repoCartDetail.NewItemInShopCart(cartId, insertItemFormat(item))
