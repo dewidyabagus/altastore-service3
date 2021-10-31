@@ -53,7 +53,7 @@ func TestMain(m *testing.M) {
 func setup() {
 	checkoutData = checkout.Checkout{
 		ID:             id,
-		ShoppingCardId: shoppingcartid,
+		ShoppingCartId: shoppingcartid,
 		Description:    description,
 	}
 
@@ -197,7 +197,7 @@ func TestGetAllCheckout(t *testing.T) {
 		assert.NotNil(t, data)
 
 		assert.Equal(t, id, (*data)[0].ID)
-		assert.Equal(t, shoppingcartid, (*data)[0].ShoppingCardId)
+		assert.Equal(t, shoppingcartid, (*data)[0].ShoppingCartId)
 		assert.Equal(t, description, (*data)[0].Description)
 	})
 }

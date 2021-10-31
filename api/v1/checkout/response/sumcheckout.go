@@ -17,7 +17,7 @@ type CheckoutResponse struct {
 func toCheckoutResponse(checkout checkout.Checkout) CheckoutResponse {
 	return CheckoutResponse{
 		ID:             checkout.ID,
-		ShoppingCardId: checkout.ShoppingCardId,
+		ShoppingCardId: checkout.ShoppingCartId,
 		Description:    checkout.Description,
 		PaymentStatus:  checkout.PaymentStatus,
 		CreatedBy:      checkout.CreatedBy,
