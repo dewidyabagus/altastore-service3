@@ -9,17 +9,18 @@ import (
 )
 
 type CheckoutPayment struct {
-	CheckOutID        string                        `gorm:"checkout_id;type:uuid"`
-	MerchantId        string                        `gorm:"merchant_id"`
-	StatusCode        string                        `gorm:"status_code"`
-	TransactionStatus checkoutpayment.PaymentStatus `gorm:"transaction_status"`
-	FraudStatus       checkoutpayment.FraudStatus   `gorm:"fraud_status"`
-	CreatedAt         time.Time                     `gorm:"created_at"`
-	CreatedBy         string                        `gorm:"created_by;type:varchar(50)"`
-	UpdatedAt         time.Time                     `gorm:"updated_at"`
-	UpdatedBy         string                        `gorm:"updated_by;type:varchar(50)"`
-	DeletedAt         time.Time                     `gorm:"deleted_at"`
-	DeletedBy         string                        `gorm:"deleted_by;type:varchar(50)"`
+	CheckOutID         string                        `gorm:"checkout_id;type:uuid"`
+	MerchantId         string                        `gorm:"merchant_id"`
+	StatusCode         string                        `gorm:"status_code"`
+	TransactionStatus  checkoutpayment.PaymentStatus `gorm:"transaction_status"`
+	FraudStatus        checkoutpayment.FraudStatus   `gorm:"fraud_status"`
+	FromPaymentGateway bool                          `gorm:"from_payment_gateway"`
+	CreatedAt          time.Time                     `gorm:"created_at"`
+	CreatedBy          string                        `gorm:"created_by;type:varchar(50)"`
+	UpdatedAt          time.Time                     `gorm:"updated_at"`
+	UpdatedBy          string                        `gorm:"updated_by;type:varchar(50)"`
+	DeletedAt          time.Time                     `gorm:"deleted_at"`
+	DeletedBy          string                        `gorm:"deleted_by;type:varchar(50)"`
 }
 
 func (p *CheckoutPayment) ToPayment() *checkoutpayment.CheckoutPayment {
@@ -62,6 +63,19 @@ func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{db}
 }
 func (r *Repository) InsertPayment(p *checkoutpayment.CheckoutPayment) (*checkoutpayment.CheckoutPayment, error) {
+
+	if p.FromPaymentGateway {
+		var datanew *CheckoutPayment
+		err := r.DB.Where("checkout_id = ?", p.CheckOutID).Where("from_payment_gateway = ?", true).First(&datanew).Error
+
+		if err != nil {
+			return nil, err
+		}
+		if datanew != nil {
+			return datanew.ToPayment(), nil
+		}
+	}
+
 	data := newPayment(p)
 	if err := r.DB.Create(data).Error; err != nil {
 		return nil, err

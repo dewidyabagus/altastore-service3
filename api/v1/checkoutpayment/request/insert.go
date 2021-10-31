@@ -10,7 +10,7 @@ type InserPaymentRequestMidtrans struct {
 	FraudStatus       string `json:"fraud_status"`
 }
 
-func (u *InserPaymentRequestMidtrans) ToPaymentSpec() *checkoutpayment.InserPaymentSpec {
+func (u *InserPaymentRequestMidtrans) ToPaymentSpec(fromPaymentGateway bool) *checkoutpayment.InserPaymentSpec {
 	var spec checkoutpayment.InserPaymentSpec
 
 	spec.OrderId = u.OrderId
@@ -18,6 +18,7 @@ func (u *InserPaymentRequestMidtrans) ToPaymentSpec() *checkoutpayment.InserPaym
 	spec.StatusCode = u.StatusCode
 	spec.TransactionStatus = u.TransactionStatus
 	spec.FraudStatus = u.FraudStatus
+	spec.FromPaymentGateway = fromPaymentGateway
 
 	return &spec
 }
@@ -26,7 +27,7 @@ type InserPaymentRequestAdmin struct {
 	TransactionStatus string `json:"transactionStatus"`
 }
 
-func (u *InserPaymentRequestAdmin) ToPaymentSpec(id string) *checkoutpayment.InserPaymentSpec {
+func (u *InserPaymentRequestAdmin) ToPaymentSpec(id string, fromPaymentGateway bool) *checkoutpayment.InserPaymentSpec {
 	var spec checkoutpayment.InserPaymentSpec
 
 	spec.OrderId = id
@@ -34,6 +35,7 @@ func (u *InserPaymentRequestAdmin) ToPaymentSpec(id string) *checkoutpayment.Ins
 	spec.StatusCode = "200"
 	spec.TransactionStatus = u.TransactionStatus
 	spec.FraudStatus = ""
+	spec.FromPaymentGateway = fromPaymentGateway
 
 	return &spec
 }

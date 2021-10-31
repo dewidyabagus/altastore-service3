@@ -51,7 +51,8 @@ func (c *Controller) InsertPaymentFromMidtrans(ctx echo.Context) error {
 	newData.TransactionStatus = transactionStatus
 	newData.MerchantId = merchantId
 	newData.StatusCode = statusCode
-	saveData, err := c.service.InsertPayment(newData.ToPaymentSpec(), "Midtrans")
+	newData.StatusCode = statusCode
+	saveData, err := c.service.InsertPayment(newData.ToPaymentSpec(true), "Midtrans")
 	if err != nil {
 		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}
@@ -74,7 +75,7 @@ func (c *Controller) InsertPaymentById(ctx echo.Context) error {
 	if _, err := uuid.Parse(adminId); err != nil {
 		return ctx.JSON(common.BadRequestResponse())
 	}
-	saveData, err := c.service.InsertPayment(payment.ToPaymentSpec(id), adminId)
+	saveData, err := c.service.InsertPayment(payment.ToPaymentSpec(id, false), adminId)
 	if err != nil {
 		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}

@@ -84,19 +84,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 }
 
 func (s *service) GetAllCheckout() (*[]Checkout, error) {
-	data, err := s.repository.GetAllCheckout()
-	if err != nil {
-		return nil, err
-	}
-	for _, checkout := range *data {
-		payment, err := s.checkoutpaymentService.GetPaymentByCheckoutId(checkout.ID)
-		if err != nil {
-			return nil, err
-		}
-		checkout.PaymentStatus = string(payment.TransactionStatus)
-	}
-
-	return data, nil
+	return s.repository.GetAllCheckout()
 }
 
 func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
@@ -112,10 +100,5 @@ func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
 	}
 	details := toDetailItemInCart(items)
 
-	payment, err := s.checkoutpaymentService.GetPaymentByCheckoutId(dtCheckout.ID)
-	if err != nil {
-		return nil, err
-	}
-
-	return getCheckItemsDetails(dtCheckout, details, string(payment.TransactionStatus)), nil
+	return getCheckItemsDetails(dtCheckout, details), nil
 }
