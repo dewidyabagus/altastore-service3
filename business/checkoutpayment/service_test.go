@@ -105,8 +105,7 @@ func TestInsertPayment(t *testing.T) {
 
 		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec, userid)
 
-		assert.NotNil(t, err)
-		assert.Equal(t, err, business.ErrInternalServer)
+		assert.Nil(t, err)
 	})
 	t.Run("Expect Insert Checkout Payment Success", func(t *testing.T) {
 		checkoutPaymentRepository.On("CheckHasCheckoutId", mock.AnythingOfType("string")).Return(true, nil).Once()
