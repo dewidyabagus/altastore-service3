@@ -26,17 +26,18 @@ const (
 )
 
 type CheckoutPayment struct {
-	CheckOutID        string
-	MerchantId        string
-	StatusCode        string
-	TransactionStatus PaymentStatus
-	FraudStatus       FraudStatus
-	CreatedAt         time.Time
-	CreatedBy         string
-	UpdatedAt         time.Time
-	UpdatedBy         string
-	DeletedAt         time.Time
-	DeletedBy         string
+	CheckOutID         string
+	MerchantId         string
+	StatusCode         string
+	TransactionStatus  PaymentStatus
+	FraudStatus        FraudStatus
+	FromPaymentGateway bool
+	CreatedAt          time.Time
+	CreatedBy          string
+	UpdatedAt          time.Time
+	UpdatedBy          string
+	DeletedAt          time.Time
+	DeletedBy          string
 }
 
 func InsertPayment(
@@ -45,18 +46,31 @@ func InsertPayment(
 	merchantId string,
 	transactionstatus string,
 	fraudstatus string,
+	fromPaymentGateway bool,
 	creator string,
 	createAt time.Time,
 ) CheckoutPayment {
 	return CheckoutPayment{
-		CheckOutID:        checkoutId,
-		MerchantId:        merchantId,
-		StatusCode:        statusCode,
-		TransactionStatus: PaymentStatus(transactionstatus),
-		FraudStatus:       FraudStatus(fraudstatus),
-		CreatedAt:         createAt,
-		CreatedBy:         creator,
+		CheckOutID:         checkoutId,
+		MerchantId:         merchantId,
+		StatusCode:         statusCode,
+		TransactionStatus:  PaymentStatus(transactionstatus),
+		FraudStatus:        FraudStatus(fraudstatus),
+		FromPaymentGateway: fromPaymentGateway,
+		CreatedAt:          createAt,
+		CreatedBy:          creator,
 	}
+}
+func (c *CheckoutPayment) ToInserPaymentSpec() InserPaymentSpec {
+	return InserPaymentSpec{
+		OrderId:            c.CheckOutID,
+		MerchantId:         c.MerchantId,
+		StatusCode:         c.StatusCode,
+		TransactionStatus:  string(c.TransactionStatus),
+		FraudStatus:        string(c.FraudStatus),
+		FromPaymentGateway: c.FromPaymentGateway,
+	}
+
 }
 
 // func (oldData *CheckoutPayment) ModifyPayment(

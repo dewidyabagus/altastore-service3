@@ -72,12 +72,12 @@ func toDetailItemInCart(items *[]shoppingdetail.ShopCartDetailItemWithProductNam
 	return &details
 }
 
-func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart, paymentStatus string) *CheckItemDetails {
+func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart) *CheckItemDetails {
 	return &CheckItemDetails{
 		ID:             cinfo.ID,
 		ShoppingCardId: cinfo.ShoppingCardId,
 		Description:    cinfo.Description,
-		PaymentStatus:  paymentStatus,
+		PaymentStatus:  cinfo.PaymentStatus,
 		CreatedBy:      cinfo.CreatedBy,
 		CreatedAt:      cinfo.CreatedAt,
 		UpdatedAt:      cinfo.UpdatedAt,

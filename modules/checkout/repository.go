@@ -32,6 +32,7 @@ func (c *Checkout) toBusinessCheckout() checkout.Checkout {
 		UpdatedAt:      c.UpdatedAt,
 	}
 }
+
 func toListCheckout(c *[]Checkout) *[]checkout.Checkout {
 	var listCheckout []checkout.Checkout
 
@@ -68,27 +69,49 @@ func (r *Repository) NewCheckoutShoppingCart(checkout *checkout.Checkout) error 
 }
 
 func (r *Repository) GetAllCheckout() (*[]checkout.Checkout, error) {
-	var checkoutList []Checkout
+	var checkoutList []checkout.Checkout
 
-	err := r.DB.Find(&checkoutList).Order("created_at asc").Error
+	err := r.DB.Raw(
+		"select c.*, cp.transaction_status payment_status" +
+			"from checkouts c" +
+			"inner join (" +
+			"select cp.check_out_id id, cp.transaction_status," +
+			"row_number() OVER (PARTITION BY  cp.check_out_id" +
+			"order by cp.created_at desc) as rnum," +
+			"cp.created_at" +
+			"from checkout_payments cp" +
+			"order by cp.created_at desc" +
+			")cp on cp.id  = CAST (c.id AS text)" +
+			"where  cp.rnum = 1").Scan(&checkoutList).Error
 	if err != nil {
-		return nil, err
+		return nil, nil
 	}
 
-	return toListCheckout(&checkoutList), nil
+	return &checkoutList, nil
 }
 
 func (r *Repository) GetCheckoutById(id string) (*checkout.Checkout, error) {
-	checkout := new(Checkout)
+	checkout := new(checkout.Checkout)
 
-	err := r.DB.First(checkout, " id = ? ", id).Error
+	err := r.DB.Raw(
+		"select c.*, cp.transaction_status payment_status"+
+			"from checkouts c"+
+			"inner join ("+
+			"select cp.check_out_id id, cp.transaction_status,"+
+			"row_number() OVER (PARTITION BY  cp.check_out_id"+
+			"order by cp.created_at desc) as rnum,"+
+			"cp.created_at"+
+			"from checkout_payments cp"+
+			"order by cp.created_at desc"+
+			")cp on cp.id  = CAST (c.id AS text)"+
+			"where  cp.rnum = 1 and  CAST (c.id AS text) = ?", id).Scan(&checkout).Error
 	if err != nil {
 		return nil, err
 	}
 
-	result := checkout.toBusinessCheckout()
+	result := checkout
 
-	return &result, nil
+	return result, nil
 }
 
 func (r *Repository) GetCheckoutByShoppingCartId(cartId string) (bool, error) {

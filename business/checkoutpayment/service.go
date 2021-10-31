@@ -11,11 +11,12 @@ import (
 )
 
 type InserPaymentSpec struct {
-	OrderId           string `validate:"required"`
-	MerchantId        string
-	StatusCode        string `validate:"required"`
-	TransactionStatus string `validate:"required"`
-	FraudStatus       string
+	OrderId            string `validate:"required"`
+	MerchantId         string
+	StatusCode         string `validate:"required"`
+	TransactionStatus  string `validate:"required"`
+	FromPaymentGateway bool   `validate:"required"`
+	FraudStatus        string
 }
 
 type service struct {
@@ -76,14 +77,18 @@ func (s *service) InsertPayment(p *InserPaymentSpec, creator string) (*InserPaym
 		p.MerchantId,
 		p.TransactionStatus,
 		p.FraudStatus,
+		p.FromPaymentGateway,
 		creator,
 		time.Now())
 
-	_, err = s.repository.InsertPayment(&data)
+	saved, err := s.repository.InsertPayment(&data)
 	if err != nil {
 		return p, business.ErrInternalServer
 	}
-	return p, nil
+
+	dataSaved := saved.ToInserPaymentSpec()
+
+	return &(dataSaved), nil
 }
 
 func (s *service) GetPaymentByCheckoutId(id string) (*CheckoutPayment, error) {

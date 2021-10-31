@@ -187,20 +187,9 @@ func TestGetAllCheckout(t *testing.T) {
 		assert.Nil(t, data)
 		assert.Equal(t, err, business.ErrInternalServer)
 	})
-	t.Run("Expect data payment not found", func(t *testing.T) {
-		checkoutRepository.On("GetAllCheckout").Return(&checkoutDatas, nil).Once()
-		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
 
-		data, err := checkoutService.GetAllCheckout()
-
-		assert.NotNil(t, err)
-		assert.Nil(t, data)
-
-		assert.Equal(t, err, business.ErrInternalServer)
-	})
 	t.Run("Expect found the data Checkout", func(t *testing.T) {
 		checkoutRepository.On("GetAllCheckout", mock.AnythingOfType("string")).Return(&checkoutDatas, nil).Once()
-		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(&checkoutpaymentData, nil).Once()
 
 		data, err := checkoutService.GetAllCheckout()
 
@@ -235,23 +224,9 @@ func TestGetCheckoutById(t *testing.T) {
 		assert.Equal(t, err, business.ErrNotFound)
 	})
 
-	t.Run("Expect data payment not found", func(t *testing.T) {
-		checkoutRepository.On("GetCheckoutById", mock.AnythingOfType("string")).Return(&checkoutData, nil).Once()
-		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
-		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
-
-		data, err := checkoutService.GetCheckoutById(id)
-
-		assert.NotNil(t, err)
-		assert.Nil(t, data)
-
-		assert.Equal(t, err, business.ErrInternalServer)
-	})
-
 	t.Run("Expect Found Checkout", func(t *testing.T) {
 		checkoutRepository.On("GetCheckoutById", mock.AnythingOfType("string")).Return(&checkoutData, nil).Once()
 		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
-		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(&checkoutpaymentData, nil).Once()
 
 		data, err := checkoutService.GetCheckoutById(id)
 
