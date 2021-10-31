@@ -49,7 +49,7 @@ func RegisterPath(e *echo.Echo,
 	shopCart := e.Group("v1/shoppingcarts")
 	shopCart.Use(middleware.JWTMiddleware())
 
-	shopCart.GET("/users/:id", shopping.GetShoppingCartByUserId) // perubahan end point
+	shopCart.GET("/carts", shopping.GetShoppingCartByUserId)
 	shopCart.POST("/carts", shopping.NewShoppingCart)
 	shopCart.GET("/carts/:id", shopping.GetShopCartDetailById)
 	shopCart.POST("/carts/:id", shopping.NewItemInShopCart)
