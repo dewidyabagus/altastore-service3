@@ -66,8 +66,8 @@ func RegisterPath(e *echo.Echo,
 	// Payment
 	payment := e.Group("v1/payments")
 	payment.Use(middleware.JWTMiddleware())
-	payment.POST("", paymentController.Call)
+	payment.PUT("/:id", paymentController.InsertPaymentById)
 
 	paymentCallback := e.Group("v1/payments/notif")
-	paymentCallback.GET("", paymentController.InsertPayment)
+	paymentCallback.GET("", paymentController.InsertPaymentFromMidtrans)
 }

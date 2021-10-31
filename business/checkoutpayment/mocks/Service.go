@@ -38,13 +38,36 @@ func (_m *Service) GenerateSnapPayment(customerId string, checkoutId string, amo
 	return r0, r1
 }
 
-// InsertPayment provides a mock function with given fields: payment
-func (_m *Service) InsertPayment(payment *checkoutpayment.InserPaymentSpec) (*checkoutpayment.InserPaymentSpec, error) {
-	ret := _m.Called(payment)
+// GetPaymentByCheckoutId provides a mock function with given fields: id
+func (_m *Service) GetPaymentByCheckoutId(id string) (*checkoutpayment.CheckoutPayment, error) {
+	ret := _m.Called(id)
+
+	var r0 *checkoutpayment.CheckoutPayment
+	if rf, ok := ret.Get(0).(func(string) *checkoutpayment.CheckoutPayment); ok {
+		r0 = rf(id)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*checkoutpayment.CheckoutPayment)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(string) error); ok {
+		r1 = rf(id)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// InsertPayment provides a mock function with given fields: payment, creator
+func (_m *Service) InsertPayment(payment *checkoutpayment.InserPaymentSpec, creator string) (*checkoutpayment.InserPaymentSpec, error) {
+	ret := _m.Called(payment, creator)
 
 	var r0 *checkoutpayment.InserPaymentSpec
-	if rf, ok := ret.Get(0).(func(*checkoutpayment.InserPaymentSpec) *checkoutpayment.InserPaymentSpec); ok {
-		r0 = rf(payment)
+	if rf, ok := ret.Get(0).(func(*checkoutpayment.InserPaymentSpec, string) *checkoutpayment.InserPaymentSpec); ok {
+		r0 = rf(payment, creator)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*checkoutpayment.InserPaymentSpec)
@@ -52,8 +75,8 @@ func (_m *Service) InsertPayment(payment *checkoutpayment.InserPaymentSpec) (*ch
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(*checkoutpayment.InserPaymentSpec) error); ok {
-		r1 = rf(payment)
+	if rf, ok := ret.Get(1).(func(*checkoutpayment.InserPaymentSpec, string) error); ok {
+		r1 = rf(payment, creator)
 	} else {
 		r1 = ret.Error(1)
 	}

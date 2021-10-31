@@ -4,7 +4,6 @@ import (
 	"AltaStore/business"
 	"AltaStore/business/checkoutpayment"
 	checkoutpaymentMock "AltaStore/business/checkoutpayment/mocks"
-	"AltaStore/business/user"
 	userMock "AltaStore/business/user/mocks"
 	"os"
 	"testing"
@@ -34,7 +33,6 @@ var (
 	checkoutPaymentRepository checkoutpaymentMock.Repository
 	checkoutPaymentService    checkoutpayment.Service
 
-	userData          user.User
 	checkoutPayment   checkoutpayment.CheckoutPayment
 	insertPaymentSpec checkoutpayment.InserPaymentSpec
 )
@@ -60,6 +58,10 @@ func setup() {
 		TransactionStatus: transactionstatus,
 		StatusCode:        statusCode,
 	}
+
+	// checkoutItemDetails = checkout.CheckItemDetails{
+	// 	ID: checkoutid,
+	// }
 	checkoutPaymentService = checkoutpayment.NewService(&userService, &checkoutPaymentRepository)
 }
 
@@ -88,21 +90,30 @@ func TestGenerateSnapPayment(t *testing.T) {
 	// })
 }
 
-func TestInserPayment(t *testing.T) {
-	t.Run("Expect Insert Checkout Payment Success", func(t *testing.T) {
-		checkoutPaymentRepository.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.CheckoutPayment")).Return(&checkoutPayment, nil).Once()
+func TestInsertPayment(t *testing.T) {
+	t.Run("Expect Checkout Data Found", func(t *testing.T) {
+		checkoutPaymentRepository.On("CheckHasCheckoutId", mock.AnythingOfType("string")).Return(false, business.ErrNotFound).Once()
 
-		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec)
+		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec, userid)
 
-		assert.Nil(t, err)
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrNotFound)
 	})
 	t.Run("Expect Insert Checkout Payment Fail", func(t *testing.T) {
-		userService.On("FinduserByID", mock.AnythingOfType("string")).Return(&userData, nil).Once()
+		checkoutPaymentRepository.On("CheckHasCheckoutId", mock.AnythingOfType("string")).Return(true, nil).Once()
 		checkoutPaymentRepository.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.CheckoutPayment")).Return(nil, business.ErrInternalServer).Once()
 
-		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec)
+		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrInternalServer)
+	})
+	t.Run("Expect Insert Checkout Payment Success", func(t *testing.T) {
+		checkoutPaymentRepository.On("CheckHasCheckoutId", mock.AnythingOfType("string")).Return(true, nil).Once()
+		checkoutPaymentRepository.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.CheckoutPayment")).Return(&checkoutPayment, nil).Once()
+
+		_, err := checkoutPaymentService.InsertPayment(&insertPaymentSpec, userid)
+
+		assert.Nil(t, err)
 	})
 }

@@ -2,6 +2,7 @@ package checkoutpayment
 
 import (
 	"AltaStore/business/checkoutpayment"
+	"AltaStore/modules/checkout"
 	"time"
 
 	"gorm.io/gorm"
@@ -67,6 +68,26 @@ func (r *Repository) InsertPayment(p *checkoutpayment.CheckoutPayment) (*checkou
 	}
 
 	return data.ToPayment(), nil
+}
+
+func (r *Repository) GetPaymentByCheckoutId(id string) (*checkoutpayment.CheckoutPayment, error) {
+	var data CheckoutPayment
+	err := r.DB.Where("checkout_id = ?", id).Order("created_at desc").First(&data).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return data.ToPayment(), nil
+}
+
+func (r *Repository) CheckHasCheckoutId(id string) (bool, error) {
+	var data checkout.Checkout
+	err := r.DB.Where("id = ?", id).First(&data).Error
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
 }
 
 // func (r *Repository) UpdatePayment(p *checkoutpayment.CheckoutPayment) error {
