@@ -15,6 +15,7 @@ import (
 const (
 	userid          = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
 	cartid          = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
+	wrongcartid     = "f9c8c2bf-d525-420e-86e5-4caf03cd8028"
 	id              = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
 	code            = "code"
 	name            = "name"
@@ -97,74 +98,105 @@ func TestNewShoppingCart(t *testing.T) {
 }
 
 func TestNewItemInShopCart(t *testing.T) {
-	t.Run("Expect Insert New Item In Shopping Cart Success", func(t *testing.T) {
-		shoppingDetailRepository.On("NewItemInShopCart",
-			mock.AnythingOfType("string"),
-			mock.AnythingOfType("*shoppingdetail.InsertItemInCartSpec"),
-		).Return(nil).Once()
+	t.Run("Expect Get Detail Shopping Cart by user id", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
 
-		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart)
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
 
-		assert.Nil(t, err)
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
 	})
 	t.Run("Expect Insert New Item In Shopping Cart Fail", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingDetailRepository.On("NewItemInShopCart",
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("*shoppingdetail.InsertItemInCartSpec"),
 		).Return(business.ErrInternalServer).Once()
 
-		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart)
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrInternalServer)
 	})
+	t.Run("Expect Insert New Item In Shopping Cart Success", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
+		shoppingDetailRepository.On("NewItemInShopCart",
+			mock.AnythingOfType("string"),
+			mock.AnythingOfType("*shoppingdetail.InsertItemInCartSpec"),
+		).Return(nil).Once()
+
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
+
+		assert.Nil(t, err)
+	})
+
 }
 
 func TestModifyItemInShopCart(t *testing.T) {
-	t.Run("Expect Modify Item In Shopping Cart Success", func(t *testing.T) {
-		shoppingDetailRepository.On("ModifyItemInShopCart",
-			mock.AnythingOfType("string"),
-			mock.AnythingOfType("*shoppingdetail.UpdateItemInCartSpec"),
-		).Return(nil).Once()
+	t.Run("Expect Get Detail Shopping Cart by user id", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
 
-		err := shoppingService.ModifyItemInShopCart(cartid, &detailItemInShopCart)
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
 
-		assert.Nil(t, err)
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
 	})
-	t.Run("Expect Modify Item In Shopping Cart Success", func(t *testing.T) {
+	t.Run("Expect Modify Item In Shopping Cart Fail", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingDetailRepository.On("ModifyItemInShopCart",
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("*shoppingdetail.UpdateItemInCartSpec"),
 		).Return(business.ErrInternalServer).Once()
 
-		err := shoppingService.ModifyItemInShopCart(cartid, &detailItemInShopCart)
+		err := shoppingService.ModifyItemInShopCart(cartid, &detailItemInShopCart, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrInternalServer)
+	})
+	t.Run("Expect Modify Item In Shopping Cart Success", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
+		shoppingDetailRepository.On("ModifyItemInShopCart",
+			mock.AnythingOfType("string"),
+			mock.AnythingOfType("*shoppingdetail.UpdateItemInCartSpec"),
+		).Return(nil).Once()
+
+		err := shoppingService.ModifyItemInShopCart(cartid, &detailItemInShopCart, userid)
+
+		assert.Nil(t, err)
 	})
 }
 
 func TestDeleteItemInShopCart(t *testing.T) {
-	t.Run("Expect Delete Item In Shopping Cart Success", func(t *testing.T) {
-		shoppingDetailRepository.On("DeleteItemInShopCart",
-			mock.AnythingOfType("string"),
-			mock.AnythingOfType("string"),
-		).Return(nil).Once()
+	t.Run("Expect Get Detail Shopping Cart by user id", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
 
-		err := shoppingService.DeleteItemInShopCart(cartid, productid)
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
 
-		assert.Nil(t, err)
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
 	})
-	t.Run("Expect Delete Item In Shopping Cart Success", func(t *testing.T) {
+	t.Run("Expect Delete Item In Shopping Cart Fail", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingDetailRepository.On("DeleteItemInShopCart",
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
 		).Return(business.ErrInternalServer).Once()
 
-		err := shoppingService.DeleteItemInShopCart(cartid, productid)
+		err := shoppingService.DeleteItemInShopCart(cartid, productid, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrInternalServer)
+	})
+	t.Run("Expect Delete Item In Shopping Cart Success", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
+		shoppingDetailRepository.On("DeleteItemInShopCart",
+			mock.AnythingOfType("string"),
+			mock.AnythingOfType("string"),
+		).Return(nil).Once()
+
+		err := shoppingService.DeleteItemInShopCart(cartid, productid, userid)
+
+		assert.Nil(t, err)
 	})
 }
 
@@ -199,18 +231,28 @@ func TestGetShoppingCartByUserId(t *testing.T) {
 }
 
 func TestGetShopCartDetailById(t *testing.T) {
+	t.Run("Expect Get Detail Shopping Cart by user id", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
+
+		err := shoppingService.NewItemInShopCart(cartid, &detailItemInShopCart, userid)
+
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
+	})
 	t.Run("Expect Shopping Cart Not Found", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingRepository.On("GetShoppingCartById",
 			mock.AnythingOfType("string"),
 		).Return(nil, business.ErrNotFound).Once()
 
-		_, err := shoppingService.GetShopCartDetailById(id)
+		_, err := shoppingService.GetShopCartDetailById(id, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrNotFound)
 
 	})
 	t.Run("Expect Detail Shopping Cart Not Found", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingRepository.On("GetShoppingCartById",
 			mock.AnythingOfType("string"),
 		).Return(&shoppCart, nil).Once()
@@ -218,13 +260,14 @@ func TestGetShopCartDetailById(t *testing.T) {
 			mock.AnythingOfType("string"),
 		).Return(nil, business.ErrNotFound).Once()
 
-		_, err := shoppingService.GetShopCartDetailById(id)
+		_, err := shoppingService.GetShopCartDetailById(id, userid)
 
 		assert.NotNil(t, err)
 		assert.Equal(t, err, business.ErrNotFound)
 
 	})
 	t.Run("Expect found the Detail Shopping Cart", func(t *testing.T) {
+		shoppingRepository.On("GetShoppingCartByUserId", mock.AnythingOfType("string")).Return(&shoppCart, nil).Once()
 		shoppingRepository.On("GetShoppingCartById",
 			mock.AnythingOfType("string"),
 		).Return(&shoppCart, nil).Once()
@@ -232,7 +275,7 @@ func TestGetShopCartDetailById(t *testing.T) {
 			mock.AnythingOfType("string"),
 		).Return(&detailWithProducts, nil).Once()
 
-		shopping, err := shoppingService.GetShopCartDetailById(id)
+		shopping, err := shoppingService.GetShopCartDetailById(id, userid)
 
 		assert.Nil(t, err)
 		assert.NotNil(t, shopping)
