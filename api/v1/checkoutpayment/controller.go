@@ -53,7 +53,7 @@ func (c *Controller) InsertPaymentFromMidtrans(ctx echo.Context) error {
 	newData.StatusCode = statusCode
 	saveData, err := c.service.InsertPayment(newData.ToPaymentSpec(), "Midtrans")
 	if err != nil {
-		return ctx.JSON(common.BadRequestResponse())
+		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}
 	return ctx.JSON(
 		common.SuccessResponseWithData(saveData),
@@ -76,7 +76,7 @@ func (c *Controller) InsertPaymentById(ctx echo.Context) error {
 	}
 	saveData, err := c.service.InsertPayment(payment.ToPaymentSpec(id), adminId)
 	if err != nil {
-		return ctx.JSON(common.BadRequestResponse())
+		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}
 	return ctx.JSON(
 		common.SuccessResponseWithData(saveData),
