@@ -72,16 +72,16 @@ func (r *Repository) GetAllCheckout() (*[]checkout.Checkout, error) {
 	var checkoutList []checkout.Checkout
 
 	err := r.DB.Raw(
-		"select c.*, cp.transaction_status payment_status" +
-			"from checkouts c" +
-			"inner join (" +
-			"select cp.check_out_id id, cp.transaction_status," +
-			"row_number() OVER (PARTITION BY  cp.check_out_id" +
-			"order by cp.created_at desc) as rnum," +
-			"cp.created_at" +
-			"from checkout_payments cp" +
-			"order by cp.created_at desc" +
-			")cp on cp.id  = CAST (c.id AS text)" +
+		"select c.*, cp.transaction_status payment_status " +
+			"from checkouts c " +
+			"inner join ( " +
+			"select cp.check_out_id id, cp.transaction_status, " +
+			"row_number() OVER (PARTITION BY  cp.check_out_id " +
+			"order by cp.created_at desc) as rnum, " +
+			"cp.created_at " +
+			"from checkout_payments cp " +
+			"order by cp.created_at desc " +
+			")cp on cp.id  = CAST (c.id AS text) " +
 			"where  cp.rnum = 1").Scan(&checkoutList).Error
 	if err != nil {
 		return nil, err
@@ -94,17 +94,17 @@ func (r *Repository) GetCheckoutById(id string) (*checkout.Checkout, error) {
 	checkout := new(checkout.Checkout)
 
 	err := r.DB.Raw(
-		"select c.*, cp.transaction_status payment_status"+
-			"from checkouts c"+
-			"inner join ("+
-			"select cp.check_out_id id, cp.transaction_status,"+
-			"row_number() OVER (PARTITION BY  cp.check_out_id"+
-			"order by cp.created_at desc) as rnum,"+
-			"cp.created_at"+
-			"from checkout_payments cp"+
-			"order by cp.created_at desc"+
-			")cp on cp.id  = CAST (c.id AS text)"+
-			"where  cp.rnum = 1 and  CAST (c.id AS text) = ?", id).Scan(&checkout).Error
+		"select c.*, cp.transaction_status payment_status "+
+			"from checkouts c "+
+			"inner join ( "+
+			"select cp.check_out_id id, cp.transaction_status, "+
+			"row_number() OVER (PARTITION BY  cp.check_out_id "+
+			"order by cp.created_at desc) as rnum, "+
+			"cp.created_at "+
+			"from checkout_payments cp "+
+			"order by cp.created_at desc "+
+			")cp on cp.id  = CAST (c.id AS text) "+
+			"where  cp.rnum = 1 and  CAST (c.id AS text) = ? ", id).Scan(&checkout).Error
 	if err != nil {
 		return nil, err
 	}
