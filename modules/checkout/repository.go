@@ -25,7 +25,7 @@ type Checkout struct {
 func (c *Checkout) toBusinessCheckout() checkout.Checkout {
 	return checkout.Checkout{
 		ID:             c.ID,
-		ShoppingCardId: c.ShoppingCartId,
+		ShoppingCartId: c.ShoppingCartId,
 		Description:    c.Description,
 		CreatedBy:      c.CreatedBy,
 		CreatedAt:      c.CreatedAt,
@@ -50,7 +50,7 @@ func toListCheckout(c *[]Checkout) *[]checkout.Checkout {
 func insertCheckout(data *checkout.Checkout) *Checkout {
 	return &Checkout{
 		ID:             data.ID,
-		ShoppingCartId: data.ShoppingCardId,
+		ShoppingCartId: data.ShoppingCartId,
 		Description:    data.Description,
 		CreatedBy:      data.CreatedBy,
 		CreatedAt:      data.CreatedAt,

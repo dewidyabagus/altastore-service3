@@ -12,7 +12,7 @@ type NewCheckoutShoppingCart struct {
 func (n *NewCheckoutShoppingCart) ToBusinessCheckout() *checkout.Checkout {
 	var checkout checkout.Checkout
 
-	checkout.ShoppingCardId = n.ShoppingCartId
+	checkout.ShoppingCartId = n.ShoppingCartId
 	checkout.Description = n.Description
 
 	return &checkout
