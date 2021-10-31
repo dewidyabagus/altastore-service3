@@ -57,7 +57,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 		return nil, err
 	}
 
-	err = s.shoppingService.UpdateShopCartStatusById(checkout.ID, true)
+	err = s.shoppingService.UpdateShopCartStatusById(checkout.ShoppingCardId, true)
 	if err != nil {
 		return nil, err
 	}
