@@ -49,7 +49,7 @@ func RegisterPath(e *echo.Echo,
 	shopCart := e.Group("v1/shoppingcarts")
 	shopCart.Use(middleware.JWTMiddleware())
 
-	shopCart.GET("/users/:id", shopping.GetShoppingCartByUserId) // perubahan end point
+	shopCart.GET("/carts", shopping.GetShoppingCartByUserId)
 	shopCart.POST("/carts", shopping.NewShoppingCart)
 	shopCart.GET("/carts/:id", shopping.GetShopCartDetailById)
 	shopCart.POST("/carts/:id", shopping.NewItemInShopCart)
@@ -66,8 +66,8 @@ func RegisterPath(e *echo.Echo,
 	// Payment
 	payment := e.Group("v1/payments")
 	payment.Use(middleware.JWTMiddleware())
-	payment.POST("", paymentController.Call)
+	payment.POST("/:id", paymentController.InsertPaymentById)
 
 	paymentCallback := e.Group("v1/payments/notif")
-	paymentCallback.GET("", paymentController.InsertPayment)
+	paymentCallback.GET("", paymentController.InsertPaymentFromMidtrans)
 }

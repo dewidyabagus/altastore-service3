@@ -3,6 +3,7 @@ package checkout
 import (
 	"AltaStore/business"
 	"AltaStore/business/checkoutpayment"
+	"AltaStore/business/shopping"
 	"AltaStore/util/validator"
 
 	snap "github.com/midtrans/midtrans-go/snap"
@@ -10,18 +11,20 @@ import (
 
 type service struct {
 	checkoutpaymentService checkoutpayment.Service
+	shoppingService        shopping.Service
 	repository             Repository
 	repoShoppingDetail     RepoShoppingDetail
 }
 
 func NewService(
 	checkoutpaymentService checkoutpayment.Service,
+	shoppingService shopping.Service,
 	repository Repository,
 	repoShoppingDetail RepoShoppingDetail,
-
 ) Service {
 	return &service{
 		checkoutpaymentService,
+		shoppingService,
 		repository,
 		repoShoppingDetail,
 	}
@@ -54,11 +57,26 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 		return nil, err
 	}
 
-	var sum int64 = 0
-	for _, val := range *dets {
-		sum += int64(val.Qty)
+	err = s.shoppingService.UpdateShopCartStatusById(checkout.ShoppingCardId, true)
+	if err != nil {
+		return nil, err
 	}
 
+	var sum int64 = 0
+	for _, val := range *dets {
+		sum += int64(val.Price)
+	}
+
+	var payment = checkoutpayment.InserPaymentSpec{
+		OrderId:           checkout.ID,
+		StatusCode:        "200",
+		TransactionStatus: "pending",
+	}
+
+	_, err = s.checkoutpaymentService.InsertPayment(&payment, userid)
+	if err != nil {
+		return nil, err
+	}
 	return s.checkoutpaymentService.GenerateSnapPayment(
 		newCheckout.CreatedBy,
 		newCheckout.ID,

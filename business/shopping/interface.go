@@ -12,17 +12,20 @@ type Service interface {
 	// Membuat keranjang belanjaan baru, ketika keranjang belanjaan ada yang aktif akan dikembalikan error
 	NewShoppingCart(userid string) (*ShoppCart, error)
 
+	// Update Status shopping cart
+	UpdateShopCartStatusById(id string, ischeckout bool) error
+
 	// Mengambil detail item pada shopping cart
-	GetShopCartDetailById(id string) (*ShopCartDetail, error)
+	GetShopCartDetailById(id string, userid string) (*ShopCartDetail, error)
 
 	// Menambahkan item produk pada shopping cart
-	NewItemInShopCart(cartId string, item *DetailItemInShopCart) error
+	NewItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error
 
 	// Merubah item produk pada shopping cart
-	ModifyItemInShopCart(cartId string, item *DetailItemInShopCart) error
+	ModifyItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error
 
 	// Menghapus item produk pada shopping cart
-	DeleteItemInShopCart(cartId string, productid string) error
+	DeleteItemInShopCart(cartId string, productid string, userid string) error
 }
 
 type Repository interface {
@@ -34,6 +37,9 @@ type Repository interface {
 
 	// Membuat keranjang belanjaan baru, ketika keranjang belanjaan ada yang aktif akan dikembalikan error
 	NewShoppingCart(id string, userid string, createdAt time.Time) (*ShoppCart, error)
+
+	// Update Status shopping cart
+	UpdateShopCartStatusById(id string, ischeckout bool) error
 }
 
 type RepositoryCartDetail interface {

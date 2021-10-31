@@ -67,6 +67,18 @@ func (r *Repository) GetShoppingCartById(id string) (*shopping.ShoppCart, error)
 	return shopCart.toShoppCart(), nil
 }
 
+func (r *Repository) UpdateShopCartStatusById(id string, isCheckout bool) error {
+	cart := new(ShoppingCart)
+
+	err := r.DB.First(cart,
+		"id = ? ", id).Error
+	if err != nil {
+		return err
+	}
+
+	return r.DB.Model(cart).Update("is_check_out", isCheckout).Error
+}
+
 func (r *Repository) NewShoppingCart(id string, userid string, createdAt time.Time) (*shopping.ShoppCart, error) {
 	var shopCart ShoppingCart
 

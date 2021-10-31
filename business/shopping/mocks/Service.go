@@ -13,13 +13,13 @@ type Service struct {
 	mock.Mock
 }
 
-// DeleteItemInShopCart provides a mock function with given fields: cartId, productid
-func (_m *Service) DeleteItemInShopCart(cartId string, productid string) error {
-	ret := _m.Called(cartId, productid)
+// DeleteItemInShopCart provides a mock function with given fields: cartId, productid, userid
+func (_m *Service) DeleteItemInShopCart(cartId string, productid string, userid string) error {
+	ret := _m.Called(cartId, productid, userid)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, string) error); ok {
-		r0 = rf(cartId, productid)
+	if rf, ok := ret.Get(0).(func(string, string, string) error); ok {
+		r0 = rf(cartId, productid, userid)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -27,13 +27,13 @@ func (_m *Service) DeleteItemInShopCart(cartId string, productid string) error {
 	return r0
 }
 
-// GetShopCartDetailById provides a mock function with given fields: id
-func (_m *Service) GetShopCartDetailById(id string) (*shopping.ShopCartDetail, error) {
-	ret := _m.Called(id)
+// GetShopCartDetailById provides a mock function with given fields: id, userid
+func (_m *Service) GetShopCartDetailById(id string, userid string) (*shopping.ShopCartDetail, error) {
+	ret := _m.Called(id, userid)
 
 	var r0 *shopping.ShopCartDetail
-	if rf, ok := ret.Get(0).(func(string) *shopping.ShopCartDetail); ok {
-		r0 = rf(id)
+	if rf, ok := ret.Get(0).(func(string, string) *shopping.ShopCartDetail); ok {
+		r0 = rf(id, userid)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*shopping.ShopCartDetail)
@@ -41,8 +41,8 @@ func (_m *Service) GetShopCartDetailById(id string) (*shopping.ShopCartDetail, e
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(id)
+	if rf, ok := ret.Get(1).(func(string, string) error); ok {
+		r1 = rf(id, userid)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -73,13 +73,13 @@ func (_m *Service) GetShoppingCartByUserId(userid string) (*shopping.ShoppCart, 
 	return r0, r1
 }
 
-// ModifyItemInShopCart provides a mock function with given fields: cartId, item
-func (_m *Service) ModifyItemInShopCart(cartId string, item *shopping.DetailItemInShopCart) error {
-	ret := _m.Called(cartId, item)
+// ModifyItemInShopCart provides a mock function with given fields: cartId, item, userid
+func (_m *Service) ModifyItemInShopCart(cartId string, item *shopping.DetailItemInShopCart, userid string) error {
+	ret := _m.Called(cartId, item, userid)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart) error); ok {
-		r0 = rf(cartId, item)
+	if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart, string) error); ok {
+		r0 = rf(cartId, item, userid)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -87,13 +87,13 @@ func (_m *Service) ModifyItemInShopCart(cartId string, item *shopping.DetailItem
 	return r0
 }
 
-// NewItemInShopCart provides a mock function with given fields: cartId, item
-func (_m *Service) NewItemInShopCart(cartId string, item *shopping.DetailItemInShopCart) error {
-	ret := _m.Called(cartId, item)
+// NewItemInShopCart provides a mock function with given fields: cartId, item, userid
+func (_m *Service) NewItemInShopCart(cartId string, item *shopping.DetailItemInShopCart, userid string) error {
+	ret := _m.Called(cartId, item, userid)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart) error); ok {
-		r0 = rf(cartId, item)
+	if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart, string) error); ok {
+		r0 = rf(cartId, item, userid)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -122,4 +122,18 @@ func (_m *Service) NewShoppingCart(userid string) (*shopping.ShoppCart, error) {
 	}
 
 	return r0, r1
+}
+
+// UpdateShopCartStatusById provides a mock function with given fields: id, ischeckout
+func (_m *Service) UpdateShopCartStatusById(id string, ischeckout bool) error {
+	ret := _m.Called(id, ischeckout)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(string, bool) error); ok {
+		r0 = rf(id, ischeckout)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }

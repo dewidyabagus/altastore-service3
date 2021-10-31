@@ -11,11 +11,12 @@ import (
 )
 
 type InserPaymentSpec struct {
-	OrderId           string `validate:"required"`
-	MerchantId        string
-	StatusCode        string `validate:"required"`
-	TransactionStatus string `validate:"required"`
-	FraudStatus       string
+	OrderId            string `validate:"required"`
+	MerchantId         string
+	StatusCode         string `validate:"required"`
+	TransactionStatus  string `validate:"required"`
+	FromPaymentGateway bool   `validate:"required"`
+	FraudStatus        string
 }
 
 type service struct {
@@ -64,9 +65,11 @@ func (s *service) GenerateSnapPayment(customerId string, checkoutId string, amou
 	return snapResp, nil
 }
 
-func (s *service) InsertPayment(p *InserPaymentSpec) (*InserPaymentSpec, error) {
-
-	//TODO: Check inv apakah ada
+func (s *service) InsertPayment(p *InserPaymentSpec, creator string) (*InserPaymentSpec, error) {
+	hasData, err := s.repository.CheckHasCheckoutId(p.OrderId)
+	if err != nil || !hasData {
+		return nil, business.ErrNotFound
+	}
 
 	data := InsertPayment(
 		p.OrderId,
@@ -74,12 +77,20 @@ func (s *service) InsertPayment(p *InserPaymentSpec) (*InserPaymentSpec, error) 
 		p.MerchantId,
 		p.TransactionStatus,
 		p.FraudStatus,
-		"midtrans",
+		p.FromPaymentGateway,
+		creator,
 		time.Now())
 
-	_, err := s.repository.InsertPayment(&data)
+	saved, err := s.repository.InsertPayment(&data)
 	if err != nil {
 		return p, business.ErrInternalServer
 	}
-	return p, nil
+
+	dataSaved := saved.ToInserPaymentSpec()
+
+	return &(dataSaved), nil
+}
+
+func (s *service) GetPaymentByCheckoutId(id string) (*CheckoutPayment, error) {
+	return s.repository.GetPaymentByCheckoutId(id)
 }
