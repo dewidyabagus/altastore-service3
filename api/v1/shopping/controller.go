@@ -71,7 +71,7 @@ func (c *Controller) GetShopCartDetailById(ctx echo.Context) error {
 		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}
 
-	return ctx.JSON(common.SuccessResponseWithData(itemDetail))
+	return ctx.JSON(common.SuccessResponseWithData(response.ToResponseDetails(itemDetail)))
 }
 
 func (c *Controller) NewItemInShopCart(ctx echo.Context) error {
