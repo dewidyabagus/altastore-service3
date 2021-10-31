@@ -56,7 +56,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 
 	var sum int64 = 0
 	for _, val := range *dets {
-		sum += int64(val.Qty)
+		sum += int64(val.Price)
 	}
 
 	var payment = checkoutpayment.InserPaymentSpec{
