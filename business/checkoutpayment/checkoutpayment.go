@@ -61,8 +61,8 @@ func InsertPayment(
 		CreatedBy:          creator,
 	}
 }
-func (c *CheckoutPayment) ToInserPaymentSpec() InserPaymentSpec {
-	return InserPaymentSpec{
+func (c *CheckoutPayment) ToInserPaymentSpec() *InserPaymentSpec {
+	return &InserPaymentSpec{
 		OrderId:            c.CheckOutID,
 		MerchantId:         c.MerchantId,
 		StatusCode:         c.StatusCode,

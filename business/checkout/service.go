@@ -38,7 +38,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 
 	var newCheckout = checkout.toCheckout(userid)
 
-	status, err := s.repository.GetCheckoutByShoppingCartId(checkout.ShoppingCardId)
+	status, err := s.repository.GetCheckoutByShoppingCartId(checkout.ShoppingCartId)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 		return nil, business.ErrDataExists
 	}
 
-	dets, err := s.repoShoppingDetail.GetShopCartDetailById(newCheckout.ShoppingCardId)
+	dets, err := s.repoShoppingDetail.GetShopCartDetailById(newCheckout.ShoppingCartId)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 		return nil, err
 	}
 
-	err = s.shoppingService.UpdateShopCartStatusById(checkout.ShoppingCardId, true)
+	err = s.shoppingService.UpdateShopCartStatusById(checkout.ShoppingCartId, true)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
 		return nil, err
 	}
 
-	items, err := s.repoShoppingDetail.GetShopCartDetailById(dtCheckout.ShoppingCardId)
+	items, err := s.repoShoppingDetail.GetShopCartDetailById(dtCheckout.ShoppingCartId)
 	if err != nil {
 		return nil, err
 	}

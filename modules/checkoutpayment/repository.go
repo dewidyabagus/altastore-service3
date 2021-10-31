@@ -25,33 +25,35 @@ type CheckoutPayment struct {
 
 func (p *CheckoutPayment) ToPayment() *checkoutpayment.CheckoutPayment {
 	return &checkoutpayment.CheckoutPayment{
-		CheckOutID:        p.CheckOutID,
-		MerchantId:        p.MerchantId,
-		StatusCode:        p.StatusCode,
-		TransactionStatus: p.TransactionStatus,
-		FraudStatus:       p.FraudStatus,
-		CreatedAt:         p.CreatedAt,
-		CreatedBy:         p.CreatedBy,
-		UpdatedAt:         p.UpdatedAt,
-		UpdatedBy:         p.UpdatedBy,
-		DeletedAt:         p.DeletedAt,
-		DeletedBy:         p.DeletedBy,
+		CheckOutID:         p.CheckOutID,
+		MerchantId:         p.MerchantId,
+		StatusCode:         p.StatusCode,
+		TransactionStatus:  p.TransactionStatus,
+		FromPaymentGateway: p.FromPaymentGateway,
+		FraudStatus:        p.FraudStatus,
+		CreatedAt:          p.CreatedAt,
+		CreatedBy:          p.CreatedBy,
+		UpdatedAt:          p.UpdatedAt,
+		UpdatedBy:          p.UpdatedBy,
+		DeletedAt:          p.DeletedAt,
+		DeletedBy:          p.DeletedBy,
 	}
 }
 
 func newPayment(p *checkoutpayment.CheckoutPayment) *CheckoutPayment {
 	return &CheckoutPayment{
-		CheckOutID:        p.CheckOutID,
-		MerchantId:        p.MerchantId,
-		StatusCode:        p.StatusCode,
-		TransactionStatus: p.TransactionStatus,
-		FraudStatus:       p.FraudStatus,
-		CreatedAt:         p.CreatedAt,
-		CreatedBy:         p.CreatedBy,
-		UpdatedAt:         p.UpdatedAt,
-		UpdatedBy:         p.UpdatedBy,
-		DeletedAt:         p.DeletedAt,
-		DeletedBy:         p.DeletedBy,
+		CheckOutID:         p.CheckOutID,
+		MerchantId:         p.MerchantId,
+		StatusCode:         p.StatusCode,
+		TransactionStatus:  p.TransactionStatus,
+		FromPaymentGateway: p.FromPaymentGateway,
+		FraudStatus:        p.FraudStatus,
+		CreatedAt:          p.CreatedAt,
+		CreatedBy:          p.CreatedBy,
+		UpdatedAt:          p.UpdatedAt,
+		UpdatedBy:          p.UpdatedBy,
+		DeletedAt:          p.DeletedAt,
+		DeletedBy:          p.DeletedBy,
 	}
 }
 
@@ -63,20 +65,15 @@ func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{db}
 }
 func (r *Repository) InsertPayment(p *checkoutpayment.CheckoutPayment) (*checkoutpayment.CheckoutPayment, error) {
-
+	var data *CheckoutPayment
 	if p.FromPaymentGateway {
-		var datanew *CheckoutPayment
-		err := r.DB.Where("checkout_id = ?", p.CheckOutID).Where("from_payment_gateway = ?", true).First(&datanew).Error
+		err := r.DB.Where("check_out_id = ? and from_payment_gateway = ?", p.CheckOutID, true).First(&data).Error
 
-		if err != nil {
-			return nil, err
-		}
-		if datanew != nil {
-			return datanew.ToPayment(), nil
+		if err == nil {
+			return data.ToPayment(), nil
 		}
 	}
-
-	data := newPayment(p)
+	data = newPayment(p)
 	if err := r.DB.Create(data).Error; err != nil {
 		return nil, err
 	}
