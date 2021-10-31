@@ -12,6 +12,9 @@ type Service interface {
 	// Membuat keranjang belanjaan baru, ketika keranjang belanjaan ada yang aktif akan dikembalikan error
 	NewShoppingCart(userid string) (*ShoppCart, error)
 
+	// Update Status shopping cart
+	UpdateShopCartStatusById(id string, ischeckout bool) error
+
 	// Mengambil detail item pada shopping cart
 	GetShopCartDetailById(id string, userid string) (*ShopCartDetail, error)
 
@@ -34,6 +37,9 @@ type Repository interface {
 
 	// Membuat keranjang belanjaan baru, ketika keranjang belanjaan ada yang aktif akan dikembalikan error
 	NewShoppingCart(id string, userid string, createdAt time.Time) (*ShoppCart, error)
+
+	// Update Status shopping cart
+	UpdateShopCartStatusById(id string, ischeckout bool) error
 }
 
 type RepositoryCartDetail interface {

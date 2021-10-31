@@ -31,6 +31,10 @@ func (s *service) NewShoppingCart(userid string) (*ShoppCart, error) {
 	return s.repository.NewShoppingCart(uuid.NewString(), userid, time.Now())
 }
 
+func (s *service) UpdateShopCartStatusById(id string, isCheckout bool) error {
+	return s.repository.UpdateShopCartStatusById(id, isCheckout)
+}
+
 func (s *service) GetShopCartDetailById(cartId string, userid string) (*ShopCartDetail, error) {
 	shopCartUser, err := s.repository.GetShoppingCartByUserId(userid)
 	if err != nil {

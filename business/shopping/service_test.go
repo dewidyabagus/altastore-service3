@@ -283,3 +283,27 @@ func TestGetShopCartDetailById(t *testing.T) {
 		assert.Equal(t, id, shopping.ID)
 	})
 }
+
+func TestUpdateShopCartStatusById(t *testing.T) {
+	t.Run("Expect Update status shopping cart failed", func(t *testing.T) {
+		shoppingRepository.On("UpdateShopCartStatusById",
+			mock.AnythingOfType("string"),
+			mock.AnythingOfType("bool"),
+		).Return(business.ErrInternalServer).Once()
+
+		err := shoppingService.UpdateShopCartStatusById(id, ischeckout)
+
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
+	})
+	t.Run("Expect Update status shopping cart succes", func(t *testing.T) {
+		shoppingRepository.On("UpdateShopCartStatusById",
+			mock.AnythingOfType("string"),
+			mock.AnythingOfType("bool"),
+		).Return(nil).Once()
+
+		err := shoppingService.UpdateShopCartStatusById(id, ischeckout)
+
+		assert.Nil(t, err)
+	})
+}
