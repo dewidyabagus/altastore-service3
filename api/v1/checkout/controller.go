@@ -67,5 +67,5 @@ func (c *Controller) GetCheckoutById(ctx echo.Context) error {
 		return ctx.JSON(common.NewBusinessErrorResponse(err))
 	}
 
-	return ctx.JSON(common.SuccessResponseWithData(checkoutDetails))
+	return ctx.JSON(common.SuccessResponseWithData(response.ToResponseDetailItems(checkoutDetails)))
 }
