@@ -64,6 +64,9 @@ func (c *Controller) InsertPaymentById(ctx echo.Context) error {
 	id := ctx.Param("id")
 
 	payment := new(request.InserPaymentRequestAdmin)
+	if err := ctx.Bind(payment); err != nil {
+		return ctx.JSON(common.BadRequestResponse())
+	}
 	adminId, err := middleware.ExtractTokenUser(ctx)
 	if err != nil {
 		return ctx.JSON(common.UnAuthorizedResponse())

@@ -24,7 +24,7 @@ func (u *InserPaymentRequestMidtrans) ToPaymentSpec(fromPaymentGateway bool) *ch
 }
 
 type InserPaymentRequestAdmin struct {
-	TransactionStatus string `json:"transactionStatus"`
+	TransactionStatus string `json:"transaction_status"`
 }
 
 func (u *InserPaymentRequestAdmin) ToPaymentSpec(id string, fromPaymentGateway bool) *checkoutpayment.InserPaymentSpec {
