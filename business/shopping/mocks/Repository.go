@@ -83,3 +83,17 @@ func (_m *Repository) NewShoppingCart(id string, userid string, createdAt time.T
 
 	return r0, r1
 }
+
+// UpdateShopCartStatusById provides a mock function with given fields: id, ischeckout
+func (_m *Repository) UpdateShopCartStatusById(id string, ischeckout bool) error {
+	ret := _m.Called(id, ischeckout)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(string, bool) error); ok {
+		r0 = rf(id, ischeckout)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}

@@ -1,0 +1,513 @@
+openapi: 3.0.0
+info:
+  description: Back-End (RESTful API) Web Application Alta Store
+  version: "1.0.0"
+  title: BE Web Application Alta Store
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+  - name: Shopping Cart
+    description: Resource for insert, modifiying and getting Shopping Carts
+  - name: Check Out
+    description: Resource for insert, modifiying and getting Check Outs
+paths:
+  /v1/shoppingcarts/carts:
+    post:
+      tags:
+        - Shopping Cart
+      summary: Added shopping cart
+      operationId: AddShoppingCart
+      description: |
+        Adding a new shopping cart when a customer doesn't have an active cart, 
+        one customer can only have one active shopping cart
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "shopping cart created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveShoppingCart"
+        400:
+          description: invalid input, object invalid
+        409:
+          description: "shopping cart already exists"
+    get:
+      tags:
+        - Shopping Cart
+      summary: Take active shopping cart
+      operationId: shoppingCartByUserId
+      description: |
+        Takes the identity of the active shopping cart and returns empty when not found.
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveShoppingCart"
+        400:
+          description: Bad Input Parameter
+        404:
+          description: when there is no active shopping cart
+  /v1/shoppingcarts/carts/{id}:
+    get:
+      tags:
+        - Shopping Cart
+      summary: Get product details in active shopping cart
+      operationId: shoppingCartById
+      description: |
+        Get product details in active shopping cart and return shopping cart summary and product details.
+      parameters:
+        - in: path
+          name: id
+          description: Provide pre-made shopping cart id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ShoppingCartDetail"
+        400:
+          description: Bad Input Parameter
+        404:
+          description: shopping cart id not found
+    post:
+      tags:
+        - Shopping Cart
+      summary: Add new product to shopping cart
+      operationId: addProductCart
+      description: Add new product to shopping cart
+      parameters:
+        - in: path
+          name: id
+          description: Provide pre-made shopping cart id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: "product created successfully"
+        400:
+          description: invalid input, object invalid
+        409:
+          description: "product already exists"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShoppingCartProductNew"
+    put:
+      tags:
+        - Shopping Cart
+      summary: Updating products in the shopping cart
+      # operationId: updateProductCart
+      description: Updating products in the shopping cart
+      parameters:
+        - in: path
+          name: id
+          description: Provide pre-made shopping cart id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "product updated successfully"
+        400:
+          description: "invalid input, object invalid"
+        404:
+          description: "product not found"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ShoppingCartProductUpdate"
+  /v1/shoppingcarts/carts/{id}/products/{productid}:
+    delete:
+      tags:
+        - Shopping Cart
+      summary: Delete product in shopping cart
+      description: Delete product in shopping cart
+      parameters:
+        - in: path
+          name: id
+          description: Provide pre-made shopping cart id
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: productid
+          description: Product id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "product deleted successfully"
+        400:
+          description: "Bad Input Parameter"
+        404:
+          description: "product not found"
+  /v1/checkouts:
+    post:
+      tags:
+        - Check Out
+      summary: Added Checkout
+      operationId: AddCheckout
+      security:
+        - bearerAuth: []
+      responses:
+        201:
+          description: "Checkout created"
+        400:
+          description: "invalid input, object invalid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutShopCart"
+    get:
+      tags:
+        - Check Out
+      summary: Fetch all checkout summary
+      operationId: getShoppingCartById
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutMasterView"
+        400:
+          description: "Bad Input Parameter"
+  /v1/checkouts/{id}:
+    get:
+      tags:
+        - Check Out
+      summary: Get checkout information and product details
+      operationId: detailcheckoutproduct
+      parameters:
+        - in: path
+          name: id
+          description: Provide pre-made checkout id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "search results matching criteria"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutProductView"
+        400:
+          description: "Bad Input Parameter"
+        404:
+          description: "Data Not Found"
+  /v1/payment:
+    put:
+      tags:
+        - Check Out
+      summary: Update Payment
+      operationId: updatepayment
+      parameters:
+        - in: path
+          name: id
+          description: give checkoutid
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Payment"
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: successfully operation
+        400:
+          description: Bad Input Parameter
+        404:
+          description: Not Found
+  /v1/payment/notif:
+    get:
+      tags:
+        - Check Out
+      summary: Get Payment Detail
+      operationId: getpaymentdetail
+      parameters:
+        - in: query
+          name: merchant_id
+          description: merchant_id
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: order_id
+          description: order_id
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: status_code
+          description: status_code
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: transaction_status
+          description: transaction_status
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: fraud_status
+          description: fraud_status
+          required: false
+          schema:
+            type: string
+
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: successfully operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutPaymentView"
+        400:
+          description: Bad Input Parameter
+
+components:
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes
+  schemas:
+    ShoppingCartDetail:
+      type: object
+      properties:
+        ID:
+          type: string
+          format: uuid
+          example: "3916445d-ca66-438e-893e-50f6e4c39a34"
+        Description:
+          type: string
+          example: ""
+        CreatedBy:
+          type: string
+          format: uuid
+          example: "961058d4-23a0-4922-816c-01333e6a13ab"
+        UpdatedAt:
+          type: string
+          format: date-time
+          example: "2021-10-24T09:48:24.560612Z"
+        Details:
+          type: array
+          items:
+            type: object
+            properties:
+              ID:
+                type: string
+                format: uuid
+                example: "987c1957-f8b7-42e8-a980-beec5a364f65"
+              ProductId:
+                type: string
+                format: uuid
+                example: "032407b9-2b7b-4e63-8802-c82a17443f34"
+              ProductName:
+                type: string
+                example: "MIE SEDAP RASA ROTO"
+              Price:
+                type: integer
+                example: 3500
+              Qty:
+                type: integer
+                example: 3
+              UpdatedAt:
+                type: string
+                format: date-time
+                example: "2021-10-24T09:52:16.839921Z"
+    ActiveShoppingCart:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "3916445d-ca66-438e-893e-50f6e4c39a34"
+        ischeckout:
+          type: boolean
+          example: false
+        description:
+          type: string
+          example: ""
+        updated_at:
+          type: string
+          format: date-time
+          example: "2021-10-24T09:48:24.560612Z"
+    ShoppingCartProductNew:
+      type: object
+      properties:
+        productid:
+          type: string
+          format: uuid
+        price:
+          type: integer
+          example: 15000
+        qty:
+          type: integer
+          example: 1
+    ShoppingCartProductUpdate:
+      type: object
+      properties:
+        productid:
+          type: string
+          format: uuid
+        price:
+          type: integer
+          example: 3500
+        qty:
+          type: integer
+          example: 1
+    ShoppingCartProductDel:
+      type: object
+      properties:
+        productId:
+          type: string
+          format: uuid
+
+    CheckoutMasterView:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        shoppingcartid:
+          type: string
+          format: uuid
+          example: 9cf9cae5-bad7-48bf-96c7-85c8d6114c68
+        description:
+          type: string
+          example: Tolong Packing dengan rapi
+        created_by:
+          type: string
+          format: uuid
+          example: 961058d4-23a0-4922-816c-01333e6a13ab
+        created_at:
+          type: string
+          format: date-time
+          example: "2021-10-26T05:37:22.958972Z"
+
+    CheckoutProductView:
+      type: object
+      properties:
+        ID:
+          type: string
+          format: uuid
+          example: 1547b2a2-ca03-4ce8-9494-e6b882b71865
+        ShoppingCardId:
+          type: string
+          format: uuid
+          example: 9cf9cae5-bad7-48bf-96c7-85c8d6114c68
+        Description:
+          type: string
+          example: "Mohon untuk di packing dengan rapi ya"
+        CreatedBy:
+          type: string
+          format: uuid
+        CreatedAt:
+          type: string
+          format: date-time
+          example: "2021-10-26T05:57:18.277861Z"
+        Details:
+          type: array
+          items:
+            type: object
+            properties:
+              ID:
+                type: string
+                format: uuid
+                example: e0fbe25d-895d-4d7a-b117-94b7025cf8a5
+              ProductId:
+                type: string
+                format: uuid
+                example: 032407b9-2b7b-4e63-8802-c82a17443f34
+              ProductName:
+                type: string
+                example: "MIE SEDAP RASA ROTO"
+              Price:
+                type: integer
+                example: 3500
+              Qty:
+                type: integer
+                example: 1
+              UpdatedAt:
+                type: string
+                format: date-time
+                example: "2021-10-26T00:18:17.872182Z"
+    CheckoutPaymentView:
+      type: array
+      items:
+        properties:
+          merchant_id:
+            type: string
+            example: M1234567
+          order_id:
+            type: string
+            format: uuid
+          status_code:
+            type: string
+            example: 200
+          transaction_status:
+            type: string
+            example: settlement
+          fraud_status:
+            type: string
+            example: ""
+    CheckoutShopCart:
+      type: object
+      properties:
+        shoppingcartid:
+          type: string
+          format: uuid
+          example: 9cf9cae5-bad7-48bf-96c7-85c8d6114c68
+        description:
+          type: string
+          example: "Mohon untuk di packing dengan rapi ya"
+    Payment:
+      type: object
+      properties:
+        transactionstatus:
+          type: string
+          example: Settlement
