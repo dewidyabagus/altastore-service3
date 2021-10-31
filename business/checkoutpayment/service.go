@@ -64,9 +64,11 @@ func (s *service) GenerateSnapPayment(customerId string, checkoutId string, amou
 	return snapResp, nil
 }
 
-func (s *service) InsertPayment(p *InserPaymentSpec) (*InserPaymentSpec, error) {
-
-	//TODO: Check inv apakah ada
+func (s *service) InsertPayment(p *InserPaymentSpec, creator string) (*InserPaymentSpec, error) {
+	hasData, err := s.repository.CheckHasCheckoutId(p.OrderId)
+	if err != nil || !hasData {
+		return nil, business.ErrNotFound
+	}
 
 	data := InsertPayment(
 		p.OrderId,
@@ -74,12 +76,16 @@ func (s *service) InsertPayment(p *InserPaymentSpec) (*InserPaymentSpec, error) 
 		p.MerchantId,
 		p.TransactionStatus,
 		p.FraudStatus,
-		"midtrans",
+		creator,
 		time.Now())
 
-	_, err := s.repository.InsertPayment(&data)
+	_, err = s.repository.InsertPayment(&data)
 	if err != nil {
 		return p, business.ErrInternalServer
 	}
 	return p, nil
+}
+
+func (s *service) GetPaymentByCheckoutId(id string) (*CheckoutPayment, error) {
+	return s.repository.GetPaymentByCheckoutId(id)
 }

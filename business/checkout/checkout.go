@@ -11,6 +11,7 @@ type Checkout struct {
 	ID             string
 	ShoppingCardId string `validate:"required"`
 	Description    string `validate:"required"`
+	PaymentStatus  string
 	CreatedBy      string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
@@ -39,6 +40,7 @@ type CheckItemDetails struct {
 	ID             string
 	ShoppingCardId string
 	Description    string
+	PaymentStatus  string
 	CreatedBy      string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
@@ -70,11 +72,12 @@ func toDetailItemInCart(items *[]shoppingdetail.ShopCartDetailItemWithProductNam
 	return &details
 }
 
-func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart) *CheckItemDetails {
+func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart, paymentStatus string) *CheckItemDetails {
 	return &CheckItemDetails{
 		ID:             cinfo.ID,
 		ShoppingCardId: cinfo.ShoppingCardId,
 		Description:    cinfo.Description,
+		PaymentStatus:  paymentStatus,
 		CreatedBy:      cinfo.CreatedBy,
 		CreatedAt:      cinfo.CreatedAt,
 		UpdatedAt:      cinfo.UpdatedAt,
