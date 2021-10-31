@@ -36,3 +36,52 @@ func AllCheckout(checkout *[]checkout.Checkout) *[]CheckoutResponse {
 
 	return &response
 }
+
+type DetailItem struct {
+	ProductId   string    `json:"product_id"`
+	ProductName string    `json:"product_name"`
+	Price       int       `json:"price"`
+	Qty         int       `json:"qty"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type ResponseDetailItems struct {
+	ID             string       `json:"id"`
+	ShoppingCartId string       `json:"shopping_cart_id"`
+	Description    string       `json:"description"`
+	CreatedBy      string       `json:"created_by"`
+	CreatedAt      time.Time    `json:"created_at"`
+	UpdatedAt      time.Time    `json:"updated_at"`
+	Details        []DetailItem `json:"details"`
+}
+
+func ToDetailItem(item *checkout.ItemInCart) *DetailItem {
+	return &DetailItem{
+		ProductId:   item.ProductId,
+		ProductName: item.ProductName,
+		Price:       item.Price,
+		Qty:         item.Qty,
+		UpdatedAt:   item.UpdatedAt,
+	}
+}
+
+func ToResponseDetailItems(checkout *checkout.CheckItemDetails) *ResponseDetailItems {
+	var items ResponseDetailItems
+
+	items.ID = checkout.ID
+	items.ShoppingCartId = checkout.ShoppingCardId
+	items.Description = checkout.Description
+	items.CreatedBy = checkout.CreatedBy
+	items.CreatedAt = checkout.CreatedAt
+	items.UpdatedAt = checkout.UpdatedAt
+
+	for _, item := range checkout.Details {
+		items.Details = append(items.Details, *ToDetailItem(&item))
+	}
+
+	if items.Details == nil {
+		items.Details = []DetailItem{}
+	}
+
+	return &items
+}
