@@ -13,16 +13,16 @@ type Service interface {
 	NewShoppingCart(userid string) (*ShoppCart, error)
 
 	// Mengambil detail item pada shopping cart
-	GetShopCartDetailById(id string) (*ShopCartDetail, error)
+	GetShopCartDetailById(id string, userid string) (*ShopCartDetail, error)
 
 	// Menambahkan item produk pada shopping cart
-	NewItemInShopCart(cartId string, item *DetailItemInShopCart) error
+	NewItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error
 
 	// Merubah item produk pada shopping cart
-	ModifyItemInShopCart(cartId string, item *DetailItemInShopCart) error
+	ModifyItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error
 
 	// Menghapus item produk pada shopping cart
-	DeleteItemInShopCart(cartId string, productid string) error
+	DeleteItemInShopCart(cartId string, productid string, userid string) error
 }
 
 type Repository interface {
