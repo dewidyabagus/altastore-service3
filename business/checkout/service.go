@@ -59,6 +59,16 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 		sum += int64(val.Qty)
 	}
 
+	var payment = checkoutpayment.InserPaymentSpec{
+		OrderId:           checkout.ID,
+		StatusCode:        "200",
+		TransactionStatus: "pending",
+	}
+
+	_, err = s.checkoutpaymentService.InsertPayment(&payment, userid)
+	if err != nil {
+		return nil, err
+	}
 	return s.checkoutpaymentService.GenerateSnapPayment(
 		newCheckout.CreatedBy,
 		newCheckout.ID,
@@ -66,7 +76,19 @@ func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*s
 }
 
 func (s *service) GetAllCheckout() (*[]Checkout, error) {
-	return s.repository.GetAllCheckout()
+	data, err := s.repository.GetAllCheckout()
+	if err != nil {
+		return nil, err
+	}
+	for _, checkout := range *data {
+		payment, err := s.checkoutpaymentService.GetPaymentByCheckoutId(checkout.ID)
+		if err != nil {
+			return nil, err
+		}
+		checkout.PaymentStatus = string(payment.TransactionStatus)
+	}
+
+	return data, nil
 }
 
 func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
@@ -82,5 +104,10 @@ func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) {
 	}
 	details := toDetailItemInCart(items)
 
-	return getCheckItemsDetails(dtCheckout, details), nil
+	payment, err := s.checkoutpaymentService.GetPaymentByCheckoutId(dtCheckout.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return getCheckItemsDetails(dtCheckout, details, string(payment.TransactionStatus)), nil
 }

@@ -4,6 +4,7 @@ import (
 	"AltaStore/business"
 	"AltaStore/business/checkout"
 	checkoutMock "AltaStore/business/checkout/mocks"
+	"AltaStore/business/checkoutpayment"
 	checkoutpaymentMock "AltaStore/business/checkoutpayment/mocks"
 	"AltaStore/modules/shoppingdetail"
 	"os"
@@ -14,14 +15,15 @@ import (
 )
 
 const (
-	id             = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
-	userid         = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
-	shoppingcartid = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
-	description    = "description"
-	productid      = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
-	productname    = "productname"
-	qty            = 10
-	price          = 100000000
+	id                = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
+	userid            = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
+	shoppingcartid    = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
+	description       = "description"
+	productid         = "f9c8c2bf-d525-420e-86e5-4caf03cd8027"
+	productname       = "productname"
+	qty               = 10
+	price             = 100000000
+	transactionstatus = "success"
 )
 
 var (
@@ -35,6 +37,9 @@ var (
 	shoppCartDetail    shoppingdetail.ShoppingCartDetail
 	detailWithProduct  shoppingdetail.ShopCartDetailItemWithProductName
 	detailWithProducts []shoppingdetail.ShopCartDetailItemWithProductName
+
+	paymentSpec         checkoutpayment.InserPaymentSpec
+	checkoutpaymentData checkoutpayment.CheckoutPayment
 )
 
 func TestMain(m *testing.M) {
@@ -64,6 +69,15 @@ func setup() {
 	detailWithProducts = append(detailWithProducts, detailWithProduct)
 
 	checkoutService = checkout.NewService(&checkoutPaymentService, &checkoutRepository, &checkoutDetailRepository)
+
+	paymentSpec = checkoutpayment.InserPaymentSpec{
+		OrderId:           id,
+		TransactionStatus: transactionstatus,
+	}
+	checkoutpaymentData = checkoutpayment.CheckoutPayment{
+		CheckOutID:        id,
+		TransactionStatus: transactionstatus,
+	}
 }
 
 func TestNewCheckoutShoppingCart(t *testing.T) {
@@ -103,10 +117,23 @@ func TestNewCheckoutShoppingCart(t *testing.T) {
 		assert.Equal(t, err, business.ErrInternalServer)
 
 	})
+	t.Run("Expect Insert New Checkout Payment Failed", func(t *testing.T) {
+		checkoutRepository.On("GetCheckoutByShoppingCartId", mock.AnythingOfType("string")).Return(false, nil).Once()
+		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
+		checkoutRepository.On("NewCheckoutShoppingCart", mock.AnythingOfType("*checkout.Checkout")).Return(nil).Once()
+		checkoutPaymentService.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.InserPaymentSpec"), mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
+
+		_, err := checkoutService.NewCheckoutShoppingCart(userid, &checkoutData)
+
+		assert.NotNil(t, err)
+		assert.Equal(t, err, business.ErrInternalServer)
+
+	})
 	t.Run("Expect Generate Snap Payment Failed", func(t *testing.T) {
 		checkoutRepository.On("GetCheckoutByShoppingCartId", mock.AnythingOfType("string")).Return(false, nil).Once()
 		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
 		checkoutRepository.On("NewCheckoutShoppingCart", mock.AnythingOfType("*checkout.Checkout")).Return(nil).Once()
+		checkoutPaymentService.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.InserPaymentSpec"), mock.AnythingOfType("string")).Return(&paymentSpec, nil).Once()
 		checkoutPaymentService.On("GenerateSnapPayment",
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
@@ -121,6 +148,7 @@ func TestNewCheckoutShoppingCart(t *testing.T) {
 		checkoutRepository.On("GetCheckoutByShoppingCartId", mock.AnythingOfType("string")).Return(false, nil).Once()
 		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
 		checkoutRepository.On("NewCheckoutShoppingCart", mock.AnythingOfType("*checkout.Checkout")).Return(nil).Once()
+		checkoutPaymentService.On("InsertPayment", mock.AnythingOfType("*checkoutpayment.InserPaymentSpec"), mock.AnythingOfType("string")).Return(&paymentSpec, nil).Once()
 		checkoutPaymentService.On("GenerateSnapPayment",
 			mock.AnythingOfType("string"),
 			mock.AnythingOfType("string"),
@@ -133,8 +161,28 @@ func TestNewCheckoutShoppingCart(t *testing.T) {
 }
 
 func TestGetAllCheckout(t *testing.T) {
+	t.Run("Expect data nil", func(t *testing.T) {
+		checkoutRepository.On("GetAllCheckout").Return(nil, business.ErrInternalServer).Once()
+		data, err := checkoutService.GetAllCheckout()
+
+		assert.NotNil(t, err)
+		assert.Nil(t, data)
+		assert.Equal(t, err, business.ErrInternalServer)
+	})
+	t.Run("Expect data payment not found", func(t *testing.T) {
+		checkoutRepository.On("GetAllCheckout").Return(&checkoutDatas, nil).Once()
+		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
+
+		data, err := checkoutService.GetAllCheckout()
+
+		assert.NotNil(t, err)
+		assert.Nil(t, data)
+
+		assert.Equal(t, err, business.ErrInternalServer)
+	})
 	t.Run("Expect found the data Checkout", func(t *testing.T) {
 		checkoutRepository.On("GetAllCheckout", mock.AnythingOfType("string")).Return(&checkoutDatas, nil).Once()
+		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(&checkoutpaymentData, nil).Once()
 
 		data, err := checkoutService.GetAllCheckout()
 
@@ -145,22 +193,16 @@ func TestGetAllCheckout(t *testing.T) {
 		assert.Equal(t, shoppingcartid, (*data)[0].ShoppingCardId)
 		assert.Equal(t, description, (*data)[0].Description)
 	})
-
-	t.Run("Expect data nil", func(t *testing.T) {
-		checkoutRepository.On("GetAllCheckout", mock.AnythingOfType("string")).Return(nil, nil).Once()
-		data, err := checkoutService.GetAllCheckout()
-
-		assert.Nil(t, err)
-		assert.Nil(t, data)
-	})
 }
 
 func TestGetCheckoutById(t *testing.T) {
 	t.Run("Expect Checkout not found", func(t *testing.T) {
 		checkoutRepository.On("GetCheckoutById", mock.AnythingOfType("string")).Return(nil, business.ErrNotFound).Once()
 
-		_, err := checkoutService.GetCheckoutById(id)
+		data, err := checkoutService.GetCheckoutById(id)
 		assert.NotNil(t, err)
+		assert.Nil(t, data)
+
 		assert.Equal(t, err, business.ErrNotFound)
 
 	})
@@ -175,9 +217,23 @@ func TestGetCheckoutById(t *testing.T) {
 		assert.Equal(t, err, business.ErrNotFound)
 	})
 
+	t.Run("Expect data payment not found", func(t *testing.T) {
+		checkoutRepository.On("GetCheckoutById", mock.AnythingOfType("string")).Return(&checkoutData, nil).Once()
+		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
+		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(nil, business.ErrInternalServer).Once()
+
+		data, err := checkoutService.GetCheckoutById(id)
+
+		assert.NotNil(t, err)
+		assert.Nil(t, data)
+
+		assert.Equal(t, err, business.ErrInternalServer)
+	})
+
 	t.Run("Expect Found Checkout", func(t *testing.T) {
 		checkoutRepository.On("GetCheckoutById", mock.AnythingOfType("string")).Return(&checkoutData, nil).Once()
 		checkoutDetailRepository.On("GetShopCartDetailById", mock.AnythingOfType("string")).Return(&detailWithProducts, nil).Once()
+		checkoutPaymentService.On("GetPaymentByCheckoutId", mock.AnythingOfType("string")).Return(&checkoutpaymentData, nil).Once()
 
 		data, err := checkoutService.GetCheckoutById(id)
 
@@ -187,4 +243,5 @@ func TestGetCheckoutById(t *testing.T) {
 		assert.Equal(t, shoppingcartid, data.ShoppingCardId)
 		assert.Equal(t, description, data.Description)
 	})
+
 }
