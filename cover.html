@@ -1,0 +1,3981 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>common: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">AltaStore/api/common/error_business_response.go (0.0%)</option>
+				
+				<option value="file1">AltaStore/api/common/error_controller_response.go (0.0%)</option>
+				
+				<option value="file2">AltaStore/api/common/success_response.go (0.0%)</option>
+				
+				<option value="file3">AltaStore/api/middleware/jwt.go (11.8%)</option>
+				
+				<option value="file4">AltaStore/api/middleware/logger.go (0.0%)</option>
+				
+				<option value="file5">AltaStore/api/routes.go (0.0%)</option>
+				
+				<option value="file6">AltaStore/api/v1/checkout/controller.go (0.0%)</option>
+				
+				<option value="file7">AltaStore/api/v1/checkout/request/insertCheckout.go (0.0%)</option>
+				
+				<option value="file8">AltaStore/api/v1/checkout/response/sumcheckout.go (0.0%)</option>
+				
+				<option value="file9">AltaStore/api/v1/checkoutpayment/controller.go (0.0%)</option>
+				
+				<option value="file10">AltaStore/api/v1/checkoutpayment/request/insert.go (0.0%)</option>
+				
+				<option value="file11">AltaStore/api/v1/shopping/controller.go (0.0%)</option>
+				
+				<option value="file12">AltaStore/api/v1/shopping/request/insert_detail.go (0.0%)</option>
+				
+				<option value="file13">AltaStore/api/v1/shopping/response/oneResponse.go (0.0%)</option>
+				
+				<option value="file14">AltaStore/api/v1/shopping/response/shopping.go (0.0%)</option>
+				
+				<option value="file15">AltaStore/business/checkout/checkout.go (92.3%)</option>
+				
+				<option value="file16">AltaStore/business/checkout/mocks/RepoShoppingDetail.go (81.8%)</option>
+				
+				<option value="file17">AltaStore/business/checkout/mocks/Repository.go (81.6%)</option>
+				
+				<option value="file18">AltaStore/business/checkout/mocks/Service.go (0.0%)</option>
+				
+				<option value="file19">AltaStore/business/checkout/service.go (94.4%)</option>
+				
+				<option value="file20">AltaStore/business/checkoutpayment/checkoutpayment.go (50.0%)</option>
+				
+				<option value="file21">AltaStore/business/checkoutpayment/mocks/Repository.go (53.1%)</option>
+				
+				<option value="file22">AltaStore/business/checkoutpayment/mocks/Service.go (24.2%)</option>
+				
+				<option value="file23">AltaStore/business/checkoutpayment/service.go (35.0%)</option>
+				
+				<option value="file24">AltaStore/business/logger/service.go (0.0%)</option>
+				
+				<option value="file25">AltaStore/business/shopping/mocks/Repository.go (82.1%)</option>
+				
+				<option value="file26">AltaStore/business/shopping/mocks/RepositoryCartDetail.go (82.8%)</option>
+				
+				<option value="file27">AltaStore/business/shopping/mocks/Service.go (8.8%)</option>
+				
+				<option value="file28">AltaStore/business/shopping/service.go (78.0%)</option>
+				
+				<option value="file29">AltaStore/business/shopping/shopping.go (90.0%)</option>
+				
+				<option value="file30">AltaStore/business/user/mocks/Repository.go (82.5%)</option>
+				
+				<option value="file31">AltaStore/business/user/mocks/Service.go (14.0%)</option>
+				
+				<option value="file32">AltaStore/business/user/service.go (84.0%)</option>
+				
+				<option value="file33">AltaStore/business/user/user.go (100.0%)</option>
+				
+				<option value="file34">AltaStore/config/config.go (0.0%)</option>
+				
+				<option value="file35">AltaStore/main.go (0.0%)</option>
+				
+				<option value="file36">AltaStore/modules/checkout/repository.go (0.0%)</option>
+				
+				<option value="file37">AltaStore/modules/checkoutpayment/repository.go (0.0%)</option>
+				
+				<option value="file38">AltaStore/modules/logger/repository.go (0.0%)</option>
+				
+				<option value="file39">AltaStore/modules/migration/migration.go (0.0%)</option>
+				
+				<option value="file40">AltaStore/modules/shopping/repository.go (0.0%)</option>
+				
+				<option value="file41">AltaStore/modules/shoppingdetail/repository.go (0.0%)</option>
+				
+				<option value="file42">AltaStore/modules/user/repository.go (0.0%)</option>
+				
+				<option value="file43">AltaStore/util/validator/validator.go (100.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package common
+
+import (
+        "AltaStore/business"
+        "net/http"
+)
+
+const (
+        errInternalServerError responseCode = "500"
+        errNotFound            responseCode = "404"
+        errHasBeenModified     responseCode = "400"
+        errNotHavePermission   responseCode = "401"
+        errPasswordMisMatch    responseCode = "403"
+        errInvalidSpec         responseCode = "400"
+        errDataExists          responseCode = "409"
+        errUnAuthorized        responseCode = "401"
+        errInvalidData         responseCode = "400"
+)
+
+// Mengembalikan respons status dari permintaan
+func NewBusinessErrorResponse(err error) (int, ControllerResponse) <span class="cov0" title="0">{
+        return errorMapping(err)
+}</span>
+
+func errorMapping(err error) (int, ControllerResponse) <span class="cov0" title="0">{
+        switch err </span>{
+        default:<span class="cov0" title="0">
+                return newInternalServerErrorResponse()</span>
+
+        case business.ErrNotFound:<span class="cov0" title="0">
+                return newNotFoundResponse()</span>
+
+        case business.ErrHasBeenModified:<span class="cov0" title="0">
+                return newHasBeenModifiedResponse()</span>
+
+        case business.ErrNotHavePermission:<span class="cov0" title="0">
+                return newNotHavePermission()</span>
+
+        case business.ErrPasswordMisMatch:<span class="cov0" title="0">
+                return newErrPasswordMisMatch()</span>
+
+        case business.ErrInvalidSpec:<span class="cov0" title="0">
+                return newErrInvalidSpec()</span>
+
+        case business.ErrDataExists:<span class="cov0" title="0">
+                return newErrDataExists()</span>
+
+        case business.ErrUnAuthorized:<span class="cov0" title="0">
+                return newErrUnAuthorized()</span>
+
+        case business.ErrInvalidData:<span class="cov0" title="0">
+                return newErrInvalidData()</span>
+        }
+}
+
+func newInternalServerErrorResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusInternalServerError,
+                ControllerResponse{errInternalServerError, "Internal Server Error", map[string]interface{}{}}
+}</span>
+
+func newNotFoundResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusNotFound,
+                ControllerResponse{errNotFound, "Data Not Found", map[string]interface{}{}}
+}</span>
+
+func newHasBeenModifiedResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusBadRequest,
+                ControllerResponse{errHasBeenModified, "Data Has Been Modified", map[string]interface{}{}}
+}</span>
+
+func newNotHavePermission() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusForbidden,
+                ControllerResponse{errNotHavePermission, "Not Have Permission", map[string]interface{}{}}
+}</span>
+
+func newErrPasswordMisMatch() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusForbidden,
+                ControllerResponse{errPasswordMisMatch, "Wrong Password", map[string]interface{}{}}
+}</span>
+
+func newErrInvalidSpec() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusBadRequest,
+                ControllerResponse{errInvalidSpec, "Bad Request", map[string]interface{}{}}
+}</span>
+
+func newErrDataExists() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusConflict,
+                ControllerResponse{errDataExists, "Data Exists", map[string]interface{}{}}
+}</span>
+
+func newErrUnAuthorized() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusUnauthorized,
+                ControllerResponse{errUnAuthorized, "Unauthorized", map[string]interface{}{}}
+}</span>
+
+func newErrInvalidData() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusBadRequest,
+                ControllerResponse{errInvalidData, "Invalid Data", map[string]interface{}{}}
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package common
+
+import "net/http"
+
+const (
+        BadRequestCode responseCode = "400"
+        ForbiddenCode  responseCode = "403"
+        NotFoundCode   responseCode = "404"
+        UnAuthorized   responseCode = "401"
+)
+
+func BadRequestResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusBadRequest, ControllerResponse{BadRequestCode, "Bad Request", map[string]interface{}{}}
+}</span>
+
+func ForbiddenResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusForbidden, ControllerResponse{ForbiddenCode, "Forbidden", map[string]interface{}{}}
+}</span>
+
+func NotFoundResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusNotFound, ControllerResponse{NotFoundCode, "Not Found", map[string]interface{}{}}
+}</span>
+
+func UnAuthorizedResponse() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusUnauthorized, ControllerResponse{UnAuthorized, "UnAuthorized", map[string]interface{}{}}
+}</span>
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package common
+
+import (
+        "net/http"
+)
+
+const (
+        Success responseCode = "200"
+)
+
+func SuccessResponseWithData(data interface{}) (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusOK, ControllerResponse{Success, "success", data}
+}</span>
+
+func SuccessResponseWithoutData() (int, ControllerResponse) <span class="cov0" title="0">{
+        return http.StatusOK, ControllerResponse{Success, "success", map[string]interface{}{}}
+}</span>
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package middleware
+
+import (
+        "AltaStore/config"
+        "errors"
+        "net/http"
+
+        "github.com/golang-jwt/jwt"
+        echo "github.com/labstack/echo/v4"
+        "github.com/labstack/echo/v4/middleware"
+)
+
+func init() <span class="cov8" title="1">{
+        middleware.ErrJWTMissing = echo.NewHTTPError(
+                http.StatusBadRequest, map[string]interface{}{
+                        "code":    400,
+                        "message": "missing or malformed jwt",
+                })
+        middleware.ErrJWTInvalid = echo.NewHTTPError(
+                http.StatusUnauthorized, map[string]interface{}{
+                        "code":    401,
+                        "massage": "invalid or expired jwt",
+                })
+}</span>
+
+func JWTMiddleware() echo.MiddlewareFunc <span class="cov0" title="0">{
+        return middleware.JWTWithConfig(middleware.JWTConfig{
+                SigningMethod: "HS256",
+                SigningKey:    []byte(config.GetConfig().JwtSecretKey),
+        })
+}</span>
+
+func ExtractTokenUser(ctx echo.Context) (string, error) <span class="cov0" title="0">{
+        user := ctx.Get("user").(*jwt.Token)
+        if user.Valid </span><span class="cov0" title="0">{
+                claim := user.Claims.(jwt.MapClaims)
+                userId := claim["userId"].(string)
+                if userId == "" </span><span class="cov0" title="0">{
+                        return "", errors.New("Unauthorize")
+                }</span>
+                <span class="cov0" title="0">return userId, nil</span>
+        }
+        <span class="cov0" title="0">return "", errors.New("Unauthorize")</span>
+}
+
+func ExtractTokenRule(ctx echo.Context) (bool, error) <span class="cov0" title="0">{
+        user := ctx.Get("user").(*jwt.Token)
+        if user.Valid </span><span class="cov0" title="0">{
+                claim := user.Claims.(jwt.MapClaims)
+                isAdmin := claim["isAdmin"].(bool)
+                return isAdmin, nil
+        }</span>
+        <span class="cov0" title="0">return false, errors.New("Unauthorize")</span>
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package middleware
+
+// Logger middleware logs the information about each HTTP request.
+
+import (
+        "fmt"
+        "net/http"
+        "time"
+
+        echo "github.com/labstack/echo/v4"
+        log "github.com/sirupsen/logrus"
+)
+
+// Penformatan pencatatan sistem
+func MakeLogEntry(c echo.Context) *log.Entry <span class="cov0" title="0">{
+        start := time.Now()
+
+        if c == nil </span><span class="cov0" title="0">{
+                return log.WithFields(log.Fields{
+                        "latency_ns": time.Since(start).Nanoseconds(),
+                        "group":      "system",
+                })
+        }</span>
+
+        <span class="cov0" title="0">return log.WithFields(log.Fields{
+                "group":      "request",
+                "method":     c.Request().Method,
+                "uri":        c.Request().RequestURI,
+                "remoteaddr": c.Request().RemoteAddr,
+                "latency_ns": time.Since(start).Nanoseconds(),
+        })</span>
+}
+
+func MiddlewareLogger(next echo.HandlerFunc) echo.HandlerFunc <span class="cov0" title="0">{
+        return func(c echo.Context) error </span><span class="cov0" title="0">{
+                MakeLogEntry(c).Info("Incoming Connection")
+                return next(c)
+        }</span>
+}
+
+func ErrorHandler(err error, c echo.Context) <span class="cov0" title="0">{
+        report, ok := err.(*echo.HTTPError)
+        if ok </span><span class="cov0" title="0">{
+                report.Message = fmt.Sprintf("http error %d - %v", report.Code, report.Message)
+        }</span> else<span class="cov0" title="0"> {
+                report = echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+        }</span>
+
+        <span class="cov0" title="0">MakeLogEntry(c).Error(report.Message)
+        c.HTML(report.Code, report.Message.(string))</span>
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package api
+
+import (
+        "AltaStore/api/middleware"
+
+        "AltaStore/api/v1/checkout"
+        "AltaStore/api/v1/checkoutpayment"
+        "AltaStore/api/v1/shopping"
+
+        "net/http"
+
+        echo "github.com/labstack/echo/v4"
+)
+
+func RegisterPath(e *echo.Echo,
+        shopping *shopping.Controller,
+        checkout *checkout.Controller,
+        paymentController *checkoutpayment.Controller,
+) <span class="cov0" title="0">{
+        if shopping == nil || checkout == nil || paymentController == nil </span><span class="cov0" title="0">{
+                panic("Invalid parameter")</span>
+        }
+
+        // Add logger
+        <span class="cov0" title="0">e.Use(middleware.MiddlewareLogger)
+
+        // Custome response
+        e.HTTPErrorHandler = func(e error, c echo.Context) </span><span class="cov0" title="0">{
+                type Response struct {
+                        Code    int    `json:"code"`
+                        Message string `json:"message"`
+                }
+                var response Response
+                response.Code = http.StatusInternalServerError // defaul 500
+                response.Message = "Internal Server Error"
+
+                if he, ok := e.(*echo.HTTPError); ok </span><span class="cov0" title="0">{
+                        response.Code = he.Code
+                        response.Message = http.StatusText(he.Code)
+                }</span>
+
+                <span class="cov0" title="0">c.Logger().Error(e)
+
+                _ = c.JSON(response.Code, response)</span>
+        }
+
+        // ROUTING LIST
+        // Shopping Cart
+        <span class="cov0" title="0">shopCart := e.Group("v1/shoppingcarts")
+        shopCart.Use(middleware.JWTMiddleware())
+
+        shopCart.GET("/carts", shopping.GetShoppingCartByUserId)
+        shopCart.POST("/carts", shopping.NewShoppingCart)
+        shopCart.GET("/carts/:id", shopping.GetShopCartDetailById)
+        shopCart.POST("/carts/:id", shopping.NewItemInShopCart)
+        shopCart.PUT("/carts/:id", shopping.ModifyItemInShopCart)
+        shopCart.DELETE("/carts/:id/products/:productid", shopping.DeleteItemInShopCart)
+
+        // Checkout
+        c_out := e.Group("v1/checkouts")
+        c_out.Use(middleware.JWTMiddleware())
+        c_out.POST("", checkout.NewCheckoutShoppingCart)
+        c_out.GET("", checkout.GetAllCheckout)
+        c_out.GET("/:id", checkout.GetCheckoutById)
+
+        // Payment
+        payment := e.Group("v1/payments")
+        payment.Use(middleware.JWTMiddleware())
+        payment.POST("/:id", paymentController.InsertPaymentById)
+
+        paymentCallback := e.Group("v1/payments/notif")
+        paymentCallback.GET("", paymentController.InsertPaymentFromMidtrans)</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package checkout
+
+import (
+        "AltaStore/api/common"
+        "AltaStore/api/middleware"
+
+        "AltaStore/api/v1/checkout/request"
+        "AltaStore/api/v1/checkout/response"
+
+        "AltaStore/business/checkout"
+
+        "github.com/google/uuid"
+        echo "github.com/labstack/echo/v4"
+)
+
+type Controller struct {
+        service checkout.Service
+}
+
+func NewController(service checkout.Service) *Controller <span class="cov0" title="0">{
+        return &amp;Controller{service}
+}</span>
+
+func (c *Controller) NewCheckoutShoppingCart(ctx echo.Context) error <span class="cov0" title="0">{
+        var err error
+
+        checkoutShopCart := new(request.NewCheckoutShoppingCart)
+
+        if err = ctx.Bind(checkoutShopCart); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+        <span class="cov0" title="0">if _, err := uuid.Parse(userId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">snap, err := c.service.NewCheckoutShoppingCart(userId, checkoutShopCart.ToBusinessCheckout())
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithData(snap))</span>
+}
+
+func (c *Controller) GetAllCheckout(ctx echo.Context) error <span class="cov0" title="0">{
+        listCheckout, err := c.service.GetAllCheckout()
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithData(response.AllCheckout(listCheckout)))</span>
+}
+
+func (c *Controller) GetCheckoutById(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+
+        if _, err := uuid.Parse(id); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">checkoutDetails, err := c.service.GetCheckoutById(id)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithData(response.ToResponseDetailItems(checkoutDetails)))</span>
+}
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package request
+
+import (
+        "AltaStore/business/checkout"
+)
+
+type NewCheckoutShoppingCart struct {
+        ShoppingCartId string `json:"shoppingcartid"`
+        Description    string `json:"description"`
+}
+
+func (n *NewCheckoutShoppingCart) ToBusinessCheckout() *checkout.Checkout <span class="cov0" title="0">{
+        var checkout checkout.Checkout
+
+        checkout.ShoppingCartId = n.ShoppingCartId
+        checkout.Description = n.Description
+
+        return &amp;checkout
+}</span>
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package response
+
+import (
+        "AltaStore/business/checkout"
+        "time"
+)
+
+type CheckoutResponse struct {
+        ID             string    `json:"id"`
+        ShoppingCardId string    `json:"shoppingcartid"`
+        Description    string    `json:"description"`
+        PaymentStatus  string    `json:"paymentstatus"`
+        CreatedBy      string    `json:"created_by"`
+        CreatedAt      time.Time `json:"created_at"`
+}
+
+func toCheckoutResponse(checkout checkout.Checkout) CheckoutResponse <span class="cov0" title="0">{
+        return CheckoutResponse{
+                ID:             checkout.ID,
+                ShoppingCardId: checkout.ShoppingCartId,
+                Description:    checkout.Description,
+                PaymentStatus:  checkout.PaymentStatus,
+                CreatedBy:      checkout.CreatedBy,
+                CreatedAt:      checkout.CreatedAt,
+        }
+}</span>
+
+func AllCheckout(checkout *[]checkout.Checkout) *[]CheckoutResponse <span class="cov0" title="0">{
+        var response []CheckoutResponse
+
+        for _, val := range *checkout </span><span class="cov0" title="0">{
+                response = append(response, toCheckoutResponse(val))
+        }</span>
+
+        <span class="cov0" title="0">if response == nil </span><span class="cov0" title="0">{
+                response = []CheckoutResponse{}
+        }</span>
+
+        <span class="cov0" title="0">return &amp;response</span>
+}
+
+type DetailItem struct {
+        ProductId   string    `json:"product_id"`
+        ProductName string    `json:"product_name"`
+        Price       int       `json:"price"`
+        Qty         int       `json:"qty"`
+        UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type ResponseDetailItems struct {
+        ID             string       `json:"id"`
+        ShoppingCartId string       `json:"shopping_cart_id"`
+        Description    string       `json:"description"`
+        CreatedBy      string       `json:"created_by"`
+        CreatedAt      time.Time    `json:"created_at"`
+        UpdatedAt      time.Time    `json:"updated_at"`
+        Details        []DetailItem `json:"details"`
+}
+
+func ToDetailItem(item *checkout.ItemInCart) *DetailItem <span class="cov0" title="0">{
+        return &amp;DetailItem{
+                ProductId:   item.ProductId,
+                ProductName: item.ProductName,
+                Price:       item.Price,
+                Qty:         item.Qty,
+                UpdatedAt:   item.UpdatedAt,
+        }
+}</span>
+
+func ToResponseDetailItems(checkout *checkout.CheckItemDetails) *ResponseDetailItems <span class="cov0" title="0">{
+        var items ResponseDetailItems
+
+        items.ID = checkout.ID
+        items.ShoppingCartId = checkout.ShoppingCardId
+        items.Description = checkout.Description
+        items.CreatedBy = checkout.CreatedBy
+        items.CreatedAt = checkout.CreatedAt
+        items.UpdatedAt = checkout.UpdatedAt
+
+        for _, item := range checkout.Details </span><span class="cov0" title="0">{
+                items.Details = append(items.Details, *ToDetailItem(&amp;item))
+        }</span>
+
+        <span class="cov0" title="0">if items.Details == nil </span><span class="cov0" title="0">{
+                items.Details = []DetailItem{}
+        }</span>
+
+        <span class="cov0" title="0">return &amp;items</span>
+}
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package checkoutpayment
+
+import (
+        "AltaStore/api/common"
+        "AltaStore/api/middleware"
+        "AltaStore/api/v1/checkoutpayment/request"
+        "AltaStore/business/checkoutpayment"
+
+        "github.com/google/uuid"
+        "github.com/labstack/echo/v4"
+)
+
+type Controller struct {
+        service checkoutpayment.Service
+}
+
+func NewController(service checkoutpayment.Service) *Controller <span class="cov0" title="0">{
+        return &amp;Controller{service}
+}</span>
+
+// // MidtransTransactionCallbackHandler handles incoming notification about payment status from midtrans.
+// func (c *Controller) Call(ctx echo.Context) error {
+//         userid := ctx.QueryParam("userid")
+
+//         if _, err := uuid.Parse(userid); err != nil {
+//                 return ctx.JSON(common.BadRequestResponse())
+//         }
+//         snap, err := c.service.GenerateSnapPayment(userid, uuid.New().String(), 10000)
+//         if err != nil {
+//                 return ctx.JSON(common.BadRequestResponse())
+//         }
+//         return ctx.JSON(
+//                 common.SuccessResponseWithData(snap),
+//         )
+// }
+
+// MidtransTransactionCallbackHandler handles incoming notification about payment status from midtrans.
+func (c *Controller) InsertPaymentFromMidtrans(ctx echo.Context) error <span class="cov0" title="0">{
+        merchantId := ctx.QueryParam("merchant_id")
+        orderId := ctx.QueryParam("order_id")
+        statusCode := ctx.QueryParam("status_code")
+        transactionStatus := ctx.QueryParam("transaction_status")
+        fraudStatus := ctx.QueryParam("fraud_status")
+
+        if _, err := uuid.Parse(orderId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+        <span class="cov0" title="0">var newData request.InserPaymentRequestMidtrans
+        newData.OrderId = orderId
+        newData.FraudStatus = fraudStatus
+        newData.TransactionStatus = transactionStatus
+        newData.MerchantId = merchantId
+        newData.StatusCode = statusCode
+        newData.StatusCode = statusCode
+        saveData, err := c.service.InsertPayment(newData.ToPaymentSpec(true), "Midtrans")
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+        <span class="cov0" title="0">return ctx.JSON(
+                common.SuccessResponseWithData(saveData),
+        )</span>
+}
+func (c *Controller) InsertPaymentById(ctx echo.Context) error <span class="cov0" title="0">{
+        id := ctx.Param("id")
+
+        payment := new(request.InserPaymentRequestAdmin)
+        if err := ctx.Bind(payment); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+        <span class="cov0" title="0">adminId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+        <span class="cov0" title="0">isAdmin, err := middleware.ExtractTokenRule(ctx)
+        if err != nil || !isAdmin </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+        <span class="cov0" title="0">if _, err := uuid.Parse(adminId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+        <span class="cov0" title="0">saveData, err := c.service.InsertPayment(payment.ToPaymentSpec(id, false), adminId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+        <span class="cov0" title="0">return ctx.JSON(
+                common.SuccessResponseWithData(saveData),
+        )</span>
+}
+
+// // MidtransTransactionCallbackHandler handles incoming notification about payment status from midtrans.
+// func (c *Controller) MidtransTransactionCallbackHandler(ctx echo.Context) error {
+//         _ = func(w http.ResponseWriter, r *http.Request) error {
+//                 decoder := json.NewDecoder(r.Body)
+//                 var notification coreapi.TransactionStatusResponse
+//                 err := decoder.Decode(&amp;notification)
+//                 if err != nil {
+//                         return ctx.JSON(common.NotFoundResponse())
+//                 }
+//                 if err != nil {
+//                         return ctx.JSON(common.NotFoundResponse())
+//                 }
+//                 err = c.service.ProcessMidtransCallback(&amp;notification)
+//                 if err != nil {
+//                         return ctx.JSON(common.NotFoundResponse())
+//                 }
+//                 return ctx.JSON(
+//                         common.SuccessResponseWithoutData(),
+//                 )
+//         }
+//         return nil
+// }
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package request
+
+import "AltaStore/business/checkoutpayment"
+
+type InserPaymentRequestMidtrans struct {
+        OrderId           string `json:"order_id"`
+        MerchantId        string `json:"merchant_id"`
+        StatusCode        string `json:"status_code"`
+        TransactionStatus string `json:"transaction_status"`
+        FraudStatus       string `json:"fraud_status"`
+}
+
+func (u *InserPaymentRequestMidtrans) ToPaymentSpec(fromPaymentGateway bool) *checkoutpayment.InserPaymentSpec <span class="cov0" title="0">{
+        var spec checkoutpayment.InserPaymentSpec
+
+        spec.OrderId = u.OrderId
+        spec.MerchantId = u.MerchantId
+        spec.StatusCode = u.StatusCode
+        spec.TransactionStatus = u.TransactionStatus
+        spec.FraudStatus = u.FraudStatus
+        spec.FromPaymentGateway = fromPaymentGateway
+
+        return &amp;spec
+}</span>
+
+type InserPaymentRequestAdmin struct {
+        TransactionStatus string `json:"transaction_status"`
+}
+
+func (u *InserPaymentRequestAdmin) ToPaymentSpec(id string, fromPaymentGateway bool) *checkoutpayment.InserPaymentSpec <span class="cov0" title="0">{
+        var spec checkoutpayment.InserPaymentSpec
+
+        spec.OrderId = id
+        spec.MerchantId = ""
+        spec.StatusCode = "200"
+        spec.TransactionStatus = u.TransactionStatus
+        spec.FraudStatus = ""
+        spec.FromPaymentGateway = fromPaymentGateway
+
+        return &amp;spec
+}</span>
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package shopping
+
+import (
+        "AltaStore/api/common"
+        "AltaStore/api/middleware"
+
+        "AltaStore/api/v1/shopping/request"
+        "AltaStore/api/v1/shopping/response"
+
+        "AltaStore/business/shopping"
+
+        "github.com/google/uuid"
+        echo "github.com/labstack/echo/v4"
+)
+
+type Controller struct {
+        service shopping.Service
+}
+
+func NewController(service shopping.Service) *Controller <span class="cov0" title="0">{
+        return &amp;Controller{service}
+}</span>
+
+func (c *Controller) GetShoppingCartByUserId(ctx echo.Context) error <span class="cov0" title="0">{
+        // userId := ctx.Param("id")
+        userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">if _, err := uuid.Parse(userId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">shoppCart, err := c.service.GetShoppingCartByUserId(userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">response := response.GetOneResponse(shoppCart)
+
+        return ctx.JSON(common.SuccessResponseWithData(response))</span>
+}
+
+func (c *Controller) NewShoppingCart(ctx echo.Context) error <span class="cov0" title="0">{
+        var err error
+
+        userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">if _, err := uuid.Parse(userId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">result, err := c.service.NewShoppingCart(userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">response := response.GetOneResponse(result)
+
+        return ctx.JSON(common.SuccessResponseWithData(response))</span>
+}
+
+func (c *Controller) GetShopCartDetailById(ctx echo.Context) error <span class="cov0" title="0">{
+        cartId := ctx.Param("id")
+
+        if _, err := uuid.Parse(cartId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">itemDetail, err := c.service.GetShopCartDetailById(cartId, userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithData(response.ToResponseDetails(itemDetail)))</span>
+}
+
+func (c *Controller) NewItemInShopCart(ctx echo.Context) error <span class="cov0" title="0">{
+        var item = new(request.DetailItemInShopCart)
+
+        cartId := ctx.Param("id")
+        if _, err := uuid.Parse(cartId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">if err := ctx.Bind(item); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">err = c.service.NewItemInShopCart(cartId, item.ToDetailItemInShopCart(), userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithoutData())</span>
+}
+
+func (c *Controller) ModifyItemInShopCart(ctx echo.Context) error <span class="cov0" title="0">{
+        var err error
+        var item = new(request.DetailItemInShopCart)
+
+        cartId := ctx.Param("id")
+        if _, err := uuid.Parse(cartId); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">if err := ctx.Bind(item); err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">err = c.service.ModifyItemInShopCart(cartId, item.ToDetailItemInShopCart(), userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithoutData())</span>
+}
+
+func (c *Controller) DeleteItemInShopCart(ctx echo.Context) error <span class="cov0" title="0">{
+        var err1, err2 error
+
+        cartId := ctx.Param("id")
+        productId := ctx.Param("productid")
+
+        _, err1 = uuid.Parse(cartId)
+        _, err2 = uuid.Parse(productId)
+
+        userId, err := middleware.ExtractTokenUser(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.UnAuthorizedResponse())
+        }</span>
+
+        <span class="cov0" title="0">if err1 != nil || err2 != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.BadRequestResponse())
+        }</span>
+
+        <span class="cov0" title="0">err = c.service.DeleteItemInShopCart(cartId, productId, userId)
+        if err != nil </span><span class="cov0" title="0">{
+                return ctx.JSON(common.NewBusinessErrorResponse(err))
+        }</span>
+
+        <span class="cov0" title="0">return ctx.JSON(common.SuccessResponseWithoutData())</span>
+}
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package request
+
+import "AltaStore/business/shopping"
+
+type DetailItemInShopCart struct {
+        ProductId string `json:"productid"`
+        Price     int    `json:"price"`
+        Qty       int    `json:"qty"`
+}
+
+func (d *DetailItemInShopCart) ToDetailItemInShopCart() *shopping.DetailItemInShopCart <span class="cov0" title="0">{
+        return &amp;shopping.DetailItemInShopCart{
+                ProductId: d.ProductId,
+                Price:     d.Price,
+                Qty:       d.Qty,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package response
+
+import "AltaStore/business/shopping"
+
+func GetOneResponse(data *shopping.ShoppCart) *ShoppData <span class="cov0" title="0">{
+        return &amp;ShoppData{
+                ID:         data.ID,
+                IsCheckOut: data.IsCheckOut,
+                UpdatedAt:  data.UpdatedAt,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">package response
+
+import (
+        "AltaStore/business/shopping"
+        "time"
+)
+
+type ShoppData struct {
+        ID         string    `json:"id"`
+        IsCheckOut bool      `json:"ischeckout"`
+        UpdatedAt  time.Time `json:"updated_at"`
+}
+
+type DetailItem struct {
+        ProductId   string    `json:"product_id"`
+        ProductName string    `json:"product_name"`
+        Price       int       `json:"price"`
+        Qty         int       `json:"qty"`
+        UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type ResponseDetailItems struct {
+        ID        string       `json:"id"`
+        CreatedBy string       `json:"created_by"`
+        UpdatedAt time.Time    `json:"updated_at"`
+        Details   []DetailItem `json:"details"`
+}
+
+func ToDetailItem(item *shopping.ItemInCart) *DetailItem <span class="cov0" title="0">{
+        return &amp;DetailItem{
+                ProductId:   item.ProductId,
+                ProductName: item.ProductName,
+                Price:       item.Price,
+                Qty:         item.Qty,
+                UpdatedAt:   item.UpdatedAt,
+        }
+}</span>
+
+func ToResponseDetails(cart *shopping.ShopCartDetail) *ResponseDetailItems <span class="cov0" title="0">{
+        var items ResponseDetailItems
+
+        items.ID = cart.ID
+        items.CreatedBy = cart.CreatedBy
+        items.UpdatedAt = cart.UpdatedAt
+
+        for _, item := range cart.Details </span><span class="cov0" title="0">{
+                items.Details = append(items.Details, *ToDetailItem(&amp;item))
+        }</span>
+
+        <span class="cov0" title="0">if items.Details == nil </span><span class="cov0" title="0">{
+                items.Details = []DetailItem{}
+        }</span>
+
+        <span class="cov0" title="0">return &amp;items</span>
+}
+</pre>
+		
+		<pre class="file" id="file15" style="display: none">package checkout
+
+import (
+        "AltaStore/modules/shoppingdetail"
+        "time"
+
+        "github.com/google/uuid"
+)
+
+type Checkout struct {
+        ID             string
+        ShoppingCartId string `validate:"required"`
+        Description    string `validate:"required"`
+        PaymentStatus  string
+        CreatedBy      string
+        CreatedAt      time.Time
+        UpdatedAt      time.Time
+}
+
+func (c *Checkout) toCheckout(userid string) *Checkout <span class="cov8" title="1">{
+
+        c.ID = uuid.NewString()
+        c.CreatedBy = userid
+        c.CreatedAt = time.Now()
+        c.UpdatedAt = time.Now()
+
+        return c
+}</span>
+
+type ItemInCart struct {
+        ID          string
+        ProductId   string
+        ProductName string
+        Price       int
+        Qty         int
+        UpdatedAt   time.Time
+}
+
+type CheckItemDetails struct {
+        ID             string
+        ShoppingCardId string
+        Description    string
+        PaymentStatus  string
+        CreatedBy      string
+        CreatedAt      time.Time
+        UpdatedAt      time.Time
+        Details        []ItemInCart
+}
+
+func toItem(item shoppingdetail.ShopCartDetailItemWithProductName) ItemInCart <span class="cov8" title="1">{
+        return ItemInCart{
+                ID:          item.ID,
+                ProductId:   item.ProductId,
+                ProductName: item.ProductName,
+                Price:       item.Price,
+                Qty:         item.Qty,
+                UpdatedAt:   item.UpdatedAt,
+        }
+}</span>
+
+func toDetailItemInCart(items *[]shoppingdetail.ShopCartDetailItemWithProductName) *[]ItemInCart <span class="cov8" title="1">{
+        var details []ItemInCart
+
+        for _, item := range *items </span><span class="cov8" title="1">{
+                details = append(details, toItem(item))
+        }</span>
+
+        <span class="cov8" title="1">if details == nil </span><span class="cov0" title="0">{
+                details = []ItemInCart{}
+        }</span>
+
+        <span class="cov8" title="1">return &amp;details</span>
+}
+
+func getCheckItemsDetails(cinfo *Checkout, items *[]ItemInCart) *CheckItemDetails <span class="cov8" title="1">{
+        return &amp;CheckItemDetails{
+                ID:             cinfo.ID,
+                ShoppingCardId: cinfo.ShoppingCartId,
+                Description:    cinfo.Description,
+                PaymentStatus:  cinfo.PaymentStatus,
+                CreatedBy:      cinfo.CreatedBy,
+                CreatedAt:      cinfo.CreatedAt,
+                UpdatedAt:      cinfo.UpdatedAt,
+                Details:        *items,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file16" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        shoppingdetail "AltaStore/modules/shoppingdetail"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// RepoShoppingDetail is an autogenerated mock type for the RepoShoppingDetail type
+type RepoShoppingDetail struct {
+        mock.Mock
+}
+
+// GetShopCartDetailById provides a mock function with given fields: id
+func (_m *RepoShoppingDetail) GetShopCartDetailById(id string) (*[]shoppingdetail.ShopCartDetailItemWithProductName, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *[]shoppingdetail.ShopCartDetailItemWithProductName
+        if rf, ok := ret.Get(0).(func(string) *[]shoppingdetail.ShopCartDetailItemWithProductName); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*[]shoppingdetail.ShopCartDetailItemWithProductName)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        checkout "AltaStore/business/checkout"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// Repository is an autogenerated mock type for the Repository type
+type Repository struct {
+        mock.Mock
+}
+
+// GetAllCheckout provides a mock function with given fields:
+func (_m *Repository) GetAllCheckout() (*[]checkout.Checkout, error) <span class="cov8" title="1">{
+        ret := _m.Called()
+
+        var r0 *[]checkout.Checkout
+        if rf, ok := ret.Get(0).(func() *[]checkout.Checkout); ok </span><span class="cov0" title="0">{
+                r0 = rf()
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*[]checkout.Checkout)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func() error); ok </span><span class="cov0" title="0">{
+                r1 = rf()
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// GetCheckoutById provides a mock function with given fields: id
+func (_m *Repository) GetCheckoutById(id string) (*checkout.Checkout, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *checkout.Checkout
+        if rf, ok := ret.Get(0).(func(string) *checkout.Checkout); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*checkout.Checkout)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// GetCheckoutByShoppingCartId provides a mock function with given fields: cartid
+func (_m *Repository) GetCheckoutByShoppingCartId(cartid string) (bool, error) <span class="cov8" title="1">{
+        ret := _m.Called(cartid)
+
+        var r0 bool
+        if rf, ok := ret.Get(0).(func(string) bool); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartid)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Get(0).(bool)
+        }</span>
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(cartid)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// NewCheckoutShoppingCart provides a mock function with given fields: _a0
+func (_m *Repository) NewCheckoutShoppingCart(_a0 *checkout.Checkout) error <span class="cov8" title="1">{
+        ret := _m.Called(_a0)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(*checkout.Checkout) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(_a0)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file18" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        checkout "AltaStore/business/checkout"
+
+        mock "github.com/stretchr/testify/mock"
+
+        snap "github.com/midtrans/midtrans-go/snap"
+)
+
+// Service is an autogenerated mock type for the Service type
+type Service struct {
+        mock.Mock
+}
+
+// GetAllCheckout provides a mock function with given fields:
+func (_m *Service) GetAllCheckout() (*[]checkout.Checkout, error) <span class="cov0" title="0">{
+        ret := _m.Called()
+
+        var r0 *[]checkout.Checkout
+        if rf, ok := ret.Get(0).(func() *[]checkout.Checkout); ok </span><span class="cov0" title="0">{
+                r0 = rf()
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*[]checkout.Checkout)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func() error); ok </span><span class="cov0" title="0">{
+                r1 = rf()
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// GetCheckoutById provides a mock function with given fields: id
+func (_m *Service) GetCheckoutById(id string) (*checkout.CheckItemDetails, error) <span class="cov0" title="0">{
+        ret := _m.Called(id)
+
+        var r0 *checkout.CheckItemDetails
+        if rf, ok := ret.Get(0).(func(string) *checkout.CheckItemDetails); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*checkout.CheckItemDetails)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// NewCheckoutShoppingCart provides a mock function with given fields: userid, _a1
+func (_m *Service) NewCheckoutShoppingCart(userid string, _a1 *checkout.Checkout) (*snap.Response, error) <span class="cov0" title="0">{
+        ret := _m.Called(userid, _a1)
+
+        var r0 *snap.Response
+        if rf, ok := ret.Get(0).(func(string, *checkout.Checkout) *snap.Response); ok </span><span class="cov0" title="0">{
+                r0 = rf(userid, _a1)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*snap.Response)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string, *checkout.Checkout) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(userid, _a1)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+</pre>
+		
+		<pre class="file" id="file19" style="display: none">package checkout
+
+import (
+        "AltaStore/business"
+        "AltaStore/business/checkoutpayment"
+        "AltaStore/business/shopping"
+        "AltaStore/util/validator"
+
+        snap "github.com/midtrans/midtrans-go/snap"
+)
+
+type service struct {
+        checkoutpaymentService checkoutpayment.Service
+        shoppingService        shopping.Service
+        repository             Repository
+        repoShoppingDetail     RepoShoppingDetail
+}
+
+func NewService(
+        checkoutpaymentService checkoutpayment.Service,
+        shoppingService shopping.Service,
+        repository Repository,
+        repoShoppingDetail RepoShoppingDetail,
+) Service <span class="cov8" title="1">{
+        return &amp;service{
+                checkoutpaymentService,
+                shoppingService,
+                repository,
+                repoShoppingDetail,
+        }
+}</span>
+
+func (s *service) NewCheckoutShoppingCart(userid string, checkout *Checkout) (*snap.Response, error) <span class="cov8" title="1">{
+        err := validator.GetValidator().Struct(checkout)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, business.ErrInvalidSpec
+        }</span>
+
+        <span class="cov8" title="1">var newCheckout = checkout.toCheckout(userid)
+
+        status, err := s.repository.GetCheckoutByShoppingCartId(checkout.ShoppingCartId)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">if status </span><span class="cov8" title="1">{
+                return nil, business.ErrDataExists
+        }</span>
+
+        <span class="cov8" title="1">dets, err := s.repoShoppingDetail.GetShopCartDetailById(newCheckout.ShoppingCartId)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">err = s.repository.NewCheckoutShoppingCart(newCheckout)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">err = s.shoppingService.UpdateShopCartStatusById(checkout.ShoppingCartId, true)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">var sum int64 = 0
+        for _, val := range *dets </span><span class="cov8" title="1">{
+                sum += int64(val.Price)
+        }</span>
+
+        <span class="cov8" title="1">var payment = checkoutpayment.InserPaymentSpec{
+                OrderId:           checkout.ID,
+                StatusCode:        "200",
+                TransactionStatus: "pending",
+        }
+
+        _, err = s.checkoutpaymentService.InsertPayment(&amp;payment, userid)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+        <span class="cov0" title="0">return s.checkoutpaymentService.GenerateSnapPayment(
+                newCheckout.CreatedBy,
+                newCheckout.ID,
+                sum)</span>
+}
+
+func (s *service) GetAllCheckout() (*[]Checkout, error) <span class="cov8" title="1">{
+        return s.repository.GetAllCheckout()
+}</span>
+
+func (s *service) GetCheckoutById(id string) (*CheckItemDetails, error) <span class="cov8" title="1">{
+        dtCheckout, err := s.repository.GetCheckoutById(id)
+
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">items, err := s.repoShoppingDetail.GetShopCartDetailById(dtCheckout.ShoppingCartId)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+        <span class="cov8" title="1">details := toDetailItemInCart(items)
+
+        return getCheckItemsDetails(dtCheckout, details), nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file20" style="display: none">package checkoutpayment
+
+import (
+        "time"
+)
+
+type PaymentStatus string
+
+const (
+        Pending     PaymentStatus = "pending"
+        Capture     PaymentStatus = "captured"
+        Settlement  PaymentStatus = "settlement"
+        DenyPayment PaymentStatus = "deny"
+        Cancel      PaymentStatus = "cancel"
+        Expire      PaymentStatus = "expire"
+        Failure     PaymentStatus = "failure"
+)
+
+type FraudStatus string
+
+const (
+        None      FraudStatus = ""
+        Accept    FraudStatus = "accept"
+        Deny      FraudStatus = "deny"
+        Challenge FraudStatus = "challenge"
+)
+
+type CheckoutPayment struct {
+        CheckOutID         string
+        MerchantId         string
+        StatusCode         string
+        TransactionStatus  PaymentStatus
+        FraudStatus        FraudStatus
+        FromPaymentGateway bool
+        CreatedAt          time.Time
+        CreatedBy          string
+        UpdatedAt          time.Time
+        UpdatedBy          string
+        DeletedAt          time.Time
+        DeletedBy          string
+}
+
+func InsertPayment(
+        checkoutId string,
+        statusCode string,
+        merchantId string,
+        transactionstatus string,
+        fraudstatus string,
+        fromPaymentGateway bool,
+        creator string,
+        createAt time.Time,
+) CheckoutPayment <span class="cov8" title="1">{
+        return CheckoutPayment{
+                CheckOutID:         checkoutId,
+                MerchantId:         merchantId,
+                StatusCode:         statusCode,
+                TransactionStatus:  PaymentStatus(transactionstatus),
+                FraudStatus:        FraudStatus(fraudstatus),
+                FromPaymentGateway: fromPaymentGateway,
+                CreatedAt:          createAt,
+                CreatedBy:          creator,
+        }
+}</span>
+func (c *CheckoutPayment) ToInserPaymentSpec() *InserPaymentSpec <span class="cov0" title="0">{
+        return &amp;InserPaymentSpec{
+                OrderId:            c.CheckOutID,
+                MerchantId:         c.MerchantId,
+                StatusCode:         c.StatusCode,
+                TransactionStatus:  string(c.TransactionStatus),
+                FraudStatus:        string(c.FraudStatus),
+                FromPaymentGateway: c.FromPaymentGateway,
+        }
+
+}</span>
+
+// func (oldData *CheckoutPayment) ModifyPayment(
+//         merchantId string,
+//         transactionstatus string,
+//         fraudstatus string,
+//         modifier string,
+//         updatedAt time.Time,
+// ) CheckoutPayment {
+//         return CheckoutPayment{
+//                 CheckOutID:        oldData.CheckOutID,
+//                 MerchantId:        merchantId,
+//                 TransactionStatus: PaymentStatus(transactionstatus),
+//                 FraudStatus:       FraudStatus(fraudstatus),
+//                 CreatedAt:         oldData.CreatedAt,
+//                 CreatedBy:         oldData.CreatedBy,
+//                 UpdatedAt:         updatedAt,
+//                 UpdatedBy:         modifier,
+//         }
+// }
+</pre>
+		
+		<pre class="file" id="file21" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        checkoutpayment "AltaStore/business/checkoutpayment"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// Repository is an autogenerated mock type for the Repository type
+type Repository struct {
+        mock.Mock
+}
+
+// CheckHasCheckoutId provides a mock function with given fields: id
+func (_m *Repository) CheckHasCheckoutId(id string) (bool, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 bool
+        if rf, ok := ret.Get(0).(func(string) bool); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Get(0).(bool)
+        }</span>
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// GetPaymentByCheckoutId provides a mock function with given fields: id
+func (_m *Repository) GetPaymentByCheckoutId(id string) (*checkoutpayment.CheckoutPayment, error) <span class="cov0" title="0">{
+        ret := _m.Called(id)
+
+        var r0 *checkoutpayment.CheckoutPayment
+        if rf, ok := ret.Get(0).(func(string) *checkoutpayment.CheckoutPayment); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*checkoutpayment.CheckoutPayment)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// InsertPayment provides a mock function with given fields: payment
+func (_m *Repository) InsertPayment(payment *checkoutpayment.CheckoutPayment) (*checkoutpayment.CheckoutPayment, error) <span class="cov8" title="1">{
+        ret := _m.Called(payment)
+
+        var r0 *checkoutpayment.CheckoutPayment
+        if rf, ok := ret.Get(0).(func(*checkoutpayment.CheckoutPayment) *checkoutpayment.CheckoutPayment); ok </span><span class="cov0" title="0">{
+                r0 = rf(payment)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*checkoutpayment.CheckoutPayment)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(*checkoutpayment.CheckoutPayment) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(payment)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+</pre>
+		
+		<pre class="file" id="file22" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        checkoutpayment "AltaStore/business/checkoutpayment"
+
+        mock "github.com/stretchr/testify/mock"
+
+        snap "github.com/midtrans/midtrans-go/snap"
+)
+
+// Service is an autogenerated mock type for the Service type
+type Service struct {
+        mock.Mock
+}
+
+// GenerateSnapPayment provides a mock function with given fields: customerId, checkoutId, amount
+func (_m *Service) GenerateSnapPayment(customerId string, checkoutId string, amount int64) (*snap.Response, error) <span class="cov0" title="0">{
+        ret := _m.Called(customerId, checkoutId, amount)
+
+        var r0 *snap.Response
+        if rf, ok := ret.Get(0).(func(string, string, int64) *snap.Response); ok </span><span class="cov0" title="0">{
+                r0 = rf(customerId, checkoutId, amount)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*snap.Response)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string, string, int64) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(customerId, checkoutId, amount)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// GetPaymentByCheckoutId provides a mock function with given fields: id
+func (_m *Service) GetPaymentByCheckoutId(id string) (*checkoutpayment.CheckoutPayment, error) <span class="cov0" title="0">{
+        ret := _m.Called(id)
+
+        var r0 *checkoutpayment.CheckoutPayment
+        if rf, ok := ret.Get(0).(func(string) *checkoutpayment.CheckoutPayment); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*checkoutpayment.CheckoutPayment)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// InsertPayment provides a mock function with given fields: payment, creator
+func (_m *Service) InsertPayment(payment *checkoutpayment.InserPaymentSpec, creator string) (*checkoutpayment.InserPaymentSpec, error) <span class="cov8" title="1">{
+        ret := _m.Called(payment, creator)
+
+        var r0 *checkoutpayment.InserPaymentSpec
+        if rf, ok := ret.Get(0).(func(*checkoutpayment.InserPaymentSpec, string) *checkoutpayment.InserPaymentSpec); ok </span><span class="cov0" title="0">{
+                r0 = rf(payment, creator)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*checkoutpayment.InserPaymentSpec)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(*checkoutpayment.InserPaymentSpec, string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(payment, creator)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+</pre>
+		
+		<pre class="file" id="file23" style="display: none">package checkoutpayment
+
+import (
+        "AltaStore/business"
+        "AltaStore/business/user"
+        "AltaStore/config"
+        "time"
+
+        midtrans "github.com/midtrans/midtrans-go"
+        snap "github.com/midtrans/midtrans-go/snap"
+)
+
+type InserPaymentSpec struct {
+        OrderId            string `validate:"required"`
+        MerchantId         string
+        StatusCode         string `validate:"required"`
+        TransactionStatus  string `validate:"required"`
+        FromPaymentGateway bool   `validate:"required"`
+        FraudStatus        string
+}
+
+type service struct {
+        userService user.Service
+        repository  Repository
+}
+
+func NewService(userService user.Service, repository Repository) Service <span class="cov8" title="1">{
+        return &amp;service{userService, repository}
+}</span>
+
+func (s *service) GenerateSnapPayment(customerId string, checkoutId string, amount int64) (*snap.Response, error) <span class="cov0" title="0">{
+        // 1. Initiate Snap client
+        var sc snap.Client
+        var key = config.GetConfig().MidTransServerKey
+        sc.New(key, midtrans.Sandbox)
+        // Use to midtrans.Production if you want Production Environment (accept real transaction).
+
+        user, err := s.userService.FindUserByID(customerId)
+        if err != nil </span><span class="cov0" title="0">{
+                var res snap.Response
+                return &amp;res, business.ErrNotFound
+        }</span>
+        // 2. Initiate Snap request param
+        <span class="cov0" title="0">req := &amp;snap.Request{
+                TransactionDetails: midtrans.TransactionDetails{
+                        OrderID:  checkoutId,
+                        GrossAmt: amount,
+                },
+                CreditCard: &amp;snap.CreditCardDetails{
+                        Secure: true,
+                },
+                CustomerDetail: &amp;midtrans.CustomerDetails{
+                        FName: user.FirstName,
+                        LName: user.LastName,
+                        Email: user.Email,
+                        Phone: user.HandPhone,
+                },
+        }
+
+        // 3. Execute request create Snap transaction to Midtrans Snap API
+        snapResp, midtransErr := sc.CreateTransaction(req)
+        if midtransErr != nil </span><span class="cov0" title="0">{
+                return snapResp, business.ErrNotFound
+        }</span>
+        <span class="cov0" title="0">return snapResp, nil</span>
+}
+
+func (s *service) InsertPayment(p *InserPaymentSpec, creator string) (*InserPaymentSpec, error) <span class="cov8" title="1">{
+        hasData, err := s.repository.CheckHasCheckoutId(p.OrderId)
+        if err != nil || !hasData </span><span class="cov8" title="1">{
+                return nil, business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">data := InsertPayment(
+                p.OrderId,
+                p.StatusCode,
+                p.MerchantId,
+                p.TransactionStatus,
+                p.FraudStatus,
+                p.FromPaymentGateway,
+                creator,
+                time.Now())
+
+        _, _ = s.repository.InsertPayment(&amp;data)
+
+        return p, nil</span>
+}
+
+func (s *service) GetPaymentByCheckoutId(id string) (*CheckoutPayment, error) <span class="cov0" title="0">{
+        return s.repository.GetPaymentByCheckoutId(id)
+}</span>
+</pre>
+		
+		<pre class="file" id="file24" style="display: none">package logger
+
+import "encoding/json"
+
+type service struct {
+        repository Repository
+}
+
+func NewService(repository Repository) Service <span class="cov0" title="0">{
+        return &amp;service{repository}
+}</span>
+
+func (s *service) Write(p []byte) (n int, err error) <span class="cov0" title="0">{
+        var data LoggerData
+
+        json.Unmarshal(p, &amp;data)
+
+        return len(p), s.repository.AddLoggerActivity(&amp;data)
+}</span>
+</pre>
+		
+		<pre class="file" id="file25" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        shopping "AltaStore/business/shopping"
+
+        mock "github.com/stretchr/testify/mock"
+
+        time "time"
+)
+
+// Repository is an autogenerated mock type for the Repository type
+type Repository struct {
+        mock.Mock
+}
+
+// GetShoppingCartById provides a mock function with given fields: id
+func (_m *Repository) GetShoppingCartById(id string) (*shopping.ShoppCart, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *shopping.ShoppCart
+        if rf, ok := ret.Get(0).(func(string) *shopping.ShoppCart); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*shopping.ShoppCart)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// GetShoppingCartByUserId provides a mock function with given fields: userid
+func (_m *Repository) GetShoppingCartByUserId(userid string) (*shopping.ShoppCart, error) <span class="cov8" title="1">{
+        ret := _m.Called(userid)
+
+        var r0 *shopping.ShoppCart
+        if rf, ok := ret.Get(0).(func(string) *shopping.ShoppCart); ok </span><span class="cov0" title="0">{
+                r0 = rf(userid)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*shopping.ShoppCart)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(userid)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// NewShoppingCart provides a mock function with given fields: id, userid, createdAt
+func (_m *Repository) NewShoppingCart(id string, userid string, createdAt time.Time) (*shopping.ShoppCart, error) <span class="cov8" title="1">{
+        ret := _m.Called(id, userid, createdAt)
+
+        var r0 *shopping.ShoppCart
+        if rf, ok := ret.Get(0).(func(string, string, time.Time) *shopping.ShoppCart); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, userid, createdAt)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*shopping.ShoppCart)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string, string, time.Time) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id, userid, createdAt)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// UpdateShopCartStatusById provides a mock function with given fields: id, ischeckout
+func (_m *Repository) UpdateShopCartStatusById(id string, ischeckout bool) error <span class="cov8" title="1">{
+        ret := _m.Called(id, ischeckout)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, bool) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, ischeckout)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file26" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        mock "github.com/stretchr/testify/mock"
+
+        shoppingdetail "AltaStore/modules/shoppingdetail"
+)
+
+// RepositoryCartDetail is an autogenerated mock type for the RepositoryCartDetail type
+type RepositoryCartDetail struct {
+        mock.Mock
+}
+
+// DeleteItemInShopCart provides a mock function with given fields: cartId, productid
+func (_m *RepositoryCartDetail) DeleteItemInShopCart(cartId string, productid string) error <span class="cov8" title="1">{
+        ret := _m.Called(cartId, productid)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, productid)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+
+// GetShopCartDetailById provides a mock function with given fields: id
+func (_m *RepositoryCartDetail) GetShopCartDetailById(id string) (*[]shoppingdetail.ShopCartDetailItemWithProductName, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *[]shoppingdetail.ShopCartDetailItemWithProductName
+        if rf, ok := ret.Get(0).(func(string) *[]shoppingdetail.ShopCartDetailItemWithProductName); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*[]shoppingdetail.ShopCartDetailItemWithProductName)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// ModifyItemInShopCart provides a mock function with given fields: cartId, item
+func (_m *RepositoryCartDetail) ModifyItemInShopCart(cartId string, item *shoppingdetail.UpdateItemInCartSpec) error <span class="cov8" title="1">{
+        ret := _m.Called(cartId, item)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, *shoppingdetail.UpdateItemInCartSpec) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, item)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+
+// NewItemInShopCart provides a mock function with given fields: cartId, item
+func (_m *RepositoryCartDetail) NewItemInShopCart(cartId string, item *shoppingdetail.InsertItemInCartSpec) error <span class="cov8" title="1">{
+        ret := _m.Called(cartId, item)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, *shoppingdetail.InsertItemInCartSpec) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, item)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file27" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        shopping "AltaStore/business/shopping"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// Service is an autogenerated mock type for the Service type
+type Service struct {
+        mock.Mock
+}
+
+// DeleteItemInShopCart provides a mock function with given fields: cartId, productid, userid
+func (_m *Service) DeleteItemInShopCart(cartId string, productid string, userid string) error <span class="cov0" title="0">{
+        ret := _m.Called(cartId, productid, userid)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, string, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, productid, userid)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// GetShopCartDetailById provides a mock function with given fields: id, userid
+func (_m *Service) GetShopCartDetailById(id string, userid string) (*shopping.ShopCartDetail, error) <span class="cov0" title="0">{
+        ret := _m.Called(id, userid)
+
+        var r0 *shopping.ShopCartDetail
+        if rf, ok := ret.Get(0).(func(string, string) *shopping.ShopCartDetail); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, userid)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*shopping.ShopCartDetail)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string, string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id, userid)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// GetShoppingCartByUserId provides a mock function with given fields: userid
+func (_m *Service) GetShoppingCartByUserId(userid string) (*shopping.ShoppCart, error) <span class="cov0" title="0">{
+        ret := _m.Called(userid)
+
+        var r0 *shopping.ShoppCart
+        if rf, ok := ret.Get(0).(func(string) *shopping.ShoppCart); ok </span><span class="cov0" title="0">{
+                r0 = rf(userid)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*shopping.ShoppCart)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(userid)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// ModifyItemInShopCart provides a mock function with given fields: cartId, item, userid
+func (_m *Service) ModifyItemInShopCart(cartId string, item *shopping.DetailItemInShopCart, userid string) error <span class="cov0" title="0">{
+        ret := _m.Called(cartId, item, userid)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, item, userid)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// NewItemInShopCart provides a mock function with given fields: cartId, item, userid
+func (_m *Service) NewItemInShopCart(cartId string, item *shopping.DetailItemInShopCart, userid string) error <span class="cov0" title="0">{
+        ret := _m.Called(cartId, item, userid)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, *shopping.DetailItemInShopCart, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(cartId, item, userid)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// NewShoppingCart provides a mock function with given fields: userid
+func (_m *Service) NewShoppingCart(userid string) (*shopping.ShoppCart, error) <span class="cov0" title="0">{
+        ret := _m.Called(userid)
+
+        var r0 *shopping.ShoppCart
+        if rf, ok := ret.Get(0).(func(string) *shopping.ShoppCart); ok </span><span class="cov0" title="0">{
+                r0 = rf(userid)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*shopping.ShoppCart)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(userid)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// UpdateShopCartStatusById provides a mock function with given fields: id, ischeckout
+func (_m *Service) UpdateShopCartStatusById(id string, ischeckout bool) error <span class="cov8" title="1">{
+        ret := _m.Called(id, ischeckout)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, bool) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, ischeckout)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file28" style="display: none">package shopping
+
+import (
+        "AltaStore/business"
+        "AltaStore/util/validator"
+        "time"
+
+        "github.com/google/uuid"
+)
+
+type DetailItemInShopCart struct {
+        ProductId string `validate:"required"`
+        Price     int    `validate:"required"`
+        Qty       int    `validate:"required"`
+}
+
+type service struct {
+        repository     Repository
+        repoCartDetail RepositoryCartDetail
+}
+
+func NewService(repository Repository, repoCartDetail RepositoryCartDetail) Service <span class="cov8" title="1">{
+        return &amp;service{repository, repoCartDetail}
+}</span>
+
+func (s *service) GetShoppingCartByUserId(userid string) (*ShoppCart, error) <span class="cov8" title="1">{
+        return s.repository.GetShoppingCartByUserId(userid)
+}</span>
+
+func (s *service) NewShoppingCart(userid string) (*ShoppCart, error) <span class="cov8" title="1">{
+        return s.repository.NewShoppingCart(uuid.NewString(), userid, time.Now())
+}</span>
+
+func (s *service) UpdateShopCartStatusById(id string, isCheckout bool) error <span class="cov8" title="1">{
+        return s.repository.UpdateShopCartStatusById(id, isCheckout)
+}</span>
+
+func (s *service) GetShopCartDetailById(cartId string, userid string) (*ShopCartDetail, error) <span class="cov8" title="1">{
+        shopCartUser, err := s.repository.GetShoppingCartByUserId(userid)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">shopCart, err := s.repository.GetShoppingCartById(cartId)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">if shopCartUser.ID != shopCart.ID </span><span class="cov0" title="0">{
+                return nil, business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">items, err := s.repoCartDetail.GetShopCartDetailById(cartId)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">cnvItems := toDetailItemInCart(items)
+
+        return getShopCartDetailFormat(shopCart, cnvItems), nil</span>
+}
+
+func (s *service) NewItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error <span class="cov8" title="1">{
+        err := validator.GetValidator().Struct(item)
+        if err != nil </span><span class="cov0" title="0">{
+                return business.ErrInvalidSpec
+        }</span>
+        <span class="cov8" title="1">shopCartUser, err := s.repository.GetShoppingCartByUserId(userid)
+        if err != nil </span><span class="cov8" title="1">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">if shopCartUser.ID != cartId </span><span class="cov0" title="0">{
+                return business.ErrNotHavePermission
+        }</span>
+
+        <span class="cov8" title="1">return s.repoCartDetail.NewItemInShopCart(cartId, insertItemFormat(item))</span>
+
+}
+
+func (s *service) ModifyItemInShopCart(cartId string, item *DetailItemInShopCart, userid string) error <span class="cov8" title="1">{
+        err := validator.GetValidator().Struct(item)
+        if err != nil </span><span class="cov0" title="0">{
+                return business.ErrInvalidSpec
+        }</span>
+
+        <span class="cov8" title="1">shopCartUser, err := s.repository.GetShoppingCartByUserId(userid)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">if shopCartUser.ID != cartId </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">return s.repoCartDetail.ModifyItemInShopCart(cartId, updateItemFormat(item))</span>
+}
+
+func (s *service) DeleteItemInShopCart(cartId string, productid string, userid string) error <span class="cov8" title="1">{
+
+        shopCartUser, err := s.repository.GetShoppingCartByUserId(userid)
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">if shopCartUser.ID != cartId </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">return s.repoCartDetail.DeleteItemInShopCart(cartId, productid)</span>
+}
+</pre>
+		
+		<pre class="file" id="file29" style="display: none">package shopping
+
+import (
+        "AltaStore/modules/shoppingdetail"
+        "time"
+
+        "github.com/google/uuid"
+)
+
+type ShoppCart struct {
+        ID         string
+        IsCheckOut bool
+        CreatedBy  string
+        CreatedAt  time.Time
+        UpdatedAt  time.Time
+}
+
+type ItemInCart struct {
+        ID          string
+        ProductId   string
+        ProductName string
+        Price       int
+        Qty         int
+        UpdatedAt   time.Time
+}
+
+type ShopCartDetail struct {
+        ID        string
+        CreatedBy string
+        UpdatedAt time.Time
+        Details   []ItemInCart
+}
+
+func getShopCartDetailFormat(sum *ShoppCart, details *[]ItemInCart) *ShopCartDetail <span class="cov8" title="1">{
+        var shopCartDetail ShopCartDetail
+        var itemInCart *ItemInCart
+
+        shopCartDetail.ID = sum.ID
+        shopCartDetail.CreatedBy = sum.CreatedBy
+        shopCartDetail.UpdatedAt = sum.UpdatedAt
+
+        for _, val := range *details </span><span class="cov8" title="1">{
+                itemInCart = &amp;val
+                shopCartDetail.Details = append(shopCartDetail.Details, *itemInCart)
+        }</span>
+
+        <span class="cov8" title="1">if shopCartDetail.Details == nil </span><span class="cov0" title="0">{
+                shopCartDetail.Details = []ItemInCart{}
+        }</span>
+
+        <span class="cov8" title="1">return &amp;shopCartDetail</span>
+}
+
+func insertItemFormat(item *DetailItemInShopCart) *shoppingdetail.InsertItemInCartSpec <span class="cov8" title="1">{
+        return &amp;shoppingdetail.InsertItemInCartSpec{
+                ID:        uuid.NewString(),
+                ProductId: item.ProductId,
+                Price:     item.Price,
+                Qty:       item.Qty,
+                CreatedAt: time.Now(),
+                UpdatedAt: time.Now(),
+        }
+}</span>
+
+func updateItemFormat(item *DetailItemInShopCart) *shoppingdetail.UpdateItemInCartSpec <span class="cov8" title="1">{
+        return &amp;shoppingdetail.UpdateItemInCartSpec{
+                ProductId: item.ProductId,
+                Price:     item.Price,
+                Qty:       item.Qty,
+                UpdatedAt: time.Now(),
+        }
+}</span>
+
+func toItem(item shoppingdetail.ShopCartDetailItemWithProductName) ItemInCart <span class="cov8" title="1">{
+        return ItemInCart{
+                ID:          item.ID,
+                ProductId:   item.ProductId,
+                ProductName: item.ProductName,
+                Price:       item.Price,
+                Qty:         item.Qty,
+                UpdatedAt:   item.UpdatedAt,
+        }
+}</span>
+
+func toDetailItemInCart(items *[]shoppingdetail.ShopCartDetailItemWithProductName) *[]ItemInCart <span class="cov8" title="1">{
+        var details []ItemInCart
+
+        for _, item := range *items </span><span class="cov8" title="1">{
+                details = append(details, toItem(item))
+        }</span>
+
+        <span class="cov8" title="1">if details == nil </span><span class="cov0" title="0">{
+                details = []ItemInCart{}
+        }</span>
+
+        <span class="cov8" title="1">return &amp;details</span>
+}
+</pre>
+		
+		<pre class="file" id="file30" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        user "AltaStore/business/user"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// Repository is an autogenerated mock type for the Repository type
+type Repository struct {
+        mock.Mock
+}
+
+// DeleteUser provides a mock function with given fields: _a0
+func (_m *Repository) DeleteUser(_a0 user.User) error <span class="cov8" title="1">{
+        ret := _m.Called(_a0)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(user.User) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(_a0)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+
+// FindUserByEmail provides a mock function with given fields: email
+func (_m *Repository) FindUserByEmail(email string) (*user.User, error) <span class="cov8" title="1">{
+        ret := _m.Called(email)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(email)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(email)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// FindUserByEmailAndPassword provides a mock function with given fields: email, password
+func (_m *Repository) FindUserByEmailAndPassword(email string, password string) (*user.User, error) <span class="cov8" title="1">{
+        ret := _m.Called(email, password)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string, string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(email, password)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string, string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(email, password)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// FindUserByID provides a mock function with given fields: id
+func (_m *Repository) FindUserByID(id string) (*user.User, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov8" title="1">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// InsertUser provides a mock function with given fields: _a0
+func (_m *Repository) InsertUser(_a0 user.User) error <span class="cov8" title="1">{
+        ret := _m.Called(_a0)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(user.User) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(_a0)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+
+// UpdateUser provides a mock function with given fields: _a0
+func (_m *Repository) UpdateUser(_a0 user.User) error <span class="cov8" title="1">{
+        ret := _m.Called(_a0)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(user.User) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(_a0)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+
+// UpdateUserPassword provides a mock function with given fields: _a0
+func (_m *Repository) UpdateUserPassword(_a0 user.User) error <span class="cov8" title="1">{
+        ret := _m.Called(_a0)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(user.User) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(_a0)
+        }</span> else<span class="cov8" title="1"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov8" title="1">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file31" style="display: none">// Code generated by mockery v2.9.4. DO NOT EDIT.
+
+package mocks
+
+import (
+        user "AltaStore/business/user"
+
+        mock "github.com/stretchr/testify/mock"
+)
+
+// Service is an autogenerated mock type for the Service type
+type Service struct {
+        mock.Mock
+}
+
+// DeleteUser provides a mock function with given fields: id, deleter
+func (_m *Service) DeleteUser(id string, deleter string) error <span class="cov0" title="0">{
+        ret := _m.Called(id, deleter)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, deleter)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// FindUserByEmail provides a mock function with given fields: email
+func (_m *Service) FindUserByEmail(email string) (*user.User, error) <span class="cov0" title="0">{
+        ret := _m.Called(email)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(email)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(email)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// FindUserByEmailAndPassword provides a mock function with given fields: email, password
+func (_m *Service) FindUserByEmailAndPassword(email string, password string) (*user.User, error) <span class="cov0" title="0">{
+        ret := _m.Called(email, password)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string, string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(email, password)
+        }</span> else<span class="cov0" title="0"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov0" title="0">var r1 error
+        if rf, ok := ret.Get(1).(func(string, string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(email, password)
+        }</span> else<span class="cov0" title="0"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov0" title="0">return r0, r1</span>
+}
+
+// FindUserByID provides a mock function with given fields: id
+func (_m *Service) FindUserByID(id string) (*user.User, error) <span class="cov8" title="1">{
+        ret := _m.Called(id)
+
+        var r0 *user.User
+        if rf, ok := ret.Get(0).(func(string) *user.User); ok </span><span class="cov0" title="0">{
+                r0 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                if ret.Get(0) != nil </span><span class="cov0" title="0">{
+                        r0 = ret.Get(0).(*user.User)
+                }</span>
+        }
+
+        <span class="cov8" title="1">var r1 error
+        if rf, ok := ret.Get(1).(func(string) error); ok </span><span class="cov0" title="0">{
+                r1 = rf(id)
+        }</span> else<span class="cov8" title="1"> {
+                r1 = ret.Error(1)
+        }</span>
+
+        <span class="cov8" title="1">return r0, r1</span>
+}
+
+// InsertUser provides a mock function with given fields: insertUserSpec
+func (_m *Service) InsertUser(insertUserSpec user.InsertUserSpec) error <span class="cov0" title="0">{
+        ret := _m.Called(insertUserSpec)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(user.InsertUserSpec) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(insertUserSpec)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// UpdateUser provides a mock function with given fields: id, updateUserSpec, modifier
+func (_m *Service) UpdateUser(id string, updateUserSpec user.UpdateUserSpec, modifier string) error <span class="cov0" title="0">{
+        ret := _m.Called(id, updateUserSpec, modifier)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, user.UpdateUserSpec, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, updateUserSpec, modifier)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+
+// UpdateUserPassword provides a mock function with given fields: id, password, oldPassword, modifier
+func (_m *Service) UpdateUserPassword(id string, password string, oldPassword string, modifier string) error <span class="cov0" title="0">{
+        ret := _m.Called(id, password, oldPassword, modifier)
+
+        var r0 error
+        if rf, ok := ret.Get(0).(func(string, string, string, string) error); ok </span><span class="cov0" title="0">{
+                r0 = rf(id, password, oldPassword, modifier)
+        }</span> else<span class="cov0" title="0"> {
+                r0 = ret.Error(0)
+        }</span>
+
+        <span class="cov0" title="0">return r0</span>
+}
+</pre>
+		
+		<pre class="file" id="file32" style="display: none">package user
+
+import (
+        "AltaStore/business"
+        "AltaStore/util/validator"
+        "time"
+
+        "github.com/google/uuid"
+        "golang.org/x/crypto/bcrypt"
+)
+
+//InsertUserSpec create user spec
+type InsertUserSpec struct {
+        Email     string `validate:"required"`
+        FirstName string `validate:"required"`
+        LastName  string `validate:"required"`
+        Password  string `validate:"required"`
+}
+
+type UpdateUserSpec struct {
+        Email     string `validate:"required"`
+        FirstName string `validate:"required"`
+        LastName  string `validate:"required"`
+        HandPhone string
+        Address   string
+}
+
+type UpdateUserPasswordSpec struct {
+        NewPassword string `validate:"required"`
+        OldPassword string `validate:"required"`
+}
+
+//=============== The implementation of those interface put below =======================
+type service struct {
+        repository Repository
+}
+
+//NewService Construct user service object
+func NewService(repository Repository) Service <span class="cov8" title="1">{
+        return &amp;service{
+                repository,
+        }
+}</span>
+
+//InsertUser Create new user and store into database
+func (s *service) InsertUser(insertUserSpec InsertUserSpec) error <span class="cov8" title="1">{
+        err := validator.GetValidator().Struct(insertUserSpec)
+        if err != nil </span><span class="cov0" title="0">{
+                return business.ErrInvalidSpec
+        }</span>
+
+        <span class="cov8" title="1">userdata, _ := s.repository.FindUserByEmail(insertUserSpec.Email)
+        if userdata != nil </span><span class="cov8" title="1">{
+                return business.ErrDataExists
+        }</span>
+
+        <span class="cov8" title="1">hashedPassword, err := bcrypt.GenerateFromPassword([]byte(insertUserSpec.Password), bcrypt.DefaultCost)
+        if err != nil </span><span class="cov0" title="0">{
+                return business.ErrInvalidSpec
+        }</span>
+        <span class="cov8" title="1">var newuuid = uuid.New().String()
+        user := NewUser(
+                newuuid,
+                insertUserSpec.Email,
+                insertUserSpec.FirstName,
+                insertUserSpec.LastName,
+                string(hashedPassword),
+                newuuid,
+                time.Now(),
+        )
+
+        err = s.repository.InsertUser(user)
+        if err != nil </span><span class="cov8" title="1">{
+                return err
+        }</span>
+
+        <span class="cov8" title="1">return nil</span>
+}
+
+//FindUserByUsernameAndPassword If data not found will return nil
+func (s *service) FindUserByEmailAndPassword(email string, password string) (*User, error) <span class="cov8" title="1">{
+        return s.repository.FindUserByEmailAndPassword(email, password)
+}</span>
+
+//FindUserByUsername If data not found will return nil
+func (s *service) FindUserByEmail(email string) (*User, error) <span class="cov8" title="1">{
+        return s.repository.FindUserByEmail(email)
+}</span>
+
+//FindUserByID If data not found will return nil without error
+func (s *service) FindUserByID(id string) (*User, error) <span class="cov8" title="1">{
+        return s.repository.FindUserByID(id)
+}</span>
+
+//UpdateUserPaasword if data not found or old password wrong will return error
+func (s *service) UpdateUserPassword(id string, newpassword, oldPassword string, modifier string) error <span class="cov8" title="1">{
+
+        user, err := s.repository.FindUserByID(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return err
+        }</span> else<span class="cov8" title="1"> if user == nil </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span> else<span class="cov8" title="1"> if user.DeletedBy != "" </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span> else<span class="cov8" title="1"> {
+                _, err := s.repository.FindUserByEmailAndPassword(user.Email, oldPassword)
+                if err != nil </span><span class="cov8" title="1">{
+                        return business.ErrPasswordMisMatch
+                }</span>
+        }
+        <span class="cov8" title="1">hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newpassword), bcrypt.DefaultCost)
+        if err != nil </span><span class="cov0" title="0">{
+                return business.ErrInvalidSpec
+        }</span>
+        <span class="cov8" title="1">modifiedUser := user.ModifyUserPassword(
+                string(hashedPassword),
+                modifier,
+                time.Now(),
+        )
+
+        return s.repository.UpdateUserPassword(modifiedUser)</span>
+}
+
+//UpdateUser if data not found will return error
+func (s *service) UpdateUser(id string, updateUserSpec UpdateUserSpec, modifier string) error <span class="cov8" title="1">{
+        user, err := s.repository.FindUserByID(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return err
+        }</span> else<span class="cov8" title="1"> if user == nil </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span> else<span class="cov8" title="1"> if user.DeletedBy != "" </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">modifiedUser := user.ModifyUser(
+                updateUserSpec.FirstName,
+                updateUserSpec.LastName,
+                updateUserSpec.HandPhone,
+                updateUserSpec.Address,
+                time.Now(),
+                modifier,
+        )
+
+        return s.repository.UpdateUser(modifiedUser)</span>
+}
+
+//Deleteuser if data not found will return error
+func (s *service) DeleteUser(id string, modifier string) error <span class="cov8" title="1">{
+        user, err := s.repository.FindUserByID(id)
+        if err != nil </span><span class="cov8" title="1">{
+                return err
+        }</span> else<span class="cov8" title="1"> if user == nil </span><span class="cov0" title="0">{
+                return business.ErrNotFound
+        }</span>
+
+        <span class="cov8" title="1">deleteUser := user.DeleteUser(
+                time.Now(),
+                modifier,
+        )
+
+        return s.repository.DeleteUser(deleteUser)</span>
+}
+</pre>
+		
+		<pre class="file" id="file33" style="display: none">package user
+
+import (
+        "time"
+)
+
+//User
+type User struct {
+        ID        string
+        Email     string
+        FirstName string
+        LastName  string
+        Password  string
+        HandPhone string
+        Address   string
+        CreatedAt time.Time
+        CreatedBy string
+        UpdatedAt time.Time
+        UpdatedBy string
+        DeletedAt time.Time
+        DeletedBy string
+}
+
+//NewUser create new User
+func NewUser(
+        id string,
+        email string,
+        firstname string,
+        lastname string,
+        password string,
+        creator string,
+        createdAt time.Time) User <span class="cov8" title="1">{
+
+        return User{
+                ID:        id,
+                Email:     email,
+                FirstName: firstname,
+                LastName:  lastname,
+                Password:  password,
+                CreatedAt: createdAt,
+                CreatedBy: creator,
+        }
+}</span>
+
+//ModifyUser update existing UserData
+func (oldData *User) ModifyUser(
+        newFirstName,
+        newLastName,
+        newHandPhone,
+        newAddress string,
+        updatedAt time.Time,
+        updater string) User <span class="cov8" title="1">{
+
+        return User{
+                ID:        oldData.ID,
+                Email:     oldData.Email,
+                FirstName: newFirstName,
+                LastName:  newLastName,
+                Password:  oldData.Password,
+                HandPhone: newHandPhone,
+                Address:   newAddress,
+                CreatedAt: oldData.CreatedAt,
+                CreatedBy: oldData.CreatedBy,
+                UpdatedAt: updatedAt,
+                UpdatedBy: updater,
+        }
+}</span>
+
+// //ModifyUserToken update existing UserData
+// func (oldData *User) ModifyUserToken(
+//         newToken string,
+//         updatedAt time.Time) User {
+
+//         return User{
+//                 ID:        oldData.ID,
+//                 Email:     oldData.Email,
+//                 FirstName: oldData.FirstName,
+//                 LastName:  oldData.LastName,
+//                 Password:  oldData.Password,
+//                 HandPhone: oldData.HandPhone,
+//                 Address:   oldData.Address,
+//                 Token:     newToken,
+//                 CreatedAt: oldData.CreatedAt,
+//                 CreatedBy: oldData.CreatedBy,
+//                 UpdatedAt: updatedAt,
+//                 UpdatedBy: oldData.ID,
+//         }
+// }
+
+//ModifyUserPassword update existing UserData
+func (oldData *User) ModifyUserPassword(
+        newPassword string,
+        updater string,
+        updatedAt time.Time) User <span class="cov8" title="1">{
+
+        return User{
+                ID:        oldData.ID,
+                Email:     oldData.Email,
+                FirstName: oldData.FirstName,
+                LastName:  oldData.LastName,
+                Password:  newPassword,
+                HandPhone: oldData.HandPhone,
+                Address:   oldData.Address,
+                CreatedAt: oldData.CreatedAt,
+                CreatedBy: oldData.CreatedBy,
+                UpdatedAt: updatedAt,
+                UpdatedBy: updater,
+        }
+}</span>
+
+func (oldData *User) DeleteUser(
+        deleteAt time.Time,
+        deleter string) User <span class="cov8" title="1">{
+
+        return User{
+                ID:        oldData.ID,
+                Email:     oldData.Email,
+                FirstName: oldData.FirstName,
+                LastName:  oldData.LastName,
+                Password:  oldData.Password,
+                HandPhone: oldData.HandPhone,
+                Address:   oldData.Address,
+                CreatedAt: oldData.CreatedAt,
+                CreatedBy: oldData.CreatedBy,
+                UpdatedAt: oldData.UpdatedAt,
+                UpdatedBy: oldData.UpdatedBy,
+                DeletedAt: deleteAt,
+                DeletedBy: deleter,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file34" style="display: none">package config
+
+import (
+        "github.com/labstack/gommon/log"
+        "github.com/spf13/viper"
+)
+
+type ConfigApp struct {
+        AppHost           string `mapstructure:"app_host"`
+        AppPort           int    `mapstructure:"app_port"`
+        DbDriver          string `mapstructure:"db_driver"`
+        DbHost            string `mapstructure:"db_host"`
+        DbPort            int    `mapstructure:"db_port"`
+        DbUsername        string `mapstructure:"db_username"`
+        DbPassword        string `mapstructure:"db_password"`
+        DbName            string `mapstructure:"db_name"`
+        JwtSecretKey      string `mapstructure:"jwtsecretkey"`
+        MongoHost         string `mapstructure:"mongo_host"`
+        MongoPort         int    `mapstructure:"mongo_port"`
+        MongoUsername     string `mapstructure:"mongo_username"`
+        MongoPassword     string `mapstructure:"mongo_password"`
+        MongoDbName       string `mapstructure:"mongo_dbname"`
+        MidTransServerKey string `mapstructure:"midtransserverkey"`
+}
+
+func GetConfig() *ConfigApp <span class="cov0" title="0">{
+        // Set default config if error parsing file
+        var defaConfig ConfigApp
+
+        defaConfig.AppHost = "localhost"
+        defaConfig.AppPort = 9000
+        defaConfig.DbDriver = "pgsql"
+        defaConfig.DbHost = "localhost"
+        defaConfig.DbPort = 5432
+        defaConfig.DbUsername = "postgres"
+        defaConfig.DbPassword = "postgres"
+        defaConfig.DbName = "altastoredb"
+        defaConfig.JwtSecretKey = "AltaStore"
+        defaConfig.MongoHost = "localhost"
+        defaConfig.MongoPort = 27017
+        defaConfig.MongoUsername = "mongo"
+        defaConfig.MongoPassword = "mongo"
+        defaConfig.MongoDbName = "altastoredb"
+        defaConfig.MidTransServerKey = ""
+
+        var (
+                err error
+        )
+
+        viper.SetConfigFile("./.env")
+        err = viper.ReadInConfig()
+        if err != nil </span><span class="cov0" title="0">{
+                log.Info("Failed read config, config set to default step 1.")
+                return &amp;defaConfig
+        }</span>
+
+        <span class="cov0" title="0">var finalConfig ConfigApp
+        err = viper.Unmarshal(&amp;finalConfig)
+        if err != nil </span><span class="cov0" title="0">{
+                log.Info("Failed bind config, config set to default step 2.")
+                return &amp;defaConfig
+        }</span>
+
+        <span class="cov0" title="0">return &amp;finalConfig</span>
+}
+</pre>
+		
+		<pre class="file" id="file35" style="display: none">package main
+
+import (
+        "AltaStore/api"
+        "AltaStore/api/middleware"
+        "AltaStore/config"
+
+        // Controller
+        checkoutController "AltaStore/api/v1/checkout"
+        paymentController "AltaStore/api/v1/checkoutpayment"
+        shopController "AltaStore/api/v1/shopping"
+
+        // Service
+        checkoutService "AltaStore/business/checkout"
+        paymentService "AltaStore/business/checkoutpayment"
+        loggerService "AltaStore/business/logger"
+        shopService "AltaStore/business/shopping"
+        userService "AltaStore/business/user"
+
+        // Repository
+        checkoutRepository "AltaStore/modules/checkout"
+        paymentRepository "AltaStore/modules/checkoutpayment"
+        loggerRepo "AltaStore/modules/logger"
+        shopRepository "AltaStore/modules/shopping"
+        shopDetailRepository "AltaStore/modules/shoppingdetail"
+        userRepository "AltaStore/modules/user"
+
+        "context"
+        "fmt"
+        "time"
+
+        echo "github.com/labstack/echo/v4"
+        log "github.com/sirupsen/logrus"
+
+        "go.mongodb.org/mongo-driver/mongo"
+        "go.mongodb.org/mongo-driver/mongo/options"
+        "gorm.io/driver/postgres"
+        "gorm.io/gorm"
+
+        "AltaStore/modules/migration"
+)
+
+func newDatabaseConnection(cfg *config.ConfigApp) *gorm.DB <span class="cov0" title="0">{
+        stringConnection := fmt.Sprintf(
+                "host=%s port=%d user=%s password=%s dbname=%s",
+                cfg.DbHost, cfg.DbPort, cfg.DbUsername, cfg.DbPassword, cfg.DbName,
+        )
+        db, err := gorm.Open(postgres.Open(stringConnection), &amp;gorm.Config{})
+
+        if err != nil </span><span class="cov0" title="0">{
+                panic(err)</span>
+        }
+
+        <span class="cov0" title="0">migration.TableMigration(db)
+
+        return db</span>
+}
+
+func newMongoDBConnection(cfg *config.ConfigApp) *mongo.Database <span class="cov0" title="0">{
+        clientOptions := options.Client().ApplyURI(
+                fmt.Sprintf("mongodb://%s:%s@%s:%d", cfg.MongoUsername, cfg.MongoPassword, cfg.MongoHost, cfg.MongoPort),
+        )
+
+        client, err := mongo.NewClient(clientOptions)
+        if err != nil </span><span class="cov0" title="0">{
+                panic(err)</span>
+        }
+
+        <span class="cov0" title="0">err = client.Connect(context.Background())
+        if err != nil </span><span class="cov0" title="0">{
+                panic(err)</span>
+        }
+
+        <span class="cov0" title="0">return client.Database(cfg.MongoDbName)</span>
+}
+
+func main() <span class="cov0" title="0">{
+        // retrieves application configuration and returns common values when there is a problem
+        config := config.GetConfig()
+
+        // Open mongodb logger
+        mongoConnection := newMongoDBConnection(config)
+
+        // Register repository
+        logrRepo := loggerRepo.NewRepository(mongoConnection)
+
+        // Register service
+        logeService := loggerService.NewService(logrRepo)
+
+        // Register logs
+        log.SetFormatter(&amp;log.JSONFormatter{})
+        log.SetOutput(logeService)
+
+        // open database server base session
+        dbConnection := newDatabaseConnection(config)
+
+        //initiate user repository
+        user := userRepository.NewDBRepository(dbConnection)
+
+        //initiate user service
+        userService := userService.NewService(user)
+
+        // initiate shopping repository
+        shopRepo := shopRepository.NewRepository(dbConnection)
+        shopDetailRepo := shopDetailRepository.NewRepository(dbConnection)
+
+        // initiate urchase Receiving service
+        shopServc := shopService.NewService(shopRepo, shopDetailRepo)
+
+        // initiate shopping controller
+        shopHandler := shopController.NewController(shopServc)
+
+        // initiate CheckOut Payment repository
+        payment := paymentRepository.NewRepository(dbConnection)
+
+        // initiate CheckOut Payment service
+        paymentService := paymentService.NewService(userService, payment)
+
+        // initiate CheckOut Payment controller
+        paymentController := paymentController.NewController(paymentService)
+
+        // initiate checkout repository shoping cart
+        c_outeRepo := checkoutRepository.NewRepository(dbConnection)
+
+        // initiate checkout service shopping cat
+        c_outServc := checkoutService.NewService(paymentService, shopServc, c_outeRepo, shopDetailRepo)
+
+        // initiate checkout controller shopingcart
+        c_outController := checkoutController.NewController(c_outServc)
+
+        // create echo http
+        e := echo.New()
+
+        // Register API Path and Controller
+        api.RegisterPath(e, shopHandler, c_outController, paymentController)
+
+        lock := make(chan error)
+
+        go func(lock chan error) </span><span class="cov0" title="0">{
+                address := fmt.Sprintf(":%d", config.AppPort)
+                lock &lt;- e.Start(address)
+        }</span>(lock)
+
+        <span class="cov0" title="0">time.Sleep(1 * time.Millisecond)
+        middleware.MakeLogEntry(nil).Info(fmt.Sprintf("Application Start In Port =&gt; ::%d", config.AppPort))
+
+        err := &lt;-lock
+        if err != nil </span><span class="cov0" title="0">{
+                middleware.MakeLogEntry(nil).Panic("Shutdown Echo Service")
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file36" style="display: none">package checkout
+
+import (
+        "AltaStore/business/checkout"
+        "errors"
+        "time"
+
+        "gorm.io/gorm"
+)
+
+type Repository struct {
+        DB *gorm.DB
+}
+
+type Checkout struct {
+        ID             string    `gorm:"id;type:uuid;primaryKey"`
+        ShoppingCartId string    `gorm:"shopping_cart_id;type:uuid;unique"`
+        Description    string    `gorm:"description;type:varchar(100)"`
+        CreatedBy      string    `gorm:"created_by;type:varchar(50)"`
+        CreatedAt      time.Time `gorm:"created_at;type:timestamp"`
+        UpdatedAt      time.Time `gorm:"updated_at;type:timestamp"`
+        DeletedAt      time.Time `gorm:"deleted_at;type:timestamp"`
+}
+
+// func (c *Checkout) toBusinessCheckout() checkout.Checkout {
+//         return checkout.Checkout{
+//                 ID:             c.ID,
+//                 ShoppingCartId: c.ShoppingCartId,
+//                 Description:    c.Description,
+//                 CreatedBy:      c.CreatedBy,
+//                 CreatedAt:      c.CreatedAt,
+//                 UpdatedAt:      c.UpdatedAt,
+//         }
+// }
+
+// func toListCheckout(c *[]Checkout) *[]checkout.Checkout {
+//         var listCheckout []checkout.Checkout
+
+//         for _, checkout := range *c {
+//                 listCheckout = append(listCheckout, checkout.toBusinessCheckout())
+//         }
+
+//         if listCheckout == nil {
+//                 listCheckout = []checkout.Checkout{}
+//         }
+
+//         return &amp;listCheckout
+// }
+
+func insertCheckout(data *checkout.Checkout) *Checkout <span class="cov0" title="0">{
+        return &amp;Checkout{
+                ID:             data.ID,
+                ShoppingCartId: data.ShoppingCartId,
+                Description:    data.Description,
+                CreatedBy:      data.CreatedBy,
+                CreatedAt:      data.CreatedAt,
+                UpdatedAt:      data.UpdatedAt,
+        }
+}</span>
+
+func NewRepository(db *gorm.DB) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+
+func (r *Repository) NewCheckoutShoppingCart(checkout *checkout.Checkout) error <span class="cov0" title="0">{
+        checkoutShopCart := insertCheckout(checkout)
+
+        return r.DB.Create(&amp;checkoutShopCart).Error
+}</span>
+
+func (r *Repository) GetAllCheckout() (*[]checkout.Checkout, error) <span class="cov0" title="0">{
+        var checkoutList []checkout.Checkout
+
+        err := r.DB.Raw(
+                "select c.*, cp.transaction_status payment_status " +
+                        "from checkouts c " +
+                        "inner join ( " +
+                        "select cp.check_out_id id, cp.transaction_status, " +
+                        "row_number() OVER (PARTITION BY  cp.check_out_id " +
+                        "order by cp.created_at desc) as rnum, " +
+                        "cp.created_at " +
+                        "from checkout_payments cp " +
+                        "order by cp.created_at desc " +
+                        ")cp on cp.id  = CAST (c.id AS text) " +
+                        "where  cp.rnum = 1").Scan(&amp;checkoutList).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return &amp;checkoutList, nil</span>
+}
+
+func (r *Repository) GetCheckoutById(id string) (*checkout.Checkout, error) <span class="cov0" title="0">{
+        checkout := new(checkout.Checkout)
+
+        err := r.DB.Raw(
+                "select c.*, cp.transaction_status payment_status "+
+                        "from checkouts c "+
+                        "inner join ( "+
+                        "select cp.check_out_id id, cp.transaction_status, "+
+                        "row_number() OVER (PARTITION BY  cp.check_out_id "+
+                        "order by cp.created_at desc) as rnum, "+
+                        "cp.created_at "+
+                        "from checkout_payments cp "+
+                        "order by cp.created_at desc "+
+                        ")cp on cp.id  = CAST (c.id AS text) "+
+                        "where  cp.rnum = 1 and  CAST (c.id AS text) = ? ", id).Scan(&amp;checkout).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">result := checkout
+
+        return result, nil</span>
+}
+
+func (r *Repository) GetCheckoutByShoppingCartId(cartId string) (bool, error) <span class="cov0" title="0">{
+        var checkout = new(Checkout)
+
+        err := r.DB.First(checkout, " shopping_cart_id = ? ", cartId).Error
+        if err != nil </span><span class="cov0" title="0">{
+                if errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
+                        return false, nil
+                }</span>
+                <span class="cov0" title="0">return false, err</span>
+        }
+
+        <span class="cov0" title="0">return true, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file37" style="display: none">package checkoutpayment
+
+import (
+        "AltaStore/business/checkoutpayment"
+        "AltaStore/modules/checkout"
+        "time"
+
+        "gorm.io/gorm"
+)
+
+type CheckoutPayment struct {
+        CheckOutID         string                        `gorm:"checkout_id;type:uuid"`
+        MerchantId         string                        `gorm:"merchant_id"`
+        StatusCode         string                        `gorm:"status_code"`
+        TransactionStatus  checkoutpayment.PaymentStatus `gorm:"transaction_status"`
+        FraudStatus        checkoutpayment.FraudStatus   `gorm:"fraud_status"`
+        FromPaymentGateway bool                          `gorm:"from_payment_gateway"`
+        CreatedAt          time.Time                     `gorm:"created_at"`
+        CreatedBy          string                        `gorm:"created_by;type:varchar(50)"`
+        UpdatedAt          time.Time                     `gorm:"updated_at"`
+        UpdatedBy          string                        `gorm:"updated_by;type:varchar(50)"`
+        DeletedAt          time.Time                     `gorm:"deleted_at"`
+        DeletedBy          string                        `gorm:"deleted_by;type:varchar(50)"`
+}
+
+func (p *CheckoutPayment) ToPayment() *checkoutpayment.CheckoutPayment <span class="cov0" title="0">{
+        return &amp;checkoutpayment.CheckoutPayment{
+                CheckOutID:         p.CheckOutID,
+                MerchantId:         p.MerchantId,
+                StatusCode:         p.StatusCode,
+                TransactionStatus:  p.TransactionStatus,
+                FromPaymentGateway: p.FromPaymentGateway,
+                FraudStatus:        p.FraudStatus,
+                CreatedAt:          p.CreatedAt,
+                CreatedBy:          p.CreatedBy,
+                UpdatedAt:          p.UpdatedAt,
+                UpdatedBy:          p.UpdatedBy,
+                DeletedAt:          p.DeletedAt,
+                DeletedBy:          p.DeletedBy,
+        }
+}</span>
+
+func newPayment(p *checkoutpayment.CheckoutPayment) *CheckoutPayment <span class="cov0" title="0">{
+        return &amp;CheckoutPayment{
+                CheckOutID:         p.CheckOutID,
+                MerchantId:         p.MerchantId,
+                StatusCode:         p.StatusCode,
+                TransactionStatus:  p.TransactionStatus,
+                FromPaymentGateway: p.FromPaymentGateway,
+                FraudStatus:        p.FraudStatus,
+                CreatedAt:          p.CreatedAt,
+                CreatedBy:          p.CreatedBy,
+                UpdatedAt:          p.UpdatedAt,
+                UpdatedBy:          p.UpdatedBy,
+                DeletedAt:          p.DeletedAt,
+                DeletedBy:          p.DeletedBy,
+        }
+}</span>
+
+type Repository struct {
+        DB *gorm.DB
+}
+
+func NewRepository(db *gorm.DB) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+func (r *Repository) InsertPayment(p *checkoutpayment.CheckoutPayment) (*checkoutpayment.CheckoutPayment, error) <span class="cov0" title="0">{
+        var data *CheckoutPayment
+        if p.FromPaymentGateway </span><span class="cov0" title="0">{
+                err := r.DB.Where("check_out_id = ? and from_payment_gateway = ?", p.CheckOutID, true).First(&amp;data).Error
+
+                if err == nil </span><span class="cov0" title="0">{
+                        return data.ToPayment(), nil
+                }</span>
+        }
+        <span class="cov0" title="0">data = newPayment(p)
+        if err := r.DB.Create(data).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return data.ToPayment(), nil</span>
+}
+
+func (r *Repository) GetPaymentByCheckoutId(id string) (*checkoutpayment.CheckoutPayment, error) <span class="cov0" title="0">{
+        var data CheckoutPayment
+        err := r.DB.Where("checkout_id = ?", id).Order("created_at desc").First(&amp;data).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return data.ToPayment(), nil</span>
+}
+
+func (r *Repository) CheckHasCheckoutId(id string) (bool, error) <span class="cov0" title="0">{
+        var data checkout.Checkout
+        err := r.DB.Where("id = ?", id).First(&amp;data).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return false, err
+        }</span>
+
+        <span class="cov0" title="0">return true, nil</span>
+}
+
+// func (r *Repository) UpdatePayment(p *checkoutpayment.CheckoutPayment) error {
+//         data := newPayment(p)
+//         err := r.DB.Model(&amp;data).Updates(checkoutpayment.CheckoutPayment{
+//                 MerchantId:        data.MerchantId,
+//                 TransactionStatus: data.TransactionStatus,
+//                 FraudStatus:       data.FraudStatus,
+//                 UpdatedAt:         data.UpdatedAt,
+//                 UpdatedBy:         data.UpdatedBy,
+//         }).Error
+//         if err != nil {
+//                 return err
+//         }
+//         return nil
+// }
+</pre>
+		
+		<pre class="file" id="file38" style="display: none">package logger
+
+import (
+        "context"
+
+        "AltaStore/business/logger"
+
+        "go.mongodb.org/mongo-driver/mongo"
+)
+
+type Repository struct {
+        DB *mongo.Database
+}
+
+func NewRepository(db *mongo.Database) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+
+func (r *Repository) AddLoggerActivity(data *logger.LoggerData) error <span class="cov0" title="0">{
+
+        _, err := r.DB.Collection("logs").InsertOne(context.Background(), data)
+
+        return err
+}</span>
+</pre>
+		
+		<pre class="file" id="file39" style="display: none">package migration
+
+import (
+        "AltaStore/business/checkoutpayment"
+
+        "AltaStore/modules/checkout"
+        "AltaStore/modules/shopping"
+        "AltaStore/modules/shoppingdetail"
+
+        "gorm.io/gorm"
+)
+
+func TableMigration(db *gorm.DB) <span class="cov0" title="0">{
+        db.AutoMigrate(&amp;shopping.ShoppingCart{},
+                &amp;shoppingdetail.ShoppingCartDetail{},
+                &amp;checkout.Checkout{},
+                &amp;checkoutpayment.CheckoutPayment{},
+        )
+}</span>
+</pre>
+		
+		<pre class="file" id="file40" style="display: none">package shopping
+
+import (
+        "AltaStore/business"
+        "AltaStore/business/shopping"
+
+        "errors"
+        "time"
+
+        "gorm.io/gorm"
+)
+
+type Repository struct {
+        DB *gorm.DB
+}
+
+type ShoppingCart struct {
+        ID         string    `gorm:"id;type:uuid;primaryKey"`
+        IsCheckOut bool      `gorm:"is_check_out;type:boolean;default:false"`
+        CreatedBy  string    `gorm:"created_by;type:uuid"`
+        CreatedAt  time.Time `gorm:"created_at;type:timestamp"`
+        UpdatedAt  time.Time `gorm:"updated_at;type:timestamp"`
+        DeletedAt  time.Time `gorm:"deleted_at;type:timestamp"`
+}
+
+func (s *ShoppingCart) toShoppCart() *shopping.ShoppCart <span class="cov0" title="0">{
+        return &amp;shopping.ShoppCart{
+                ID:         s.ID,
+                IsCheckOut: s.IsCheckOut,
+                CreatedBy:  s.CreatedBy,
+                CreatedAt:  s.CreatedAt,
+                UpdatedAt:  s.UpdatedAt,
+        }
+}</span>
+
+func (s *ShoppingCart) newShoppingCart(id string, userid string, createdAt time.Time) <span class="cov0" title="0">{
+        s.ID = id
+        s.IsCheckOut = false
+        s.CreatedBy = userid
+        s.CreatedAt = createdAt
+        s.UpdatedAt = createdAt
+}</span>
+
+func NewRepository(db *gorm.DB) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+
+func (r *Repository) GetShoppingCartByUserId(userid string) (*shopping.ShoppCart, error) <span class="cov0" title="0">{
+        var shopCart ShoppingCart
+
+        err := r.DB.First(&amp;shopCart, "is_check_out = false and created_by = ?", userid).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return shopCart.toShoppCart(), nil</span>
+}
+
+func (r *Repository) GetShoppingCartById(id string) (*shopping.ShoppCart, error) <span class="cov0" title="0">{
+        var shopCart ShoppingCart
+
+        err := r.DB.First(&amp;shopCart, "is_check_out = false and id = ?", id).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return shopCart.toShoppCart(), nil</span>
+}
+
+func (r *Repository) UpdateShopCartStatusById(id string, isCheckout bool) error <span class="cov0" title="0">{
+        cart := new(ShoppingCart)
+
+        err := r.DB.First(cart,
+                "id = ? ", id).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return r.DB.Model(cart).Update("is_check_out", isCheckout).Error</span>
+}
+
+func (r *Repository) NewShoppingCart(id string, userid string, createdAt time.Time) (*shopping.ShoppCart, error) <span class="cov0" title="0">{
+        var shopCart ShoppingCart
+
+        err := r.DB.First(&amp;shopCart, "is_check_out = false and created_by = ?", userid).Error
+
+        // Pengecekan jika masih terdapat keranjang aktif maka dikembalikan bad request
+        if !errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
+                return nil, business.ErrDataExists
+        }</span>
+
+        <span class="cov0" title="0">shopCart.newShoppingCart(id, userid, createdAt)
+
+        if err := r.DB.Create(&amp;shopCart).Error; err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return shopCart.toShoppCart(), nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file41" style="display: none">package shoppingdetail
+
+import (
+        "AltaStore/business"
+        "errors"
+        "time"
+
+        "gorm.io/gorm"
+)
+
+type Repository struct {
+        DB *gorm.DB
+}
+
+func NewRepository(db *gorm.DB) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+
+type ShoppingCartDetail struct {
+        ID             string    `gorm:"id;type:uuid;primaryKey"`
+        ShoppingCartId string    `gorm:"shopping_cart_id;type:uuid;index:shopping_detail_uniq"`
+        ProductId      string    `gorm:"product_id;type:uuid;index:shopping_detail_uniq"`
+        Price          int       `gorm:"price;type:integer"`
+        Qty            int       `gorm:"qty;type:integer"`
+        CreatedAt      time.Time `gorm:"created_at;type:timestamp"`
+        UpdatedAt      time.Time `gorm:"updated_at;type:timestamp"`
+        DeletedAt      time.Time `gorm:"deleted_at;type:timestamp"`
+}
+
+type ShopCartDetailItemWithProductName struct {
+        ShoppingCartDetail
+        ProductName string `gorm:"name"`
+}
+
+type InsertItemInCartSpec struct {
+        ID        string
+        ProductId string
+        Price     int
+        Qty       int
+        CreatedAt time.Time
+        UpdatedAt time.Time
+}
+
+type UpdateItemInCartSpec struct {
+        ID        string
+        ProductId string
+        Price     int
+        Qty       int
+        UpdatedAt time.Time
+}
+
+func createItemInCart(cartId string, item *InsertItemInCartSpec) *ShoppingCartDetail <span class="cov0" title="0">{
+        return &amp;ShoppingCartDetail{
+                ID:             item.ID,
+                ShoppingCartId: cartId,
+                ProductId:      item.ProductId,
+                Price:          item.Price,
+                Qty:            item.Qty,
+                CreatedAt:      item.CreatedAt,
+                UpdatedAt:      item.UpdatedAt,
+        }
+}</span>
+
+func modifyItemInCart(item *UpdateItemInCartSpec) *ShoppingCartDetail <span class="cov0" title="0">{
+        return &amp;ShoppingCartDetail{
+                Price:     item.Price,
+                Qty:       item.Qty,
+                UpdatedAt: item.UpdatedAt,
+        }
+}</span>
+
+func (r *Repository) GetShopCartDetailById(id string) (*[]ShopCartDetailItemWithProductName, error) <span class="cov0" title="0">{
+        var shopCartDetail []ShopCartDetailItemWithProductName
+
+        err := r.DB.Raw(
+                "select t1.*, t2.name product_name from shopping_cart_details t1 inner join products t2 on t2.id = t1.product_id "+
+                        " where t1.shopping_cart_id = ? and cast(to_char(t1.deleted_at,'YYYY') as int) &lt; 1000", id).Scan(&amp;shopCartDetail).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return &amp;shopCartDetail, nil</span>
+}
+
+func (r *Repository) NewItemInShopCart(cartId string, item *InsertItemInCartSpec) error <span class="cov0" title="0">{
+        var product = new(ShoppingCartDetail)
+
+        err := r.DB.First(product,
+                " shopping_cart_id = ? and product_id = ? and cast(to_char(deleted_at,'YYYY') as int) &lt; 1000",
+                cartId, item.ProductId).Error
+
+        if !errors.Is(err, gorm.ErrRecordNotFound) </span><span class="cov0" title="0">{
+                if err != nil </span><span class="cov0" title="0">{
+                        return err
+                }</span>
+                <span class="cov0" title="0">return business.ErrDataExists</span>
+        }
+
+        <span class="cov0" title="0">return r.DB.Create(createItemInCart(cartId, item)).Error</span>
+
+}
+
+func (r *Repository) ModifyItemInShopCart(cartId string, item *UpdateItemInCartSpec) error <span class="cov0" title="0">{
+        var itemInCart = new(ShoppingCartDetail)
+
+        err := r.DB.First(itemInCart,
+                "shopping_cart_id = ? and product_id = ? and cast(to_char(deleted_at,'YYYY') as int) &lt; 1000",
+                cartId, item.ProductId).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return r.DB.Model(itemInCart).Updates(modifyItemInCart(item)).Error</span>
+}
+
+func (r *Repository) DeleteItemInShopCart(cartId string, productid string) error <span class="cov0" title="0">{
+        var itemInCart = new(ShoppingCartDetail)
+
+        err := r.DB.First(itemInCart,
+                "shopping_cart_id = ? and product_id = ? and cast(to_char(deleted_at,'YYYY') as int) &lt; 1000",
+                cartId, productid).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return r.DB.Model(itemInCart).Update("deleted_at", time.Now()).Error</span>
+}
+</pre>
+		
+		<pre class="file" id="file42" style="display: none">package user
+
+import (
+        "AltaStore/business/user"
+
+        "time"
+
+        "golang.org/x/crypto/bcrypt"
+        "gorm.io/gorm"
+)
+
+// Implementasi repositori user
+type Repository struct {
+        DB *gorm.DB
+}
+
+type User struct {
+        ID        string    `gorm:"type:uuid;primary_key"`
+        Email     string    `gorm:"email;index:idx_email,unique;type:varchar(50)"`
+        FirstName string    `gorm:"firstname;type:varchar(50)"`
+        LastName  string    `gorm:"lastname;type:varchar(50)"`
+        Password  string    `gorm:"password;type:varchar(100)"`
+        HandPhone string    `gorm:"handphone;type:varchar(50)"`
+        Address   string    `gorm:"address;type:varchar(100)"`
+        CreatedAt time.Time `gorm:"created_at"`
+        CreatedBy string    `gorm:"created_by;type:varchar(50)"`
+        UpdatedAt time.Time `gorm:"updated_at"`
+        UpdatedBy string    `gorm:"updated_by;type:varchar(50)"`
+        DeletedAt time.Time `gorm:"deleted_at"`
+        DeletedBy string    `gorm:"deleted_by;type:varchar(50)"`
+}
+
+func newUserTable(user user.User) *User <span class="cov0" title="0">{
+
+        return &amp;User{
+                user.ID,
+                user.Email,
+                user.FirstName,
+                user.LastName,
+                user.Password,
+                user.HandPhone,
+                user.Address,
+                user.CreatedAt,
+                user.CreatedBy,
+                user.UpdatedAt,
+                user.UpdatedBy,
+                user.DeletedAt,
+                user.DeletedBy,
+        }
+}</span>
+
+func (col *User) ToUser() user.User <span class="cov0" title="0">{
+        var user user.User
+
+        user.ID = col.ID
+        user.Email = col.Email
+        user.FirstName = col.FirstName
+        user.LastName = col.LastName
+        user.HandPhone = col.HandPhone
+        user.Address = col.Address
+        user.CreatedAt = col.CreatedAt
+        user.CreatedBy = col.CreatedBy
+        user.UpdatedAt = col.UpdatedAt
+        user.UpdatedBy = col.UpdatedBy
+        user.DeletedAt = col.DeletedAt
+        user.DeletedBy = col.DeletedBy
+
+        return user
+}</span>
+
+// Menghasilkan ORM DB untuk user repository
+func NewDBRepository(db *gorm.DB) *Repository <span class="cov0" title="0">{
+        return &amp;Repository{db}
+}</span>
+
+//InsertUser Insert new User into storage
+func (repo *Repository) InsertUser(user user.User) error <span class="cov0" title="0">{
+
+        userData := newUserTable(user)
+
+        err := repo.DB.Create(userData).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+//FindUserByEmailAndPassword If data not found will return nil
+func (repo *Repository) FindUserByEmailAndPassword(email string, password string) (*user.User, error) <span class="cov0" title="0">{
+
+        var userData User
+
+        err := repo.DB.Where("email = ?", email).Where("deleted_by = ''").First(&amp;userData).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        // Comparing the password with the hash
+        <span class="cov0" title="0">err = bcrypt.CompareHashAndPassword([]byte(userData.Password), []byte(password))
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">user := userData.ToUser()
+
+        return &amp;user, nil</span>
+}
+
+func (repo *Repository) FindUserByEmail(email string) (*user.User, error) <span class="cov0" title="0">{
+
+        var userData User
+
+        err := repo.DB.Where("email = ?", email).Where("deleted_by = ''").First(&amp;userData).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">user := userData.ToUser()
+
+        return &amp;user, nil</span>
+}
+
+//FindUserByID If data not found will return nil without error
+func (repo *Repository) FindUserByID(id string) (*user.User, error) <span class="cov0" title="0">{
+
+        var userData User
+
+        err := repo.DB.Where("id = ?", id).Where("deleted_by = ''").First(&amp;userData).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">user := userData.ToUser()
+
+        return &amp;user, nil</span>
+}
+
+//UpdateUserPassword if data not found or old password wrong will return error
+func (repo *Repository) UpdateUserPassword(user user.User) error <span class="cov0" title="0">{
+        userData := newUserTable(user)
+
+        err := repo.DB.Model(&amp;userData).Updates(User{
+                Password: userData.Password,
+        }).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+//UpdateUser Update existing user in database
+func (repo *Repository) UpdateUser(user user.User) error <span class="cov0" title="0">{
+        userData := newUserTable(user)
+
+        err := repo.DB.Model(&amp;userData).Updates(User{
+                FirstName: userData.FirstName,
+                LastName:  userData.LastName,
+                Address:   userData.Address,
+                Password:  userData.Password,
+                HandPhone: userData.HandPhone,
+                UpdatedAt: userData.UpdatedAt,
+                UpdatedBy: userData.UpdatedBy,
+        }).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+
+//DeleteUser Set IsDelete true in database
+func (repo *Repository) DeleteUser(user user.User) error <span class="cov0" title="0">{
+        userData := newUserTable(user)
+
+        err := repo.DB.Model(&amp;userData).Updates(User{
+                DeletedBy: userData.DeletedBy,
+                DeletedAt: userData.DeletedAt,
+        }).Error
+        if err != nil </span><span class="cov0" title="0">{
+                return err
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file43" style="display: none">package validator
+
+import (
+        "sync"
+
+        "github.com/go-playground/validator/v10"
+)
+
+var lock = &amp;sync.Mutex{}
+var validate *validator.Validate
+
+//GetValidator Initiatilize validator in singleton way
+func GetValidator() *validator.Validate <span class="cov8" title="1">{
+        lock.Lock()
+        defer lock.Unlock()
+
+        if validate == nil </span><span class="cov8" title="1">{
+                validate = validator.New()
+        }</span>
+
+        <span class="cov8" title="1">return validate</span>
+}
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
