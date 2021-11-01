@@ -81,14 +81,9 @@ func (s *service) InsertPayment(p *InserPaymentSpec, creator string) (*InserPaym
 		creator,
 		time.Now())
 
-	saved, err := s.repository.InsertPayment(&data)
-	if err != nil {
-		return p, business.ErrInternalServer
-	}
+	_, _ = s.repository.InsertPayment(&data)
 
-	dataSaved := saved.ToInserPaymentSpec()
-
-	return &(dataSaved), nil
+	return p, nil
 }
 
 func (s *service) GetPaymentByCheckoutId(id string) (*CheckoutPayment, error) {
