@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "331f7ee5-67f6-4fb0-8c07-502c45d8114f",
+		"name": "BE Alta Store Service 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Shopping Cart",
+			"item": [
+				{
+					"name": "Shopping Cart",
+					"item": [
+						{
+							"name": "Create a New Shopping Cart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pick Up Shopping Cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shopping Product",
+					"item": [
+						{
+							"name": "View Items in Shopping Cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts/983c3f89-a7be-4b4f-b402-bef9b29f316e",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts",
+										"983c3f89-a7be-4b4f-b402-bef9b29f316e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Item to Shopping Cart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productid\": \"cde144e2-eecc-4f1b-bb99-5b0ecf662a8f\",\n    \"price\": 300000,\n    \"qty\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts/e91811ed-7e60-4f55-bfd6-dc0be31ee8de",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts",
+										"e91811ed-7e60-4f55-bfd6-dc0be31ee8de"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Item in Shopping Cart",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productid\": \"cde144e2-eecc-4f1b-bb99-5b0ecf662a8f\",\n    \"price\": 4000,\n    \"qty\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts/9475702b-e453-4b82-b3aa-5ed970fe65a8",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts",
+										"9475702b-e453-4b82-b3aa-5ed970fe65a8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Item in Shopping Cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/shoppingcarts/carts/9475702b-e453-4b82-b3aa-5ed970fe65a8/products/cde144e2-eecc-4f1b-bb99-5b0ecf662a8f",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"shoppingcarts",
+										"carts",
+										"9475702b-e453-4b82-b3aa-5ed970fe65a8",
+										"products",
+										"cde144e2-eecc-4f1b-bb99-5b0ecf662a8f"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "API Checkout",
+			"item": [
+				{
+					"name": "Checkout Shopping Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shoppingcartid\": \"e91811ed-7e60-4f55-bfd6-dc0be31ee8de\",\n    \"description\": \"Mohon untuk di packing dengan rapi ya\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/checkouts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkouts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Checkout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/checkouts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkouts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Items Checkout By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/checkouts/7207f9a1-7789-4c23-9f27-c59ff6c527c9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"checkouts",
+								"7207f9a1-7789-4c23-9f27-c59ff6c527c9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Payment",
+			"item": [
+				{
+					"name": "Check Payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payments/notif?order_id=11da5e20-7cec-4159-b516-bc1bff004b3e&status_code=200&transaction_status=capture",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"notif"
+							],
+							"query": [
+								{
+									"key": "order_id",
+									"value": "11da5e20-7cec-4159-b516-bc1bff004b3e"
+								},
+								{
+									"key": "status_code",
+									"value": "200"
+								},
+								{
+									"key": "transaction_status",
+									"value": "capture"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transaction_status\": \"capture\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payments/11da5e20-7cec-4159-b516-bc1bff004b3e",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payments",
+								"11da5e20-7cec-4159-b516-bc1bff004b3e"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6IjdiODdiM2U5LWFiODUtNDVmYS05NTg1LTFjMzMyODE2Y2I4OSIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTYzNTc2MzgzNiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiZWQzMmFkYmMtOGNkYi00MGEzLWFmMWUtZGMxNzI5YzBkOGM2In0.RChe_80dsbfZBcBLiQvCwuGORlXCyFpg3oyoq4Uuof0",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NfdXVpZCI6ImQ4M2VlOGQ1LTk0NTYtNDMwZS1iNjM2LWVlYjU1ZmM5M2MxNCIsImF1dGhvcml6ZWQiOnRydWUsImV4cCI6MTYzNTc2NTI1OCwiaXNBZG1pbiI6ZmFsc2UsInVzZXJJZCI6ImUxZDFmM2ZmLTZlYzUtNDU5ZC1hMmY5LTNhYTU3Yjk5MmFmOSJ9.IDkiilHGBHrmGuX5jU4OliEriRvyirbVecgRzzzflaM",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "base_local",
+			"value": "http://localhost:9000/v1"
+		},
+		{
+			"key": "base_online",
+			"value": "http://ec2-3-145-19-13.us-east-2.compute.amazonaws.com:8000/v1"
+		}
+	]
+}
