@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  databases:
+  mongodb-4.2:
     container_name: mongodb-4.2
     image: mongo:4.2
     hostname: ${MONGODB_HOST}
@@ -12,6 +12,29 @@ services:
       - 27017:27017
     networks:
       - local_network
+  postgresdb-10:
+    container_name: postgresdb-10
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_PASSWORD=${PGSQL_PASSWORD}
+      - POSTGRES_USER=${PGSQL_USER}
+      - POSTGRES_DB=${PGSQL_DB}
+    restart: on-failure
+    ports:
+      - 65432:5432
+    networks:
+      - local_network
+  web-service:
+    container_name: altastore-webservice2
+    image: altastore-webservice2:1.0
+    restart: on-failure
+    ports:
+      - 8000:8000
+    networks:
+      - local_network
+    depends_on:
+      - "postgresdb-10"
+      - "mongodb-4.2"
 networks:
   local_network:
     name: local_network
